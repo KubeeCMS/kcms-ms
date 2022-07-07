@@ -28,7 +28,7 @@ class AccountService extends \WP_Ultimo\Dependencies\Stripe\Service\AbstractServ
      *
      * @throws \Stripe\Exception\ApiErrorException if the request fails
      *
-     * @return \Stripe\Collection<\Stripe\FinancialConnections\Account>
+     * @return \Stripe\Collection<\Stripe\FinancialConnections\AccountOwner>
      */
     public function allOwners($id, $params = null, $opts = null)
     {

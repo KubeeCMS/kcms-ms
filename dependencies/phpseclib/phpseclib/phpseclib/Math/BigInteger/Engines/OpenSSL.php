@@ -10,6 +10,7 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://pear.php.net/package/Math_BigInteger
  */
+declare (strict_types=1);
 namespace phpseclib3\Math\BigInteger\Engines;
 
 use phpseclib3\Crypt\RSA\Formats\Keys\PKCS8;
@@ -23,22 +24,15 @@ abstract class OpenSSL
 {
     /**
      * Test for engine validity
-     *
-     * @return bool
      */
-    public static function isValidEngine()
+    public static function isValidEngine() : bool
     {
         return \extension_loaded('openssl') && static::class != __CLASS__;
     }
     /**
      * Performs modular exponentiation.
-     *
-     * @param Engine $x
-     * @param Engine $e
-     * @param Engine $n
-     * @return Engine
      */
-    public static function powModHelper(\phpseclib3\Math\BigInteger\Engines\Engine $x, \phpseclib3\Math\BigInteger\Engines\Engine $e, \phpseclib3\Math\BigInteger\Engines\Engine $n)
+    public static function powModHelper(\phpseclib3\Math\BigInteger\Engines\Engine $x, \phpseclib3\Math\BigInteger\Engines\Engine $e, \phpseclib3\Math\BigInteger\Engines\Engine $n) : \phpseclib3\Math\BigInteger\Engines\Engine
     {
         if ($n->getLengthInBytes() < 31 || $n->getLengthInBytes() > 16384) {
             throw new \OutOfRangeException('Only modulo between 31 and 16384 bits are accepted');

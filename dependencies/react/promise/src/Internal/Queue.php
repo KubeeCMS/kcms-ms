@@ -17,11 +17,9 @@ final class Queue
     private function drain() : void
     {
         for ($i = \key($this->queue); isset($this->queue[$i]); $i++) {
-            try {
-                $this->queue[$i]();
-            } finally {
-                unset($this->queue[$i]);
-            }
+            $task = $this->queue[$i];
+            unset($this->queue[$i]);
+            $task();
         }
         $this->queue = [];
     }

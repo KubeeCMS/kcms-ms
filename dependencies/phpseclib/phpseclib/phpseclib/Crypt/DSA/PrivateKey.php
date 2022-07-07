@@ -8,6 +8,7 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
+declare (strict_types=1);
 namespace phpseclib3\Crypt\DSA;
 
 use phpseclib3\Crypt\Common;
@@ -47,7 +48,6 @@ class PrivateKey extends DSA implements Common\PrivateKey
      * without the parameters and the PKCS1 DSA public key format does not include the parameters.
      *
      * @see self::getPrivateKey()
-     * @return mixed
      */
     public function getPublicKey()
     {
@@ -63,9 +63,8 @@ class PrivateKey extends DSA implements Common\PrivateKey
      *
      * @see self::verify()
      * @param string $message
-     * @return mixed
      */
-    public function sign($message)
+    public function sign($message) : string
     {
         $format = $this->sigFormat;
         if (self::$engines['OpenSSL'] && \in_array($this->hash->getHash(), \openssl_get_md_methods())) {
@@ -84,14 +83,14 @@ class PrivateKey extends DSA implements Common\PrivateKey
         while (\true) {
             $k = BigInteger::randomRange(self::$one, $this->q->subtract(self::$one));
             $r = $this->g->powMod($k, $this->p);
-            list(, $r) = $r->divide($this->q);
+            [, $r] = $r->divide($this->q);
             if ($r->equals(self::$zero)) {
                 continue;
             }
             $kinv = $k->modInverse($this->q);
             $temp = $h->add($this->x->multiply($r));
             $temp = $kinv->multiply($temp);
-            list(, $s) = $temp->divide($this->q);
+            [, $s] = $temp->divide($this->q);
             if (!$s->equals(self::$zero)) {
                 break;
             }
@@ -116,11 +115,9 @@ class PrivateKey extends DSA implements Common\PrivateKey
     /**
      * Returns the private key
      *
-     * @param string $type
      * @param array $options optional
-     * @return string
      */
-    public function toString($type, array $options = [])
+    public function toString(string $type, array $options = []) : string
     {
         $type = self::validatePlugin('Keys', $type, 'savePrivateKey');
         if (!isset($this->y)) {

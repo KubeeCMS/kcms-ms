@@ -389,7 +389,6 @@ class Setup_Wizard_Admin_Page extends Wizard_Admin_Page {
 						'readonly'        => 'readonly',
 						'title'           => __('License Key', 'wp-ultimo'),
 						'placeholder'     => __('sk_ucdyzixolkigmdymoqfkwjpjzzmyebkd', 'wp-ultimo'),
-
 						'value'           => __('sk_ucdyzixolkigmdymoqfkwjpjzzmyebkd', 'wp-ultimo'),
 						'tooltip'         => __('Your WP Ultimo License Key', 'wp-ultimo'),
 						'desc'            => array($this, '_desc_and_validation_error'),

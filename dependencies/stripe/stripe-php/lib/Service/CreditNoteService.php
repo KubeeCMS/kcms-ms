@@ -93,7 +93,7 @@ class CreditNoteService extends \WP_Ultimo\Dependencies\Stripe\Service\AbstractS
      *
      * @throws \Stripe\Exception\ApiErrorException if the request fails
      *
-     * @return \Stripe\Collection<\Stripe\CreditNote>
+     * @return \Stripe\Collection<\Stripe\CreditNoteLineItem>
      */
     public function previewLines($params = null, $opts = null)
     {

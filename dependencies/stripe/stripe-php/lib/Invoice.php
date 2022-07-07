@@ -96,18 +96,21 @@ namespace WP_Ultimo\Dependencies\Stripe;
  * @property int $pre_payment_credit_notes_amount Total amount of all pre-payment credit notes issued for this invoice.
  * @property null|string|\Stripe\Quote $quote The quote this invoice was generated from.
  * @property null|string $receipt_number This is the transaction number that appears on email receipts sent for this invoice.
+ * @property null|\Stripe\StripeObject $rendering_options Options for invoice PDF rendering.
  * @property int $starting_balance Starting customer balance before the invoice is finalized. If the invoice has not been finalized yet, this will be the current customer balance.
  * @property null|string $statement_descriptor Extra information about an invoice for the customer's credit card statement.
  * @property null|string $status The status of the invoice, one of <code>draft</code>, <code>open</code>, <code>paid</code>, <code>uncollectible</code>, or <code>void</code>. <a href="https://stripe.com/docs/billing/invoices/workflow#workflow-overview">Learn more</a>
  * @property \Stripe\StripeObject $status_transitions
  * @property null|string|\Stripe\Subscription $subscription The subscription that this invoice was prepared for, if any.
  * @property int $subscription_proration_date Only set for upcoming invoices that preview prorations. The time used to calculate prorations.
- * @property int $subtotal Total of all subscriptions, invoice items, and prorations on the invoice before any invoice level discount or tax is applied. Item discounts are already incorporated
+ * @property int $subtotal Total of all subscriptions, invoice items, and prorations on the invoice before any invoice level discount or exclusive tax is applied. Item discounts are already incorporated
+ * @property null|int $subtotal_excluding_tax The integer amount in %s representing the subtotal of the invoice before any invoice level discount or tax is applied. Item discounts are already incorporated
  * @property null|int $tax The amount of tax on this invoice. This is the sum of all the tax amounts on this invoice.
  * @property null|string|\Stripe\TestHelpers\TestClock $test_clock ID of the test clock this invoice belongs to.
  * @property \Stripe\StripeObject $threshold_reason
  * @property int $total Total after discounts and taxes.
  * @property null|\Stripe\StripeObject[] $total_discount_amounts The aggregate amounts calculated per discount across all line items.
+ * @property null|int $total_excluding_tax The integer amount in %s representing the total amount of the invoice including all discounts but excluding all tax.
  * @property \Stripe\StripeObject[] $total_tax_amounts The aggregate amounts calculated per tax rate for all line items.
  * @property null|int $webhooks_delivered_at Invoices are automatically paid or sent 1 hour after webhooks are delivered, or until all webhook delivery attempts have <a href="https://stripe.com/docs/billing/webhooks#understand">been exhausted</a>. This field tracks the time when webhooks for this invoice were successfully delivered. If the invoice had no webhooks to deliver, this will be set while the invoice is being created.
  */

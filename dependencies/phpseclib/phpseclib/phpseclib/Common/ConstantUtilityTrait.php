@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace phpseclib3\Common;
 
 /**
@@ -11,9 +12,8 @@ trait ConstantUtilityTrait
     private static $valueToConstantNameMap = null;
     /**
      * @param string|int $value
-     * @return string|null
      */
-    public static function findConstantNameByValue($value)
+    public static function findConstantNameByValue($value) : ?string
     {
         if (!self::$valueToConstantNameMap) {
             $reflectionClass = new \ReflectionClass(static::class);
@@ -27,9 +27,8 @@ trait ConstantUtilityTrait
     }
     /**
      * @param string|int $value
-     * @return string
      */
-    public static function getConstantNameByValue($value)
+    public static function getConstantNameByValue($value) : string
     {
         $constantName = static::findConstantNameByValue($value);
         if ($constantName === null) {

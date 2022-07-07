@@ -67,6 +67,14 @@ class Checkout_Form_Edit_Admin_Page extends Edit_Admin_Page {
 	protected $badge_count = 0;
 
 	/**
+	 * The settings retrieved from session cookie. This is used to read the values after we sent the headers.
+	 *
+	 * @since 2.0.16
+	 * @var string
+	 */
+	protected $session_settings = array();
+
+	/**
 	 * Holds the admin panels where this page should be displayed, as well as which capability to require.
 	 *
 	 * To add a page to the regular admin (wp-admin/), use: 'admin_menu' => 'capability_here'
@@ -95,6 +103,29 @@ class Checkout_Form_Edit_Admin_Page extends Edit_Admin_Page {
 		add_action('wp_ajax_wu_save_editor_session', array($this, 'save_editor_session'));
 
 		add_action('load-admin_page_wp-ultimo-edit-checkout-form', array($this, 'add_width_control_script'));
+
+		$current_form = wu_request('form');
+
+		$editor_forms = array(
+			'add_new_form_step',
+			'add_new_form_field',
+		);
+
+		if (in_array($current_form, $editor_forms, true) && wu_request('checkout_form')) {
+
+			$checkout_form = wu_get_checkout_form_by_slug(wu_request('checkout_form'));
+
+			if ($checkout_form) {
+
+				$key = sprintf('checkout_form_%d', $checkout_form->get_id());
+
+				$session = wu_get_session($key);
+
+				$this->session_settings = $session->get('settings');
+
+			} // end if;
+
+		} // end if;
 
 	} // end init;
 
@@ -608,15 +639,9 @@ class Checkout_Form_Edit_Admin_Page extends Edit_Admin_Page {
 
 		} // end if;
 
-		$key = sprintf('checkout_form_%d', $checkout_form->get_id());
+		if (!empty($this->session_settings)) {
 
-		$session = wu_get_session($key);
-
-		$settings = $session->get('settings');
-
-		if (!empty($settings)) {
-
-			$checkout_form->set_settings($settings);
+			$checkout_form->set_settings($this->session_settings);
 
 			$new_field = $checkout_form->get_field($step_name, $field_name);
 
@@ -645,21 +670,25 @@ class Checkout_Form_Edit_Admin_Page extends Edit_Admin_Page {
 
 		$step = $checkout_form->get_step($step_name);
 
-		$step['saved'] = true;
-
 		if (!$step) {
+
+			$step = array();
 
 			$step['saved'] = false;
 
+		} else {
+
+			$step['saved'] = true;
+
 		} // end if;
 
-		$key = sprintf('checkout_form_%d', $checkout_form->get_id());
+		if (!empty($this->session_settings)) {
 
-		$session = wu_get_session($key);
+			$checkout_form->set_settings($this->session_settings);
 
-		$checkout_form->set_settings($session->get('settings'));
+			$step = $checkout_form->get_step($step_name);
 
-		$step = $checkout_form->get_step($step_name);
+		} // end if;
 
 		return $step;
 
@@ -902,6 +931,13 @@ class Checkout_Form_Edit_Admin_Page extends Edit_Admin_Page {
 					'v-cloak' => 1,
 				),
 			),
+			'original_id'             => array(
+				'type'      => 'hidden',
+				'value'     => wu_request('id', ''),
+				'html_attr' => array(
+					'v-bind:value' => 'original_id',
+				),
+			),
 			'name'          => array(
 				'type'              => 'text',
 				'title'             => __('Step Title', 'wp-ultimo'),
@@ -1017,6 +1053,12 @@ class Checkout_Form_Edit_Admin_Page extends Edit_Admin_Page {
 
 		$state['logged'] = wu_get_isset($state, 'logged', 'always');
 
+		if (!wu_get_isset($state, 'original_id', false)) {
+
+			$state['original_id'] = wu_get_isset($state, 'id', '');
+
+		} // end if;
+
 		$form = new \WP_Ultimo\UI\Form('add_new_form_step', $fields, array(
 			'views'                 => 'admin-pages/fields',
 			'classes'               => 'wu-modal-form wu-widget-list wu-striped wu-m-0 wu-mt-0',
@@ -1051,13 +1093,14 @@ class Checkout_Form_Edit_Admin_Page extends Edit_Admin_Page {
 		} // end if;
 
 		$data = array(
-			'id'         => wu_request('id', ''),
-			'name'       => wu_request('name', ''),
-			'desc'       => wu_request('desc', ''),
-			'element_id' => wu_request('element_id', ''),
-			'classes'    => wu_request('classes', ''),
-			'logged'     => wu_request('logged', 'always'),
-			'fields'     => array(),
+			'id'          => wu_request('id', ''),
+			'original_id' => wu_request('original_id', ''),
+			'name'        => wu_request('name', ''),
+			'desc'        => wu_request('desc', ''),
+			'element_id'  => wu_request('element_id', ''),
+			'classes'     => wu_request('classes', ''),
+			'logged'      => wu_request('logged', 'always'),
+			'fields'      => array(),
 		);
 
 		wp_send_json_success(array(

@@ -37,7 +37,7 @@ final class WP_Ultimo {
 	 *
 	 * @var string
 	 */
-	public $version = '2.0.15';
+	public $version = '2.0.17';
 
 	/**
 	 * Holds an instance of the helper functions layer.

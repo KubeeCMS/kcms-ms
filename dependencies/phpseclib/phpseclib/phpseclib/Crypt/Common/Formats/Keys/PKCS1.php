@@ -10,6 +10,7 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
+declare (strict_types=1);
 namespace phpseclib3\Crypt\Common\Formats\Keys;
 
 use WP_Ultimo\Dependencies\ParagonIE\ConstantTime\Base64;
@@ -36,21 +37,18 @@ abstract class PKCS1 extends \phpseclib3\Crypt\Common\Formats\Keys\PKCS
     private static $defaultEncryptionAlgorithm = 'AES-128-CBC';
     /**
      * Sets the default encryption algorithm
-     *
-     * @param string $algo
      */
-    public static function setEncryptionAlgorithm($algo)
+    public static function setEncryptionAlgorithm(string $algo) : void
     {
         self::$defaultEncryptionAlgorithm = $algo;
     }
     /**
      * Returns the mode constant corresponding to the mode string
      *
-     * @param string $mode
      * @return int
      * @throws \UnexpectedValueException if the block cipher mode is unsupported
      */
-    private static function getEncryptionMode($mode)
+    private static function getEncryptionMode(string $mode)
     {
         switch ($mode) {
             case 'CBC':
@@ -65,17 +63,16 @@ abstract class PKCS1 extends \phpseclib3\Crypt\Common\Formats\Keys\PKCS
     /**
      * Returns a cipher object corresponding to a string
      *
-     * @param string $algo
-     * @return string
+     * @return AES|DES|TripleDES
      * @throws \UnexpectedValueException if the encryption algorithm is unsupported
      */
-    private static function getEncryptionObject($algo)
+    private static function getEncryptionObject(string $algo)
     {
         $modes = '(CBC|ECB|CFB|OFB|CTR)';
         switch (\true) {
             case \preg_match("#^AES-(128|192|256)-{$modes}\$#", $algo, $matches):
                 $cipher = new AES(self::getEncryptionMode($matches[2]));
-                $cipher->setKeyLength($matches[1]);
+                $cipher->setKeyLength((int) $matches[1]);
                 return $cipher;
             case \preg_match("#^DES-EDE3-{$modes}\$#", $algo, $matches):
                 return new TripleDES(self::getEncryptionMode($matches[1]));
@@ -87,13 +84,8 @@ abstract class PKCS1 extends \phpseclib3\Crypt\Common\Formats\Keys\PKCS
     }
     /**
      * Generate a symmetric key for PKCS#1 keys
-     *
-     * @param string $password
-     * @param string $iv
-     * @param int $length
-     * @return string
      */
-    private static function generateSymmetricKey($password, $iv, $length)
+    private static function generateSymmetricKey(string $password, string $iv, int $length) : string
     {
         $symkey = '';
         $iv = \substr($iv, 0, 8);
@@ -105,11 +97,11 @@ abstract class PKCS1 extends \phpseclib3\Crypt\Common\Formats\Keys\PKCS
     /**
      * Break a public or private key down into its constituent components
      *
-     * @param string $key
-     * @param string $password optional
-     * @return array
+     * @param string|array $key
+     * @param string|false $password
+     * @return array|string
      */
-    protected static function load($key, $password)
+    protected static function load($key, $password = '')
     {
         if (!Strings::is_stringable($key)) {
             throw new \UnexpectedValueException('Key should be a string - not a ' . \gettype($key));
@@ -156,18 +148,15 @@ abstract class PKCS1 extends \phpseclib3\Crypt\Common\Formats\Keys\PKCS
     /**
      * Wrap a private key appropriately
      *
-     * @param string $key
-     * @param string $type
-     * @param string $password
+     * @param string|false $password
      * @param array $options optional
-     * @return string
      */
-    protected static function wrapPrivateKey($key, $type, $password, array $options = [])
+    protected static function wrapPrivateKey(string $key, string $type, $password, array $options = []) : string
     {
         if (empty($password) || !\is_string($password)) {
             return "-----BEGIN {$type} PRIVATE KEY-----\r\n" . \chunk_split(Base64::encode($key), 64) . "-----END {$type} PRIVATE KEY-----";
         }
-        $encryptionAlgorithm = isset($options['encryptionAlgorithm']) ? $options['encryptionAlgorithm'] : self::$defaultEncryptionAlgorithm;
+        $encryptionAlgorithm = $options['encryptionAlgorithm'] ?? self::$defaultEncryptionAlgorithm;
         $cipher = self::getEncryptionObject($encryptionAlgorithm);
         $iv = Random::string($cipher->getBlockLength() >> 3);
         $cipher->setKey(self::generateSymmetricKey($password, $iv, $cipher->getKeyLength() >> 3));
@@ -177,12 +166,8 @@ abstract class PKCS1 extends \phpseclib3\Crypt\Common\Formats\Keys\PKCS
     }
     /**
      * Wrap a public key appropriately
-     *
-     * @param string $key
-     * @param string $type
-     * @return string
      */
-    protected static function wrapPublicKey($key, $type)
+    protected static function wrapPublicKey(string $key, string $type) : string
     {
         return "-----BEGIN {$type} PUBLIC KEY-----\r\n" . \chunk_split(Base64::encode($key), 64) . "-----END {$type} PUBLIC KEY-----";
     }

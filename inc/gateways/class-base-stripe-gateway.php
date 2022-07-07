@@ -1336,6 +1336,15 @@ class Base_Stripe_Gateway extends Base_Gateway {
 
 		} // end if;
 
+		// Set the right mode for this request
+		if (isset($received_event->livemode) && !$received_event->livemode !== $this->test_mode) {
+
+			$this->test_mode = !$received_event->livemode;
+
+			$this->setup_api_keys($this->get_id());
+
+		} // end if;
+
 		$event_id = $received_event->id;
 
 		$event         = Stripe\Event::retrieve($event_id);

@@ -19,6 +19,7 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
+declare (strict_types=1);
 namespace phpseclib3\Crypt\RSA\Formats\Keys;
 
 use phpseclib3\Common\Functions\Strings;
@@ -36,11 +37,10 @@ abstract class PKCS1 extends Progenitor
     /**
      * Break a public or private key down into its constituent components
      *
-     * @param string $key
-     * @param string $password optional
-     * @return array
+     * @param string|array $key
+     * @param string|false $password
      */
-    public static function load($key, $password = '')
+    public static function load($key, $password = '') : array
     {
         if (!Strings::is_stringable($key)) {
             throw new \UnexpectedValueException('Key should be a string - not a ' . \gettype($key));
@@ -54,7 +54,7 @@ abstract class PKCS1 extends Progenitor
         }
         $key = parent::load($key, $password);
         $decoded = ASN1::decodeBER($key);
-        if (empty($decoded)) {
+        if (!$decoded) {
             throw new \RuntimeException('Unable to decode BER');
         }
         $key = ASN1::asn1map($decoded[0], Maps\RSAPrivateKey::MAP);
@@ -84,17 +84,10 @@ abstract class PKCS1 extends Progenitor
     /**
      * Convert a private key to the appropriate format.
      *
-     * @param \phpseclib3\Math\BigInteger $n
-     * @param \phpseclib3\Math\BigInteger $e
-     * @param \phpseclib3\Math\BigInteger $d
-     * @param array $primes
-     * @param array $exponents
-     * @param array $coefficients
-     * @param string $password optional
+     * @param string|false $password
      * @param array $options optional
-     * @return string
      */
-    public static function savePrivateKey(BigInteger $n, BigInteger $e, BigInteger $d, array $primes, array $exponents, array $coefficients, $password = '', array $options = [])
+    public static function savePrivateKey(BigInteger $n, BigInteger $e, BigInteger $d, array $primes, array $exponents, array $coefficients, $password = '', array $options = []) : string
     {
         $num_primes = \count($primes);
         $key = ['version' => $num_primes == 2 ? 'two-prime' : 'multi', 'modulus' => $n, 'publicExponent' => $e, 'privateExponent' => $d, 'prime1' => $primes[1], 'prime2' => $primes[2], 'exponent1' => $exponents[1], 'exponent2' => $exponents[2], 'coefficient' => $coefficients[2]];
@@ -106,12 +99,8 @@ abstract class PKCS1 extends Progenitor
     }
     /**
      * Convert a public key to the appropriate format
-     *
-     * @param \phpseclib3\Math\BigInteger $n
-     * @param \phpseclib3\Math\BigInteger $e
-     * @return string
      */
-    public static function savePublicKey(BigInteger $n, BigInteger $e)
+    public static function savePublicKey(BigInteger $n, BigInteger $e) : string
     {
         $key = ['modulus' => $n, 'publicExponent' => $e];
         $key = ASN1::encodeDER($key, Maps\RSAPublicKey::MAP);

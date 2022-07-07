@@ -312,6 +312,16 @@ class PayPal_Gateway extends Base_Gateway {
 
 		} // end if;
 
+		$url = wu_get_current_url();
+
+		if (!is_main_site()) {
+
+			$checkout_pages = \WP_Ultimo\Checkout\Checkout_Pages::get_instance();
+
+			$url = $checkout_pages->get_page_url('register');
+
+		} // end if;
+
 		/*
 		 * Calculates the return URL
 		 * for the intermediary return URL.
@@ -319,7 +329,7 @@ class PayPal_Gateway extends Base_Gateway {
 		$return_url = add_query_arg(array(
 			'wu-confirm' => 'paypal',
 			'payment-id' => urlencode($this->payment->get_id()),
-		), home_url('register'));
+		), $url);
 
 		/*
 		 * Setup variables
@@ -453,9 +463,9 @@ class PayPal_Gateway extends Base_Gateway {
 
 			} // end if;
 
-			if ('failure' === strtolower($body['ACK'])) {
+			if ('failure' === strtolower($body['ACK']) || 'failurewithwarning' === strtolower($body['ACK'])) {
 
-				throw new \Exception($body['L_LONGMESSAGE0'], $body['L_ERRORCODE0']);
+				wp_die($body['L_LONGMESSAGE0'], $body['L_ERRORCODE0']);
 
 			} else {
 				/*
@@ -490,7 +500,27 @@ class PayPal_Gateway extends Base_Gateway {
 	 * @param \WP_Ultimo\Models\Customer   $customer The customer checking out.
 	 * @return void|bool
 	 */
-	public function process_cancellation($membership, $customer) {} // end process_cancellation;
+	public function process_cancellation($membership, $customer) {
+
+		$profile_id = $membership->get_gateway_subscription_id();
+
+		$args = array(
+			'USER'      => $this->username,
+			'PWD'       => $this->password,
+			'SIGNATURE' => $this->signature,
+			'VERSION'   => '124',
+			'METHOD'    => 'ManageRecurringPaymentsProfileStatus',
+			'PROFILEID' => $profile_id,
+			'ACTION'    => 'Cancel',
+		);
+
+		$request = wp_remote_post($this->api_endpoint, array(
+			'timeout'     => 45,
+			'httpversion' => '1.1',
+			'body'        => $args,
+		));
+
+	} // end process_cancellation;
 
 	/**
 	 * Process a checkout.
@@ -621,7 +651,7 @@ class PayPal_Gateway extends Base_Gateway {
 	 */
 	public function process_confirmation() {
 		/*
-		 * Tries to retrieve the nonce.
+		 * Tries to retrieve the nonce, this part is necessary due EU SCA Compliancy.
 		 */
 		$nonce = wu_request('wu_ppe_confirm_nonce', 'no-nonce');
 
@@ -633,8 +663,8 @@ class PayPal_Gateway extends Base_Gateway {
 		 */
 		if (wp_verify_nonce($nonce, 'wu-ppe-confirm-nonce')) {
 			/*
-			 * Retrieve the payment details, base on the token.
-			 */
+			* Retrieve the payment details, base on the token.
+			*/
 			$details = $this->get_checkout_details(wu_request('token'));
 
 			if (empty($details)) {
@@ -646,15 +676,15 @@ class PayPal_Gateway extends Base_Gateway {
 			} // end if;
 
 			/*
-			 * Tries to get the payment based on the request
-			 */
+			* Tries to get the payment based on the request
+			*/
 			$payment_id = wu_request('payment-id');
 			$payment    = wu_get_payment($payment_id);
 
 			/*
-			 * The pending payment does not exist...
-			 * Bail.
-			 */
+			* The pending payment does not exist...
+			* Bail.
+			*/
 			if (empty($payment)) {
 
 				$error = new \WP_Error(__('Pending payment does not exist.', 'wp-ultimo'));
@@ -664,11 +694,11 @@ class PayPal_Gateway extends Base_Gateway {
 			} // end if;
 
 			/*
-			 * Now we need to original cart.
-			 *
-			 * The original cart gets saved with the original
-			 * payment. Otherwise, we bail.
-			 */
+			* Now we need to original cart.
+			*
+			* The original cart gets saved with the original
+			* payment. Otherwise, we bail.
+			*/
 			$original_cart = $payment->get_meta('wu_original_cart');
 
 			if (empty($original_cart)) {
@@ -680,8 +710,8 @@ class PayPal_Gateway extends Base_Gateway {
 			} // end if;
 
 			/*
-			 * Set the variables
-			 */
+			* Set the variables
+			*/
 			$membership        = $payment->get_membership();
 			$customer          = $payment->get_customer();
 			$should_auto_renew = $original_cart->should_auto_renew();
@@ -697,30 +727,29 @@ class PayPal_Gateway extends Base_Gateway {
 
 			if ($should_auto_renew && $is_recurring) {
 				/*
-				 * We need to create the payment profile.
-				 * As this is a recurring payment and the
-				 * auto-renew option is active.
-				 */
+				* We need to create the payment profile.
+				* As this is a recurring payment and the
+				* auto-renew option is active.
+				*/
 				$this->create_recurring_profile($details, $original_cart, $payment, $membership, $customer);
 
 			} else {
 				/*
-				 * Otherwise, process
-				 * single payment.
-				 */
+				* Otherwise, process
+				* single payment.
+				*/
 				$this->complete_single_payment($details, $original_cart, $payment, $membership, $customer);
 
 			} // end if;
 
-		/*
-		 * If we don't have the valid
-		 * parameters we need to process
-		 * the confirmation, we
-		 * filter the content to display
-		 * the confirmation screen.
-		 */
 		} elseif (!empty(wu_request('token')) && !empty(wu_request('PayerID'))) {
-
+			/*
+			 * If we don't have the valid
+			 * parameters we need to process
+			 * the confirmation, we
+			 * filter the content to display
+			 * the confirmation screen.
+			 */
 			add_filter('the_content', array($this, 'confirmation_form'), 9999999);
 
 		} // end if;
@@ -774,8 +803,7 @@ class PayPal_Gateway extends Base_Gateway {
 		 */
 		$payment_data = array(
 			'status'        => Payment_Status::COMPLETED,
-			'payment_type'  => $posted['txn_type'],
-			'customer_id'   => $customer->get_id(),
+			'customer_id'   => $membership->get_customer_id(),
 			'membership_id' => $membership->get_id(),
 			'gateway'       => $this->id,
 		);
@@ -796,11 +824,9 @@ class PayPal_Gateway extends Base_Gateway {
 
 		if (!empty($posted['txn_id'])) {
 
-			$payment_data['transaction_id'] = sanitize_text_field($posted['txn_id']);
+			$payment_data['gateway_payment_id'] = sanitize_text_field($posted['txn_id']);
 
 		} // end if;
-
-		$pending_payment = $membership->get_last_pending_payment();
 
 		/*
 		 * Deal with each transaction type
@@ -832,44 +858,53 @@ class PayPal_Gateway extends Base_Gateway {
 
 				} // end if;
 
-				if (empty($transaction_id) || $rcp_payments->payment_exists($transaction_id)) {
+				if (empty($transaction_id)) {
 
-					throw new \Exception(sprintf('Breaking out of PayPal Express IPN recurring_payment_profile_created. Transaction ID not given or payment already exists. TXN ID: %s', $transaction_id));
+					throw new \Exception('Breaking out of PayPal Express IPN recurring_payment_profile_created. Transaction ID not given.');
 
 				} // end if;
 
 				// setup the payment info in an array for storage
-				$payment_data['date']           = date('Y-m-d H:i:s', strtotime($posted['time_created'])); // phpcs:ignore
-				$payment_data['amount']         = wu_to_float($posted['initial_payment_amount']);
-				$payment_data['transaction_id'] = sanitize_text_field($transaction_id);
+				$payment_data['date']               = date('Y-m-d H:i:s', strtotime($posted['time_created'])); // phpcs:ignore
+				$payment_data['amount']             = wu_to_float($posted['initial_payment_amount']);
+				$payment_data['gateway_payment_id'] = sanitize_text_field($transaction_id);
+
+				$payment = wu_get_payment_by('gateway_payment_id', $payment_data['gateway_payment_id']);
 
 				/*
 				 * In the case that the payment
 				 * already exists, update it.
 				 */
-				if (!empty($pending_payment)) {
+				if ($payment) {
 
-					$pending_payment->attributes($payment_data);
+					$payment->attributes($payment_data);
 
-					$pending_payment->save();
+					$payment->save();
 
 				/*
 				 * Payment does not exist. Create it and renew the membership.
 				 */
 				} else {
 
-					/**
-					 * Here, we need to create a new payment, based on the IPN.
-					 * This can be a challenge...
-					 */
-					// $payment_data['subtotal'] = $payment_data['amount'];
-					// $payment_id = $rcp_payments->insert( $payment_data );
+					$pending_payment = $membership->get_last_pending_payment();
+
+					if ($pending_payment) {
+
+						$pending_payment->attributes($payment_data);
+
+						$pending_payment->save();
+
+					} else {
+
+						wu_create_payment($payment_data);
+
+					} // end if;
+
+					$membership->add_to_times_billed(1);
 
 				} // end if;
 
 				$expiration = date('Y-m-d 23:59:59', strtotime($posted['next_payment_date'])); // phpcs:ignore
-
-				$membership->add_to_times_billed(1);
 
 				$membership->renew($membership->should_auto_renew(), 'active', $expiration);
 
@@ -877,11 +912,6 @@ class PayPal_Gateway extends Base_Gateway {
 
 			case 'recurring_payment':
 				wu_log_add('paypal', 'Processing PayPal Express recurring_payment IPN.');
-
-				// when a user makes a recurring payment
-				update_user_meta( $user_id, 'rcp_paypal_subscriber', $posted['payer_id'] );
-
-				$membership->set_gateway_subscription_id( $posted['recurring_payment_id'] );
 
 				if ('failed' === strtolower($posted['payment_status'])) {
 
@@ -901,54 +931,62 @@ class PayPal_Gateway extends Base_Gateway {
 
 				} // end if;
 
-				$membership->add_to_times_billed(1);
+				$payment_data['transaction_type'] = 'renewal';
+
+				$payment = wu_get_payment_by('gateway_payment_id', $payment_data['gateway_payment_id']);
+
+				/*
+				 * In the case that the payment
+				 * already exists, update it.
+				 */
+				if ($payment) {
+
+					$payment->attributes($payment_data);
+
+					$payment->save();
+
+				/*
+				 * Payment does not exist. Create it and renew the membership.
+				 */
+				} else {
+
+					wu_create_payment($payment_data);
+
+					$membership->add_to_times_billed(1);
+
+				} // end if;
 
 				$membership->renew(true);
-
-				$payment_data['transaction_type'] = 'renewal';
 
 				break;
 
 			case 'recurring_payment_profile_cancel':
 				wu_log_add('paypal', 'Processing PayPal Express recurring_payment_profile_cancel IPN.');
 
-				if (!$member->just_upgraded()) {
+				if (isset($posted['initial_payment_status']) && 'Failed' === $posted['initial_payment_status']) {
 
-					if (isset($posted['initial_payment_status']) && 'Failed' === $posted['initial_payment_status']) {
+					// Initial payment failed, so set the user back to pending.
+					$membership->set_status('pending');
 
-						// Initial payment failed, so set the user back to pending.
-						$membership->set_status('pending');
+					$membership->add_note(__( 'Initial payment failed in PayPal Express.', 'wp-ultimo'));
 
-						$membership->add_note(__( 'Initial payment failed in PayPal Express.', 'wp-ultimo'));
+					$this->error_message = __('Initial payment failed.', 'wp-ultimo');
 
-						$this->error_message = __('Initial payment failed.', 'wp-ultimo');
+				} else {
 
-						// do_action('rcp_registration_failed', $this);
-						// do_action('rcp_paypal_express_initial_payment_failed', $member, $posted, $this);
+					// If this is a completed payment plan, we can skip any cancellation actions. This is handled in renewals.
+					if ($membership->has_payment_plan() && $membership->at_maximum_renewals()) {
 
-					} else {
+						wu_log_add('paypal', sprintf('Membership #%d has completed its payment plan - not cancelling.', $membership->get_id()));
 
-						// If this is a completed payment plan, we can skip any cancellation actions. This is handled in renewals.
-						if ($membership->has_payment_plan() && $membership->at_maximum_renewals()) {
-
-							wu_log_add('paypal', sprintf('Membership #%d has completed its payment plan - not cancelling.', $membership->get_id()));
-
-							die('membership payment plan completed');
-
-						} // end if;
-
-						// user is marked as cancelled but retains access until end of term
-						$membership->cancel();
-
-						$membership->add_note(__('Membership cancelled via PayPal Express IPN.', 'wp-ultimo'));
-
-						// set the use to no longer be recurring
-						delete_user_meta($user_id, 'rcp_paypal_subscriber');
-
-						// do_action('rcp_ipn_subscr_cancel', $user_id);
-						// do_action('rcp_webhook_cancel', $member, $this);
+						die('membership payment plan completed');
 
 					} // end if;
+
+					// user is marked as cancelled but retains access until end of term
+					$membership->cancel();
+
+					$membership->add_note(__('Membership cancelled via PayPal Express IPN.', 'wp-ultimo'));
 
 				} // end if;
 
@@ -958,7 +996,7 @@ class PayPal_Gateway extends Base_Gateway {
 			case 'recurring_payment_suspended_due_to_max_failed_payment': // Same case as before
 				wu_log_add('paypal', 'Processing PayPal Express recurring_payment_failed or recurring_payment_suspended_due_to_max_failed_payment IPN.');
 
-				if (!in_array($membership->get_status(), array('cancelled', 'expired'))) {
+				if (!in_array($membership->get_status(), array('cancelled', 'expired'), true)) {
 
 					$membership->set_status('expired');
 
@@ -973,9 +1011,6 @@ class PayPal_Gateway extends Base_Gateway {
 					$this->webhook_event_id = sanitize_text_field($posted['ipn_track_id']);
 				} // end if;
 
-				// do_action('rcp_ipn_subscr_failed');
-				// do_action('rcp_recurring_payment_failed', $member, $this);
-
 				break;
 
 			case 'web_accept':
@@ -984,13 +1019,32 @@ class PayPal_Gateway extends Base_Gateway {
 				switch (strtolower($posted['payment_status'])) :
 
 					case 'completed':
-						if (empty($payment_data['transaction_id']) || $rcp_payments->payment_exists($payment_data['transaction_id'])) {
+						if (empty($payment_data['gateway_payment_id'])) {
 
-							wu_log_add('paypal', sprintf('Not inserting PayPal Express web_accept payment. Transaction ID not given or payment already exists. TXN ID: %s', $payment_data['transaction_id']), true);
+							throw new \Exception('Breaking out of PayPal Express IPN recurring_payment_profile_created. Transaction ID not given.');
 
+						} // end if;
+
+						$payment = wu_get_payment_by('gateway_payment_id', $payment_data['gateway_payment_id']);
+
+						/*
+						* In the case that the payment
+						* already exists, update it.
+						*/
+						if ($payment) {
+
+							$payment->attributes($payment_data);
+
+							$payment->save();
+
+						/*
+						* Payment does not exist. Create it and renew the membership.
+						*/
 						} else {
 
-							$rcp_payments->insert($payment_data);
+							wu_create_payment($payment_data);
+
+							$membership->add_to_times_billed(1);
 
 						} // end if;
 
@@ -1048,7 +1102,7 @@ class PayPal_Gateway extends Base_Gateway {
 			'PWD'                 => $this->password,
 			'SIGNATURE'           => $this->signature,
 			'VERSION'             => '124',
-			'TOKEN'               => $_POST['token'],
+			'TOKEN'               => wu_request('token'),
 			'METHOD'              => 'CreateRecurringPaymentsProfile',
 			'PROFILESTARTDATE'    => date('Y-m-d\TH:i:s', strtotime('+' . $cart->get_duration() . ' ' . $cart->get_duration_unit(), wu_get_current_time('timestamp', true))), // phpcs:ignore
 			'BILLINGPERIOD'       => ucwords($cart->get_duration_unit()),
@@ -1119,24 +1173,33 @@ class PayPal_Gateway extends Base_Gateway {
 				 * First, set the value
 				 * and the transaction ID.
 				 */
-				$transaction_id = $body['PAYMENTINFO_0_TRANSACTIONID'];
+				$transaction_id = isset($body['TRANSACTIONID']) ? $body['TRANSACTIONID'] : '';
+
+				// If TRANSACTIONID is not passed we need to wait for webhook
+				$payment_status = Payment_Status::PENDING;
+
+				if (!empty($transaction_id)) {
+
+					$payment_status = Payment_Status::COMPLETED;
+
+				} // end if;
 
 				$payment_data = array(
 					'gateway_payment_id' => $transaction_id,
-					'status'             => Payment_Status::COMPLETED,
+					'status'             => $payment_status,
 				);
 
 				/*
-					* Update local payment.
-					*
-					* This will add the transaction id,
-					* if we have it already, and mark it as
-					* complete.
-					*
-					* If we have a pending membership,
-					* and a pending site, for example,
-					* those will be marked as active.
-					*/
+				 * Update local payment.
+				 *
+				 * This will add the transaction id,
+				 * if we have it already, and mark it as
+				 * complete.
+				 *
+				 * If we have a pending membership,
+				 * and a pending site, for example,
+				 * those will be marked as active.
+				 */
 				$payment->attributes($payment_data);
 				$payment->save();
 
@@ -1144,7 +1207,36 @@ class PayPal_Gateway extends Base_Gateway {
 				$membership->set_gateway_subscription_id($body['PROFILEID']);
 				$membership->set_gateway_customer_id($details['PAYERID']);
 				$membership->set_gateway('paypal');
-				$membership->renew(true);
+
+				if ($payment_status === Payment_Status::COMPLETED) {
+
+					$membership->add_to_times_billed(1);
+
+				} // end if;
+
+				/*
+				 * Lets deal with upgrades, downgrades and addons
+				 *
+				 * Here, we just need to make sure we process
+				 * a membership swap.
+				 */
+				if ($cart->get_cart_type() === 'upgrade' || $cart->get_cart_type() === 'addon') {
+
+					$membership->swap($cart);
+
+					$membership->renew(true);
+
+				} elseif ($cart->get_cart_type() === 'downgrade') {
+
+					$membership->schedule_swap($cart);
+
+					$membership->save();
+
+				} else {
+
+					$membership->renew(true);
+
+				} // end if;
 
 				$redirect_url = add_query_arg(array(
 					'payment' => $payment->get_hash(),
@@ -1279,7 +1371,36 @@ class PayPal_Gateway extends Base_Gateway {
 				$payment->save();
 
 				$membership = $payment->get_membership();
-				$membership->renew(false);
+
+				if ($cart->get_total() > 0) {
+
+					$membership->add_to_times_billed(1);
+
+				} // end if;
+
+				/*
+				 * Lets deal with upgrades, downgrades and addons
+				 *
+				 * Here, we just need to make sure we process
+				 * a membership swap.
+				 */
+				if ($cart->get_cart_type() === 'upgrade' || $cart->get_cart_type() === 'addon') {
+
+					$membership->swap($cart);
+
+					$membership->renew(false);
+
+				} elseif ($cart->get_cart_type() === 'downgrade') {
+
+					$membership->schedule_swap($cart);
+
+					$membership->save();
+
+				} else {
+
+					$membership->renew(false);
+
+				} // end if;
 
 				$redirect_url = add_query_arg(array(
 					'payment' => $payment->get_hash(),

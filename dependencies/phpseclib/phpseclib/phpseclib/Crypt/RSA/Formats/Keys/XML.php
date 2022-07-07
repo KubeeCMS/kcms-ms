@@ -17,6 +17,7 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
+declare (strict_types=1);
 namespace phpseclib3\Crypt\RSA\Formats\Keys;
 
 use WP_Ultimo\Dependencies\ParagonIE\ConstantTime\Base64;
@@ -34,11 +35,9 @@ abstract class XML
     /**
      * Break a public or private key down into its constituent components
      *
-     * @param string $key
-     * @param string $password optional
-     * @return array
+     * @param string|array $key
      */
-    public static function load($key, $password = '')
+    public static function load($key) : array
     {
         if (!Strings::is_stringable($key)) {
             throw new \UnexpectedValueException('Key should be a string - not a ' . \gettype($key));
@@ -108,16 +107,9 @@ abstract class XML
     /**
      * Convert a private key to the appropriate format.
      *
-     * @param \phpseclib3\Math\BigInteger $n
-     * @param \phpseclib3\Math\BigInteger $e
-     * @param \phpseclib3\Math\BigInteger $d
-     * @param array $primes
-     * @param array $exponents
-     * @param array $coefficients
      * @param string $password optional
-     * @return string
      */
-    public static function savePrivateKey(BigInteger $n, BigInteger $e, BigInteger $d, array $primes, array $exponents, array $coefficients, $password = '')
+    public static function savePrivateKey(BigInteger $n, BigInteger $e, BigInteger $d, array $primes, array $exponents, array $coefficients, string $password = '') : string
     {
         if (\count($primes) != 2) {
             throw new \InvalidArgumentException('XML does not support multi-prime RSA keys');
@@ -129,12 +121,8 @@ abstract class XML
     }
     /**
      * Convert a public key to the appropriate format
-     *
-     * @param \phpseclib3\Math\BigInteger $n
-     * @param \phpseclib3\Math\BigInteger $e
-     * @return string
      */
-    public static function savePublicKey(BigInteger $n, BigInteger $e)
+    public static function savePublicKey(BigInteger $n, BigInteger $e) : string
     {
         return "<RSAKeyValue>\r\n" . '  <Modulus>' . Base64::encode($n->toBytes()) . "</Modulus>\r\n" . '  <Exponent>' . Base64::encode($e->toBytes()) . "</Exponent>\r\n" . '</RSAKeyValue>';
     }

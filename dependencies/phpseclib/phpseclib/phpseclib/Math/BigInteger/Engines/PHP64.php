@@ -10,6 +10,7 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://pear.php.net/package/Math_BigInteger
  */
+declare (strict_types=1);
 namespace phpseclib3\Math\BigInteger\Engines;
 
 /**
@@ -40,13 +41,13 @@ class PHP64 extends \phpseclib3\Math\BigInteger\Engines\PHP
     /**
      * Initialize a PHP64 BigInteger Engine instance
      *
-     * @param int $base
      * @see parent::initialize()
      */
-    protected function initialize($base)
+    protected function initialize(int $base) : void
     {
         if ($base != 256 && $base != -256) {
-            return parent::initialize($base);
+            parent::initialize($base);
+            return;
         }
         $val = $this->value;
         $this->value = [];
@@ -68,7 +69,7 @@ class PHP64 extends \phpseclib3\Math\BigInteger\Engines\PHP
                 }
                 $i = 0;
             }
-            list(, $digit) = \unpack('N', \substr($val, $i, 4));
+            [, $digit] = \unpack('N', \substr($val, $i, 4));
             $step = \count($vals) & 7;
             if (!$step) {
                 $digit &= static::MAX_DIGIT;
@@ -92,41 +93,31 @@ class PHP64 extends \phpseclib3\Math\BigInteger\Engines\PHP
      * Test for engine validity
      *
      * @see parent::__construct()
-     * @return bool
      */
-    public static function isValidEngine()
+    public static function isValidEngine() : bool
     {
         return \PHP_INT_SIZE >= 8;
     }
     /**
      * Adds two BigIntegers.
-     *
-     * @param PHP64 $y
-     * @return PHP64
      */
-    public function add(\phpseclib3\Math\BigInteger\Engines\PHP64 $y)
+    public function add(\phpseclib3\Math\BigInteger\Engines\PHP64 $y) : \phpseclib3\Math\BigInteger\Engines\PHP64
     {
         $temp = self::addHelper($this->value, $this->is_negative, $y->value, $y->is_negative);
         return $this->convertToObj($temp);
     }
     /**
      * Subtracts two BigIntegers.
-     *
-     * @param PHP64 $y
-     * @return PHP64
      */
-    public function subtract(\phpseclib3\Math\BigInteger\Engines\PHP64 $y)
+    public function subtract(\phpseclib3\Math\BigInteger\Engines\PHP64 $y) : \phpseclib3\Math\BigInteger\Engines\PHP64
     {
         $temp = self::subtractHelper($this->value, $this->is_negative, $y->value, $y->is_negative);
         return $this->convertToObj($temp);
     }
     /**
      * Multiplies two BigIntegers.
-     *
-     * @param PHP64 $y
-     * @return PHP64
      */
-    public function multiply(\phpseclib3\Math\BigInteger\Engines\PHP64 $y)
+    public function multiply(\phpseclib3\Math\BigInteger\Engines\PHP64 $y) : \phpseclib3\Math\BigInteger\Engines\PHP64
     {
         $temp = self::multiplyHelper($this->value, $this->is_negative, $y->value, $y->is_negative);
         return $this->convertToObj($temp);
@@ -139,10 +130,9 @@ class PHP64 extends \phpseclib3\Math\BigInteger\Engines\PHP
      * same.  If the remainder would be negative, the "common residue" is equal to the sum of the remainder
      * and the divisor (basically, the "common residue" is the first positive modulo).
      *
-     * @param PHP64 $y
      * @return array{PHP64, PHP64}
      */
-    public function divide(\phpseclib3\Math\BigInteger\Engines\PHP64 $y)
+    public function divide(\phpseclib3\Math\BigInteger\Engines\PHP64 $y) : array
     {
         return $this->divideHelper($y);
     }
@@ -150,7 +140,6 @@ class PHP64 extends \phpseclib3\Math\BigInteger\Engines\PHP
      * Calculates modular inverses.
      *
      * Say you have (30 mod 17 * x mod 17) mod 17 == 1.  x can be found using modular inverses.
-     * @param PHP64 $n
      * @return false|PHP64
      */
     public function modInverse(\phpseclib3\Math\BigInteger\Engines\PHP64 $n)
@@ -161,10 +150,9 @@ class PHP64 extends \phpseclib3\Math\BigInteger\Engines\PHP
      * Calculates modular inverses.
      *
      * Say you have (30 mod 17 * x mod 17) mod 17 == 1.  x can be found using modular inverses.
-     * @param PHP64 $n
      * @return PHP64[]
      */
-    public function extendedGCD(\phpseclib3\Math\BigInteger\Engines\PHP64 $n)
+    public function extendedGCD(\phpseclib3\Math\BigInteger\Engines\PHP64 $n) : array
     {
         return $this->extendedGCDHelper($n);
     }
@@ -172,41 +160,29 @@ class PHP64 extends \phpseclib3\Math\BigInteger\Engines\PHP
      * Calculates the greatest common divisor
      *
      * Say you have 693 and 609.  The GCD is 21.
-     *
-     * @param PHP64 $n
-     * @return PHP64
      */
-    public function gcd(\phpseclib3\Math\BigInteger\Engines\PHP64 $n)
+    public function gcd(\phpseclib3\Math\BigInteger\Engines\PHP64 $n) : \phpseclib3\Math\BigInteger\Engines\PHP64
     {
         return $this->extendedGCD($n)['gcd'];
     }
     /**
      * Logical And
-     *
-     * @param PHP64 $x
-     * @return PHP64
      */
-    public function bitwise_and(\phpseclib3\Math\BigInteger\Engines\PHP64 $x)
+    public function bitwise_and(\phpseclib3\Math\BigInteger\Engines\PHP64 $x) : \phpseclib3\Math\BigInteger\Engines\PHP64
     {
         return $this->bitwiseAndHelper($x);
     }
     /**
      * Logical Or
-     *
-     * @param PHP64 $x
-     * @return PHP64
      */
-    public function bitwise_or(\phpseclib3\Math\BigInteger\Engines\PHP64 $x)
+    public function bitwise_or(\phpseclib3\Math\BigInteger\Engines\PHP64 $x) : \phpseclib3\Math\BigInteger\Engines\PHP64
     {
         return $this->bitwiseOrHelper($x);
     }
     /**
      * Logical Exclusive Or
-     *
-     * @param PHP64 $x
-     * @return PHP64
      */
-    public function bitwise_xor(\phpseclib3\Math\BigInteger\Engines\PHP64 $x)
+    public function bitwise_xor(\phpseclib3\Math\BigInteger\Engines\PHP64 $x) : \phpseclib3\Math\BigInteger\Engines\PHP64
     {
         return $this->bitwiseXorHelper($x);
     }
@@ -224,11 +200,10 @@ class PHP64 extends \phpseclib3\Math\BigInteger\Engines\PHP
      *
      * {@internal Could return $this->subtract($x), but that's not as fast as what we do do.}
      *
-     * @param PHP64 $y
      * @return int in case < 0 if $this is less than $y; > 0 if $this is greater than $y, and 0 if they are equal.
      * @see self::equals()
      */
-    public function compare(\phpseclib3\Math\BigInteger\Engines\PHP64 $y)
+    public function compare(\phpseclib3\Math\BigInteger\Engines\PHP64 $y) : int
     {
         return parent::compareHelper($this->value, $this->is_negative, $y->value, $y->is_negative);
     }
@@ -236,22 +211,15 @@ class PHP64 extends \phpseclib3\Math\BigInteger\Engines\PHP
      * Tests the equality of two numbers.
      *
      * If you need to see if one number is greater than or less than another number, use BigInteger::compare()
-     *
-     * @param PHP64 $x
-     * @return bool
      */
-    public function equals(\phpseclib3\Math\BigInteger\Engines\PHP64 $x)
+    public function equals(\phpseclib3\Math\BigInteger\Engines\PHP64 $x) : bool
     {
         return $this->value === $x->value && $this->is_negative == $x->is_negative;
     }
     /**
      * Performs modular exponentiation.
-     *
-     * @param PHP64 $e
-     * @param PHP64 $n
-     * @return PHP64
      */
-    public function modPow(\phpseclib3\Math\BigInteger\Engines\PHP64 $e, \phpseclib3\Math\BigInteger\Engines\PHP64 $n)
+    public function modPow(\phpseclib3\Math\BigInteger\Engines\PHP64 $e, \phpseclib3\Math\BigInteger\Engines\PHP64 $n) : \phpseclib3\Math\BigInteger\Engines\PHP64
     {
         return $this->powModOuter($e, $n);
     }
@@ -260,8 +228,6 @@ class PHP64 extends \phpseclib3\Math\BigInteger\Engines\PHP
      *
      * Alias for modPow().
      *
-     * @param PHP64 $e
-     * @param PHP64 $n
      * @return PHP64|false
      */
     public function powMod(\phpseclib3\Math\BigInteger\Engines\PHP64 $e, \phpseclib3\Math\BigInteger\Engines\PHP64 $n)
@@ -273,8 +239,6 @@ class PHP64 extends \phpseclib3\Math\BigInteger\Engines\PHP
      *
      * If there's not a prime within the given range, false will be returned.
      *
-     * @param PHP64 $min
-     * @param PHP64 $max
      * @return false|PHP64
      */
     public static function randomRangePrime(\phpseclib3\Math\BigInteger\Engines\PHP64 $min, \phpseclib3\Math\BigInteger\Engines\PHP64 $max)
@@ -289,53 +253,36 @@ class PHP64 extends \phpseclib3\Math\BigInteger\Engines\PHP
      *
      * BigInteger::randomRange($min, $max)
      * BigInteger::randomRange($max, $min)
-     *
-     * @param PHP64 $min
-     * @param PHP64 $max
-     * @return PHP64
      */
-    public static function randomRange(\phpseclib3\Math\BigInteger\Engines\PHP64 $min, \phpseclib3\Math\BigInteger\Engines\PHP64 $max)
+    public static function randomRange(\phpseclib3\Math\BigInteger\Engines\PHP64 $min, \phpseclib3\Math\BigInteger\Engines\PHP64 $max) : \phpseclib3\Math\BigInteger\Engines\PHP64
     {
         return self::randomRangeHelper($min, $max);
     }
     /**
      * Performs exponentiation.
-     *
-     * @param PHP64 $n
-     * @return PHP64
      */
-    public function pow(\phpseclib3\Math\BigInteger\Engines\PHP64 $n)
+    public function pow(\phpseclib3\Math\BigInteger\Engines\PHP64 $n) : \phpseclib3\Math\BigInteger\Engines\PHP64
     {
         return $this->powHelper($n);
     }
     /**
      * Return the minimum BigInteger between an arbitrary number of BigIntegers.
-     *
-     * @param PHP64 ...$nums
-     * @return PHP64
      */
-    public static function min(\phpseclib3\Math\BigInteger\Engines\PHP64 ...$nums)
+    public static function min(\phpseclib3\Math\BigInteger\Engines\PHP64 ...$nums) : \phpseclib3\Math\BigInteger\Engines\PHP64
     {
         return self::minHelper($nums);
     }
     /**
      * Return the maximum BigInteger between an arbitrary number of BigIntegers.
-     *
-     * @param PHP64 ...$nums
-     * @return PHP64
      */
-    public static function max(\phpseclib3\Math\BigInteger\Engines\PHP64 ...$nums)
+    public static function max(\phpseclib3\Math\BigInteger\Engines\PHP64 ...$nums) : \phpseclib3\Math\BigInteger\Engines\PHP64
     {
         return self::maxHelper($nums);
     }
     /**
      * Tests BigInteger to see if it is between two integers, inclusive
-     *
-     * @param PHP64 $min
-     * @param PHP64 $max
-     * @return bool
      */
-    public function between(\phpseclib3\Math\BigInteger\Engines\PHP64 $min, \phpseclib3\Math\BigInteger\Engines\PHP64 $max)
+    public function between(\phpseclib3\Math\BigInteger\Engines\PHP64 $min, \phpseclib3\Math\BigInteger\Engines\PHP64 $max) : bool
     {
         return $this->compare($min) >= 0 && $this->compare($max) <= 0;
     }

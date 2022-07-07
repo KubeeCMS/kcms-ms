@@ -12,6 +12,7 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
+declare (strict_types=1);
 namespace phpseclib3\Crypt\DSA\Formats\Keys;
 
 use phpseclib3\Math\BigInteger;
@@ -25,11 +26,10 @@ abstract class Raw
     /**
      * Break a public or private key down into its constituent components
      *
-     * @param array $key
-     * @param string $password optional
-     * @return array
+     * @param string|array $key
+     * @param string|false $password
      */
-    public static function load($key, $password = '')
+    public static function load($key, $password = '') : array
     {
         if (!\is_array($key)) {
             throw new \UnexpectedValueException('Key should be a array - not a ' . \gettype($key));
@@ -50,28 +50,16 @@ abstract class Raw
     /**
      * Convert a private key to the appropriate format.
      *
-     * @param \phpseclib3\Math\BigInteger $p
-     * @param \phpseclib3\Math\BigInteger $q
-     * @param \phpseclib3\Math\BigInteger $g
-     * @param \phpseclib3\Math\BigInteger $y
-     * @param \phpseclib3\Math\BigInteger $x
      * @param string $password optional
-     * @return string
      */
-    public static function savePrivateKey(BigInteger $p, BigInteger $q, BigInteger $g, BigInteger $y, BigInteger $x, $password = '')
+    public static function savePrivateKey(BigInteger $p, BigInteger $q, BigInteger $g, BigInteger $y, BigInteger $x, string $password = '') : string
     {
         return \compact('p', 'q', 'g', 'y', 'x');
     }
     /**
      * Convert a public key to the appropriate format
-     *
-     * @param \phpseclib3\Math\BigInteger $p
-     * @param \phpseclib3\Math\BigInteger $q
-     * @param \phpseclib3\Math\BigInteger $g
-     * @param \phpseclib3\Math\BigInteger $y
-     * @return string
      */
-    public static function savePublicKey(BigInteger $p, BigInteger $q, BigInteger $g, BigInteger $y)
+    public static function savePublicKey(BigInteger $p, BigInteger $q, BigInteger $g, BigInteger $y) : string
     {
         return \compact('p', 'q', 'g', 'y');
     }

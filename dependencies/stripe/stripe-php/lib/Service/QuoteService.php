@@ -46,7 +46,7 @@ class QuoteService extends \WP_Ultimo\Dependencies\Stripe\Service\AbstractServic
      *
      * @throws \Stripe\Exception\ApiErrorException if the request fails
      *
-     * @return \Stripe\Collection<\Stripe\Quote>
+     * @return \Stripe\Collection<\Stripe\LineItem>
      */
     public function allComputedUpfrontLineItems($id, $params = null, $opts = null)
     {
@@ -63,7 +63,7 @@ class QuoteService extends \WP_Ultimo\Dependencies\Stripe\Service\AbstractServic
      *
      * @throws \Stripe\Exception\ApiErrorException if the request fails
      *
-     * @return \Stripe\Collection<\Stripe\Quote>
+     * @return \Stripe\Collection<\Stripe\LineItem>
      */
     public function allLineItems($id, $params = null, $opts = null)
     {

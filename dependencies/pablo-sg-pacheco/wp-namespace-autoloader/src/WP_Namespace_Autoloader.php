@@ -42,6 +42,8 @@ if (!\class_exists('WP_Ultimo\\Dependencies\\Pablo_Pacheco\\WP_Namespace_Autoloa
          * @type array         $lowercase            If you want to lowercase. It accepts an array with two possible values: 'file' | 'folders'
          * @type array         $underscore_to_hyphen If you want to convert underscores to hyphens. It accepts an array with two possible values: 'file' | 'folders'
          * @type boolean       $prepend_class        If you want to prepend 'class-' before files
+         * @type boolean       $prepend_interface    If you want to prepend 'interface-' before files
+         * @type boolean       $prepend_trait        If you want to prepend 'trait-' before files
          * @type string|array  $classes_dir          Name of the directories containing all your classes (optional).
          * }
          */
@@ -55,6 +57,8 @@ if (!\class_exists('WP_Ultimo\\Dependencies\\Pablo_Pacheco\\WP_Namespace_Autoloa
                 'underscore_to_hyphen' => array('file'),
                 // 'file' | folders
                 'prepend_class' => \true,
+                'prepend_interface' => \true,
+                'prepend_trait' => \true,
                 'classes_dir' => array('.', 'vendor'),
                 'debug' => \false,
             );
@@ -79,7 +83,7 @@ if (!\class_exists('WP_Ultimo\\Dependencies\\Pablo_Pacheco\\WP_Namespace_Autoloa
         {
             $args = $this->get_args();
             $namespace = $args['namespace_prefix'];
-            if (!\class_exists($class) && !\interface_exists($class)) {
+            if (!\class_exists($class) && !\interface_exists($class) && !\trait_exists($class)) {
                 if (\false !== \strpos($class, $namespace)) {
                     if (!\class_exists($class)) {
                         return \true;
@@ -169,12 +173,14 @@ if (!\class_exists('WP_Ultimo\\Dependencies\\Pablo_Pacheco\\WP_Namespace_Autoloa
          * Takes className or end of classFQN and converts it to WPCS "class-" prefixed filename.
          *
          * @param string $class className or classFNQ.
+         * @param string $object_type the type of object interface, trait or class (default).
          *
          * @return string
          */
-        private function get_file_applying_wp_standards($class)
+        private function get_file_applying_wp_standards($class, $object_type = 'class')
         {
             $args = $this->get_args();
+            $object_type = \in_array($object_type, array('class', 'interface', 'trait'), \true) ? $object_type : 'class';
             // Sanitized class and namespace prefix.
             $sanitized_class = $this->sanitize_namespace($class, \false);
             // Gets namespace file path.
@@ -189,12 +195,11 @@ if (!\class_exists('WP_Ultimo\\Dependencies\\Pablo_Pacheco\\WP_Namespace_Autoloa
                 $final_file = \str_replace(array('_', "\0"), array('-', ''), $final_file);
             }
             // Prepend class.
-            if ($args['prepend_class']) {
-                $prepended = \preg_replace('/(.*)-interface$/', 'interface-$1', $final_file);
-                $prepended = \preg_replace('/(.*)-abstract$/', 'abstract-$1', $prepended);
+            if ($args['prepend_class'] || $args['prepend_interface'] || $args['prepend_trait']) {
+                $prepended = \preg_replace('/(.*)-abstract$/', 'abstract-$1', $final_file);
                 // If no changes were made when looking for interfaces and abstract classes, prepend "class-".
                 if ($prepended === $final_file) {
-                    $final_file = 'class-' . $final_file;
+                    $final_file = $object_type . '-' . $final_file;
                 } else {
                     $final_file = $prepended;
                 }
@@ -245,16 +250,25 @@ if (!\class_exists('WP_Ultimo\\Dependencies\\Pablo_Pacheco\\WP_Namespace_Autoloa
                     return array();
                 }
             }
+            $args = $this->get_args();
             $namespace_file_path = $this->get_namespace_file_path($class);
-            $final_file = $this->get_file_applying_wp_standards($class);
+            $final_files = array($this->get_file_applying_wp_standards($class));
+            if ($args['prepend_interface']) {
+                $final_files[] = $this->get_file_applying_wp_standards($class, 'interface');
+            }
+            if ($args['prepend_trait']) {
+                $final_files[] = $this->get_file_applying_wp_standards($class, 'trait');
+            }
             $class_files = array();
             $dir = $this->get_dir();
-            if (\is_array($dir)) {
-                foreach ($dir as $class_dir) {
-                    $class_files[] = $class_dir . $namespace_file_path . $final_file;
+            foreach ($final_files as $final_file) {
+                if (\is_array($dir)) {
+                    foreach ($dir as $class_dir) {
+                        $class_files[] = $class_dir . $namespace_file_path . $final_file;
+                    }
+                } else {
+                    $class_files[] = $dir . $namespace_file_path . $final_file;
                 }
-            } else {
-                $class_files[] = $dir . $namespace_file_path . $final_file;
             }
             return $class_files;
         }

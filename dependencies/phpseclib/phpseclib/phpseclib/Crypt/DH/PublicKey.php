@@ -8,6 +8,7 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
+declare (strict_types=1);
 namespace phpseclib3\Crypt\DH;
 
 use phpseclib3\Crypt\Common;
@@ -23,21 +24,17 @@ class PublicKey extends DH
     /**
      * Returns the public key
      *
-     * @param string $type
      * @param array $options optional
-     * @return string
      */
-    public function toString($type, array $options = [])
+    public function toString(string $type, array $options = []) : string
     {
         $type = self::validatePlugin('Keys', $type, 'savePublicKey');
         return $type::savePublicKey($this->prime, $this->base, $this->publicKey, $options);
     }
     /**
      * Returns the public key as a BigInteger
-     *
-     * @return \phpseclib3\Math\BigInteger
      */
-    public function toBigInteger()
+    public function toBigInteger() : \phpseclib3\Math\BigInteger
     {
         return $this->publicKey;
     }

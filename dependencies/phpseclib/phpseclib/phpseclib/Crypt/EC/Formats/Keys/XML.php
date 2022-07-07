@@ -15,6 +15,7 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
+declare (strict_types=1);
 namespace phpseclib3\Crypt\EC\Formats\Keys;
 
 use WP_Ultimo\Dependencies\ParagonIE\ConstantTime\Base64;
@@ -49,11 +50,10 @@ abstract class XML
     /**
      * Break a public or private key down into its constituent components
      *
-     * @param string $key
-     * @param string $password optional
-     * @return array
+     * @param string|array $key
+     * @param string|false $password
      */
-    public static function load($key, $password = '')
+    public static function load($key, $password = '') : array
     {
         self::initialize_static_variables();
         if (!Strings::is_stringable($key)) {
@@ -90,13 +90,11 @@ abstract class XML
     /**
      * Case-insensitive xpath query
      *
-     * @param \DOMXPath $xpath
-     * @param string $name
-     * @param string $error optional
+     * @param string|null $error optional
      * @param bool $decode optional
-     * @return \DOMNodeList
+     * @return \DOMNodeList|string
      */
-    private static function query($xpath, $name, $error = null, $decode = \true)
+    private static function query(\DOMXPath $xpath, string $name, string $error = null, bool $decode = \true)
     {
         $query = '/';
         $names = \explode('/', $name);
@@ -114,11 +112,8 @@ abstract class XML
     }
     /**
      * Finds the first element in the relevant namespace, strips the namespacing and returns the XML for that element.
-     *
-     * @param string $xml
-     * @param string $ns
      */
-    private static function isolateNamespace($xml, $ns)
+    private static function isolateNamespace(string $xml, string $ns)
     {
         $dom = new \DOMDocument();
         if (!$dom->loadXML($xml)) {
@@ -138,21 +133,17 @@ abstract class XML
     }
     /**
      * Decodes the value
-     *
-     * @param string $value
      */
-    private static function decodeValue($value)
+    private static function decodeValue(string $value) : string
     {
         return Base64::decode(\str_replace(["\r", "\n", ' ', "\t"], '', $value));
     }
     /**
      * Extract points from an XML document
      *
-     * @param \DOMXPath $xpath
-     * @param \phpseclib3\Crypt\EC\BaseCurves\Base $curve
      * @return object[]
      */
-    private static function extractPointRFC4050(\DOMXPath $xpath, BaseCurve $curve)
+    private static function extractPointRFC4050(\DOMXPath $xpath, BaseCurve $curve) : array
     {
         $x = self::query($xpath, 'publickey/x');
         $y = self::query($xpath, 'publickey/y');
@@ -172,7 +163,6 @@ abstract class XML
      * Returns an instance of \phpseclib3\Crypt\EC\BaseCurves\Base based
      * on the curve parameters
      *
-     * @param \DomXPath $xpath
      * @return \phpseclib3\Crypt\EC\BaseCurves\Base|false
      */
     private static function loadCurveByParam(\DOMXPath $xpath)
@@ -235,7 +225,6 @@ abstract class XML
      * Returns an instance of \phpseclib3\Crypt\EC\BaseCurves\Base based
      * on the curve parameters
      *
-     * @param \DomXPath $xpath
      * @return \phpseclib3\Crypt\EC\BaseCurves\Base|false
      */
     private static function loadCurveByParamRFC4050(\DOMXPath $xpath)
@@ -279,36 +268,32 @@ abstract class XML
      * Sets the namespace. dsig11 is the most common one.
      *
      * Set to null to unset. Used only for creating public keys.
-     *
-     * @param string $namespace
      */
-    public static function setNamespace($namespace)
+    public static function setNamespace(string $namespace) : void
     {
         self::$namespace = $namespace;
     }
     /**
      * Uses the XML syntax specified in https://tools.ietf.org/html/rfc4050
      */
-    public static function enableRFC4050Syntax()
+    public static function enableRFC4050Syntax() : void
     {
         self::$rfc4050 = \true;
     }
     /**
      * Uses the XML syntax specified in https://www.w3.org/TR/xmldsig-core/#sec-ECParameters
      */
-    public static function disableRFC4050Syntax()
+    public static function disableRFC4050Syntax() : void
     {
         self::$rfc4050 = \false;
     }
     /**
      * Convert a public key to the appropriate format
      *
-     * @param \phpseclib3\Crypt\EC\BaseCurves\Base $curve
      * @param \phpseclib3\Math\Common\FiniteField\Integer[] $publicKey
      * @param array $options optional
-     * @return string
      */
-    public static function savePublicKey(BaseCurve $curve, array $publicKey, array $options = [])
+    public static function savePublicKey(BaseCurve $curve, array $publicKey, array $options = []) : string
     {
         self::initialize_static_variables();
         if ($curve instanceof TwistedEdwardsCurve || $curve instanceof MontgomeryCurve) {
@@ -329,12 +314,10 @@ abstract class XML
     /**
      * Encode Parameters
      *
-     * @param \phpseclib3\Crypt\EC\BaseCurves\Base $curve
-     * @param string $pre
      * @param array $options optional
      * @return string|false
      */
-    private static function encodeXMLParameters(BaseCurve $curve, $pre, array $options = [])
+    private static function encodeXMLParameters(BaseCurve $curve, string $pre, array $options = [])
     {
         $result = self::encodeParameters($curve, \true, $options);
         if (isset($result['namedCurve'])) {
@@ -349,7 +332,7 @@ abstract class XML
                     $xml .= '<' . $pre . 'PrimeFieldParamsType>' . "\r\n" . '<' . $pre . 'P>' . $temp['fieldID']['parameters'] . '</' . $pre . 'P>' . "\r\n" . '</' . $pre . 'PrimeFieldParamsType>' . "\r\n";
                     $a = $curve->getA();
                     $b = $curve->getB();
-                    list($x, $y) = $curve->getBasePoint();
+                    [$x, $y] = $curve->getBasePoint();
                     break;
                 default:
                     throw new UnsupportedCurveException('Field Type of ' . $temp['fieldID']['fieldType'] . ' is not supported');

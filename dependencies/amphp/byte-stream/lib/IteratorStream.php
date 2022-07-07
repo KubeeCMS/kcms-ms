@@ -15,7 +15,7 @@ final class IteratorStream implements InputStream
     /** @var bool */
     private $pending = \false;
     /**
-     * @psam-param Iterator<string> $iterator
+     * @psalm-param Iterator<string> $iterator
      */
     public function __construct(Iterator $iterator)
     {

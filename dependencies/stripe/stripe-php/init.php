@@ -3,6 +3,7 @@
 namespace WP_Ultimo\Dependencies;
 
 // File generated from our OpenAPI spec
+require __DIR__ . '/lib/Util/ApiVersion.php';
 // Stripe singleton
 require __DIR__ . '/lib/Stripe.php';
 // Utilities
@@ -245,6 +246,8 @@ require __DIR__ . '/lib/Service/Terminal/ConfigurationService.php';
 require __DIR__ . '/lib/Service/Terminal/ConnectionTokenService.php';
 require __DIR__ . '/lib/Service/Terminal/LocationService.php';
 require __DIR__ . '/lib/Service/Terminal/ReaderService.php';
+require __DIR__ . '/lib/Service/TestHelpers/CustomerService.php';
+require __DIR__ . '/lib/Service/TestHelpers/Issuing/CardService.php';
 require __DIR__ . '/lib/Service/TestHelpers/RefundService.php';
 require __DIR__ . '/lib/Service/TestHelpers/Terminal/ReaderService.php';
 require __DIR__ . '/lib/Service/TestHelpers/TestClockService.php';
@@ -279,6 +282,7 @@ require __DIR__ . '/lib/Service/Radar/RadarServiceFactory.php';
 require __DIR__ . '/lib/Service/Reporting/ReportingServiceFactory.php';
 require __DIR__ . '/lib/Service/Sigma/SigmaServiceFactory.php';
 require __DIR__ . '/lib/Service/Terminal/TerminalServiceFactory.php';
+require __DIR__ . '/lib/Service/TestHelpers/Issuing/IssuingServiceFactory.php';
 require __DIR__ . '/lib/Service/TestHelpers/Terminal/TerminalServiceFactory.php';
 require __DIR__ . '/lib/Service/TestHelpers/TestHelpersServiceFactory.php';
 require __DIR__ . '/lib/Service/TestHelpers/Treasury/TreasuryServiceFactory.php';

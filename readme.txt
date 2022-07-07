@@ -22,6 +22,24 @@ The Complete Network Solution.
 
 == Changelog ==
 
+Version 2.0.17 - Released on 2022-07-04
+
+* fix: New site creation not working on customer form;
+
+Version 2.0.16 - Released on 2022-07-01
+
+* Improvement: Allow the auto-submission of fields with the steps field present in form;
+* Improvement: Do not calculate prorate in upgrades if membership is in trial period;
+* Improvement: PayPal gateway rebuilt to run updates on memberships;
+* Improvement: Set Stripe Webhook mode by request mode (live or sandbox);
+* Fix: Checkout form editor not showing the input and steps settings;
+* Fix: Step being duplicate when updating the step id in checkout form editor;
+* Fix: Paypal gateway not completing the checkout process on recurring payments;
+* Internal: Additional tests for Wordpress 6.0;
+* Internal: Improved the multistep checkout test;
+* Internal: Improved the model generators for better tests;
+* Internal: Improved the code to check sent emails in automated tests;
+
 Version 2.0.15 - Released on 2022-06-15
 
 * Added: Currency Saudi Riyal

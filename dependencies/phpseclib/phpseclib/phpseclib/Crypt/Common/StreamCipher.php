@@ -11,6 +11,7 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
+declare (strict_types=1);
 namespace phpseclib3\Crypt\Common;
 
 /**
@@ -41,10 +42,8 @@ abstract class StreamCipher extends \phpseclib3\Crypt\Common\SymmetricKey
     }
     /**
      * Stream ciphers not use an IV
-     *
-     * @return bool
      */
-    public function usesIV()
+    public function usesIV() : bool
     {
         return \false;
     }

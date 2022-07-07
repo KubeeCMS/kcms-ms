@@ -361,6 +361,7 @@ class Checkout {
 			'hidden',
 			'submit_button',
 			'period_selection',
+			'steps'
 		);
 
 		// Extra check to prevent error messages from being displayed.

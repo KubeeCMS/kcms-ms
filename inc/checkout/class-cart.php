@@ -9,13 +9,12 @@
 
 namespace WP_Ultimo\Checkout;
 
+use \WP_Ultimo\Checkout\Line_Item;
 use \WP_Ultimo\Database\Memberships\Membership_Status;
+use \WP_Ultimo\Dependencies\Arrch\Arrch as Array_Search;
 
 // Exit if accessed directly
 defined('ABSPATH') || exit;
-
-use \WP_Ultimo\Checkout\Line_Item;
-use \WP_Ultimo\Dependencies\Arrch\Arrch as Array_Search;
 
 /**
  * Creates an cart with the parameters of the purchase being placed.
@@ -975,6 +974,16 @@ class Cart implements \JsonSerializable {
 		 * This is super hard to get right, but we basically need to add
 		 * new line items to account for the time using the old plan.
 		 */
+
+		/*
+		 * If the membership is in trial period theres nothing to prorate.
+		 */
+		if ($this->membership->get_status() === Membership_Status::TRIALING) {
+
+			return;
+
+		} // end if;
+
 		if ($this->membership->is_lifetime() || !$this->membership->is_recurring()) {
 
 			$credit = $this->membership->get_initial_amount();
@@ -1050,6 +1059,8 @@ class Cart implements \JsonSerializable {
 		 * @param self $cart This cart object.
 		 */
 		$credit = apply_filters('wu_checkout_calculate_prorate_credits', $credit, $this);
+
+		$credit = round($credit, wu_currency_decimal_filter());
 
 		/*
 		 * No credits

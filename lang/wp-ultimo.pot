@@ -2,9 +2,9 @@
 # This file is distributed under the GPL2.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Ultimo 2.0.15\n"
+"Project-Id-Version: WP Ultimo 2.0.17\n"
 "Report-Msgid-Bugs-To: arindo+translation@wpultimo.com\n"
-"POT-Creation-Date: 2022-06-15 21:00:30+00:00\n"
+"POT-Creation-Date: 2022-07-04 20:10:11+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,7 +24,7 @@ msgstr ""
 "X-Textdomain-Support: yes\n"
 "X-Generator: grunt-wp-i18n 1.0.3\n"
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:475
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:506
 msgid "100"
 msgstr ""
 
@@ -181,7 +181,7 @@ msgid "Exit Customize Mode"
 msgstr ""
 
 #: inc/admin-pages/class-broadcast-edit-admin-page.php:94
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1315
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1358
 #: inc/admin-pages/class-customer-edit-admin-page.php:628
 #: inc/admin-pages/class-discount-code-edit-admin-page.php:235
 #: inc/admin-pages/class-domain-edit-admin-page.php:265
@@ -204,7 +204,7 @@ msgid "Broadcast Type"
 msgstr ""
 
 #: inc/admin-pages/class-broadcast-edit-admin-page.php:110
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1157
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1200
 #: inc/admin-pages/class-payment-edit-admin-page.php:655
 #: inc/list-tables/class-broadcast-list-table.php:433
 #: inc/list-tables/class-event-list-table.php:217
@@ -319,7 +319,7 @@ msgstr ""
 #: inc/admin-pages/class-broadcast-edit-admin-page.php:351
 #: inc/admin-pages/class-edit-admin-page.php:501
 #: inc/admin-pages/class-tax-rates-admin-page.php:187
-#: inc/checkout/class-checkout.php:1547 views/base/addons.php:252
+#: inc/checkout/class-checkout.php:1548 views/base/addons.php:252
 #: views/base/edit/widget-tabs.php:104
 #: views/dashboard-statistics/widget-mrr-growth.php:14
 #: views/dashboard-statistics/widget-tax-graph.php:14
@@ -363,7 +363,7 @@ msgid "Delete Broadcast"
 msgstr ""
 
 #: inc/admin-pages/class-broadcast-edit-admin-page.php:413
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1445
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1488
 #: inc/admin-pages/class-customer-edit-admin-page.php:863
 #: inc/admin-pages/class-discount-code-edit-admin-page.php:586
 #: inc/admin-pages/class-domain-edit-admin-page.php:435
@@ -461,7 +461,7 @@ msgid "Enter a title for your broadcast."
 msgstr ""
 
 #: inc/admin-pages/class-broadcast-list-admin-page.php:382
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:881
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:910
 #: inc/admin-pages/class-email-template-customize-admin-page.php:242
 #: inc/admin-pages/class-placeholders-admin-page.php:113
 #: inc/checkout/signup-fields/class-base-signup-field.php:532
@@ -516,11 +516,11 @@ msgstr ""
 msgid "System Emails"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:133
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:164
 msgid "Generate Shortcode"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:178
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:209
 #: inc/admin-pages/class-email-list-admin-page.php:233
 #: inc/admin-pages/class-email-list-admin-page.php:609
 #: inc/admin-pages/class-email-list-admin-page.php:631
@@ -530,214 +530,214 @@ msgstr ""
 msgid "Something wrong happened."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:226
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:257
 msgid "Step Separator"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:380
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:411
 msgid "Field"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:381
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:412
 msgid "Additional Settings"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:382
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:883
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:413
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:912
 #: inc/admin-pages/class-email-edit-admin-page.php:297
 msgid "Style"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:392
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:423
 msgid "Field Type"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:393
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:424
 msgid "Select the type of field you want to add to the checkout form."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:410
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:441
 msgid "&larr; Back to Field Type Selection"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:429
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:460
 msgid "Pre-fill from Request"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:430
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:461
 msgid ""
 "The key is the field slug. If your field has the slug \"my-color\" for "
 "example, adding ?my-color=blue will pre-fill this field with the value "
 "\"blue\"."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:431
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:462
 msgid ""
 "Enable this to allow this field to be pre-filled based on the request "
 "parameters."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:447
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:478
 msgid "Field Visibility"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:448
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:479
 msgid "Select the visibility of this field."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:450
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:945
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:481
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:981
 msgid "Always show"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:451
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:946
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:482
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:982
 msgid "Only show for logged in users"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:452
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:947
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:483
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:983
 msgid "Only show for guests"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:474
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:505
 msgid "Wrapper Width"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:476
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:507
 msgid "Set the width of this field wrapper (in %)."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:491
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:522
 msgid "Wrapper CSS Classes"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:492
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:507
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:523
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:538
 msgid "e.g. custom-field example-class"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:493
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:524
 msgid ""
 "You can enter multiple CSS classes separated by spaces. These will be "
 "applied to the field wrapper element."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:506
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:537
 msgid "Field CSS Classes"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:508
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:539
 msgid ""
 "You can enter multiple CSS classes separated by spaces. These will be "
 "applied to the field element itself, when possible."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:569
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:600
 msgid "Add Field"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:569
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:600
 msgid "Save Field"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:734
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:763
 #: inc/compat/class-legacy-shortcodes.php:341
 #: inc/models/class-checkout-form.php:784
 #: views/legacy/signup/pricing-table/frequency-selector.php:31
 msgid "Monthly"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:796
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1048
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:825
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1090
 msgid "The checkout form could not be found."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:882
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:911
 #: views/limitations/plugin-selector.php:61
 #: views/limitations/theme-selector.php:65
 msgid "Visibility"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:890
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:919
 msgid "Step ID"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:891
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:920
 msgid "e.g. step-name"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:892
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:921
 msgid "This will be used on the URL. Only alpha-numeric and hyphens allowed."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:907
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:943
 msgid "Step Title"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:908
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:944
 msgid "e.g. My Extra Step"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:909
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:925
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:945
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:961
 msgid "Mostly used internally, but made available for templates."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:923
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:959
 msgid "Step Description"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:924
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:960
 msgid "e.g. This is the last step!"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:942
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:978
 msgid "Logged Status"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:943
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:979
 msgid "Select the visibility of this step."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:961
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:997
 msgid "Element ID"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:962
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:998
 msgid "myfield"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:963
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:999
 msgid "A custom ID to be added to the form element. Do not add the # symbol."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:976
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1012
 msgid "Extra CSS Classes"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:977
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1013
 msgid "custom-field example-class"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:978
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1014
 msgid "You can enter multiple CSS classes separated by spaces."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:992
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1028
 msgid "Add Step"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:992
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1028
 msgid "Save Step"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1155
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1198
 #: views/base/checkout-forms/js-templates.php:43
 msgid "Order"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1156
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1199
 #: inc/admin-pages/class-tax-rates-admin-page.php:114
 #: inc/checkout/signup-fields/class-signup-field-period-selection.php:261
 #: inc/checkout/signup-fields/class-signup-field-select.php:213
@@ -745,7 +745,7 @@ msgstr ""
 msgid "Label"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1158
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1201
 #: inc/admin-pages/class-email-edit-admin-page.php:152
 #: inc/list-tables/class-product-list-table.php:266
 #: inc/ui/class-checkout-element.php:124
@@ -753,11 +753,11 @@ msgstr ""
 msgid "Slug"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1206
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1249
 msgid "Conversion Snippets"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1207
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1250
 msgid ""
 "Add custom snippets in HTML (with javascript support) to add conversion "
 "tracking pixels and such. This code is only run on the successful Thank You "
@@ -766,13 +766,13 @@ msgid ""
 "%%ORDER_AMOUNT%%"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1243
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1286
 #: inc/admin-pages/class-discount-code-edit-admin-page.php:224
 #: inc/admin-pages/class-email-edit-admin-page.php:282
 msgid "Advanced Options"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1250
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1293
 #: inc/ui/class-thank-you-element.php:154
 #: inc/ui/class-thank-you-element.php:205
 #: inc/ui/class-thank-you-element.php:224
@@ -781,68 +781,68 @@ msgstr ""
 msgid "Thank You"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1251
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1261
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1294
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1304
 msgid "Configure the Thank You page for this Checkout Form."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1260
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1303
 msgid "Scripts"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1270
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1313
 msgid "Custom CSS"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1271
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1314
 msgid "Add custom CSS code to your checkout form. SCSS syntax is supported."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1278
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1321
 msgid "Restrictions"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1279
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1322
 msgid "Control the access to this checkout form."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1287
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1330
 msgid "Restrict by Country"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1288
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1331
 msgid "Restrict this checkout form to specific countries."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1295
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1338
 msgid "Allowed Countries"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1296
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1339
 msgid "Select the allowed countries."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1297
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1340
 msgid "Type to search countries..."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1332
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1375
 msgid "Checkout Form Slug"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1333
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1376
 msgid "This is used to create shortcodes and more."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1346
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1389
 msgid ""
 "You are changing the form slug. If you save this change, all the shortcodes "
 "and blocks referencing this slug will stop working until you update them "
 "with the new slug."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1357
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1361
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1400
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1404
 #: inc/admin-pages/class-discount-code-edit-admin-page.php:360
 #: inc/admin-pages/class-discount-code-edit-admin-page.php:364
 #: inc/admin-pages/class-domain-edit-admin-page.php:318
@@ -866,84 +866,84 @@ msgstr ""
 msgid "Active"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1362
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1405
 msgid "Use this option to manually enable or disable this checkout form."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1371
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1414
 msgid "Welcome to the Checkout Form builder!"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1373
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1416
 msgid ""
 "You should be able to create registration forms in any way, shape, and form "
 "you desire. This editor allows you to do just that 😃"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1374
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1417
 msgid ""
 "Want a registration form with multiple steps? Check! A single step? Check! "
 "Control the visibility of certain steps and fields based on the context of "
 "the customer? Check!"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1379
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1422
 msgid "Adding new Steps"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1381
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1424
 msgid "To add a new step to the registration form, use this button here."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1390
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1433
 msgid "Adding new Fields"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1392
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1435
 msgid ""
 "To add a new field to a step, use this button here. You can add fields to "
 "capture additional data from your customers and use that data to populate "
 "site templates."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1393
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1436
 msgid "You can learn more about that here &rarr;"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1412
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1437
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1455
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1480
 msgid "Edit Checkout Form"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1412
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1438
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1455
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1481
 msgid "Add new Checkout Form"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1424
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1467
 msgid "Edit Checkout_Form"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1439
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1482
 msgid "Checkout Form updated with success!"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1440
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1483
 msgid "Enter Checkout Form Name"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1441
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1484
 #: inc/admin-pages/class-email-template-customize-admin-page.php:545
 #: inc/admin-pages/class-invoice-template-customize-admin-page.php:339
 #: inc/admin-pages/class-template-previewer-customize-admin-page.php:283
 msgid "This name is used for internal reference only."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1442
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1485
 msgid "Save Checkout Form"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1444
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1487
 msgid "Delete Checkout Form"
 msgstr ""
 
@@ -3487,7 +3487,7 @@ msgid "Fee"
 msgstr ""
 
 #: inc/admin-pages/class-payment-edit-admin-page.php:671
-#: inc/checkout/class-cart.php:1065
+#: inc/checkout/class-cart.php:1076
 msgid "Credit"
 msgstr ""
 
@@ -5510,7 +5510,7 @@ msgid "Reset Password"
 msgstr ""
 
 #: inc/admin-pages/customer-panel/class-account-admin-page.php:428
-#: inc/gateways/class-paypal-gateway.php:588
+#: inc/gateways/class-paypal-gateway.php:618
 #: inc/list-tables/class-base-list-table.php:712
 #: inc/managers/class-form-manager.php:508
 #: inc/ui/class-billing-info-element.php:376
@@ -6773,69 +6773,69 @@ msgstr ""
 msgid "Limit response to specific fields. Defaults to id, name"
 msgstr ""
 
-#: inc/checkout/class-cart.php:476
+#: inc/checkout/class-cart.php:475
 msgid "Subscription"
 msgstr ""
 
-#: inc/checkout/class-cart.php:526
+#: inc/checkout/class-cart.php:525
 msgid "The payment in question was not found."
 msgstr ""
 
-#: inc/checkout/class-cart.php:555
+#: inc/checkout/class-cart.php:554
 msgid "You are not allowed to modify this payment."
 msgstr ""
 
-#: inc/checkout/class-cart.php:568 inc/checkout/class-cart.php:688
+#: inc/checkout/class-cart.php:567 inc/checkout/class-cart.php:687
 msgid "The membership in question was not found."
 msgstr ""
 
-#: inc/checkout/class-cart.php:617
+#: inc/checkout/class-cart.php:616
 msgid "The payment in question has an invalid status."
 msgstr ""
 
-#: inc/checkout/class-cart.php:710
+#: inc/checkout/class-cart.php:709
 msgid "You are not allowed to modify this membership."
 msgstr ""
 
-#: inc/checkout/class-cart.php:735 inc/checkout/class-cart.php:775
-#: inc/checkout/class-cart.php:891
+#: inc/checkout/class-cart.php:734 inc/checkout/class-cart.php:774
+#: inc/checkout/class-cart.php:890
 msgid "This cart proposes no changes to the current membership."
 msgstr ""
 
-#: inc/checkout/class-cart.php:938
+#: inc/checkout/class-cart.php:937
 msgid "Scheduled Swap Credit"
 msgstr ""
 
-#: inc/checkout/class-cart.php:939
+#: inc/checkout/class-cart.php:938
 msgid "Swap scheduled to next billing cycle."
 msgstr ""
 
-#: inc/checkout/class-cart.php:1066
+#: inc/checkout/class-cart.php:1077
 msgid "Prorated amount based on the previous membership."
 msgstr ""
 
-#: inc/checkout/class-cart.php:1105
+#: inc/checkout/class-cart.php:1116
 #. translators: %s is the coupon code being used, all-caps. e.g. PROMO10OFF
 msgid "The code %s do not exist or is no longer valid."
 msgstr ""
 
-#: inc/checkout/class-cart.php:1198
+#: inc/checkout/class-cart.php:1209
 msgid "Interval %1$s and %2$s do not match."
 msgstr ""
 
-#: inc/checkout/class-cart.php:1478
+#: inc/checkout/class-cart.php:1489
 #. translators: respectively, product name, duration, and duration unit.
 msgid ""
 "%1$s does not have a valid price variation for that billing period (every "
 "%2$s %3$s(s)) and was not added to the cart."
 msgstr ""
 
-#: inc/checkout/class-cart.php:1544
+#: inc/checkout/class-cart.php:1555
 #. translators: placeholder is the product name.
 msgid "Signup Fee for %s"
 msgstr ""
 
-#: inc/checkout/class-cart.php:1544
+#: inc/checkout/class-cart.php:1555
 msgid "Signup Credit for %s"
 msgstr ""
 
@@ -6899,22 +6899,22 @@ msgstr ""
 msgid "WP Ultimo - Site Blocked Page"
 msgstr ""
 
-#: inc/checkout/class-checkout.php:612 inc/checkout/class-checkout.php:626
-#: inc/checkout/class-checkout.php:2075 inc/checkout/class-checkout.php:2085
+#: inc/checkout/class-checkout.php:613 inc/checkout/class-checkout.php:627
+#: inc/checkout/class-checkout.php:2076 inc/checkout/class-checkout.php:2086
 msgid "Payment gateway not registered."
 msgstr ""
 
-#: inc/checkout/class-checkout.php:1023
+#: inc/checkout/class-checkout.php:1024
 msgid ""
 "Something wrong happened while attempting to save the customer billing "
 "address"
 msgstr ""
 
-#: inc/checkout/class-checkout.php:1548
+#: inc/checkout/class-checkout.php:1549
 msgid "The item was added!"
 msgstr ""
 
-#: inc/checkout/class-checkout.php:1549
+#: inc/checkout/class-checkout.php:1550
 msgid "The Password entered is too weak."
 msgstr ""
 
@@ -230510,7 +230510,7 @@ msgid "Account credit and other discounts"
 msgstr ""
 
 #: inc/gateways/class-base-stripe-gateway.php:1097
-#: inc/gateways/class-paypal-gateway.php:517
+#: inc/gateways/class-paypal-gateway.php:547
 msgid "Gateway payment ID not found. Cannot process refund automatically."
 msgstr ""
 
@@ -230531,45 +230531,45 @@ msgstr ""
 msgid "Event ID not found."
 msgstr ""
 
-#: inc/gateways/class-base-stripe-gateway.php:1355
+#: inc/gateways/class-base-stripe-gateway.php:1364
 msgid "Exiting Stripe webhook - no customer attached to event."
 msgstr ""
 
-#: inc/gateways/class-base-stripe-gateway.php:1432
+#: inc/gateways/class-base-stripe-gateway.php:1441
 #. translators: %s is the customer ID.
 msgid "Exiting Stripe webhook - membership not found. Customer ID: %s."
 msgstr ""
 
-#: inc/gateways/class-base-stripe-gateway.php:1619
+#: inc/gateways/class-base-stripe-gateway.php:1628
 msgid "Duplicate payment."
 msgstr ""
 
-#: inc/gateways/class-base-stripe-gateway.php:1640
+#: inc/gateways/class-base-stripe-gateway.php:1649
 msgid "Payment not found on refund webhook call."
 msgstr ""
 
-#: inc/gateways/class-base-stripe-gateway.php:1648
+#: inc/gateways/class-base-stripe-gateway.php:1657
 msgid "Payment is not refundable."
 msgstr ""
 
-#: inc/gateways/class-base-stripe-gateway.php:1709
+#: inc/gateways/class-base-stripe-gateway.php:1718
 msgid "Membership cancelled via Stripe webhook."
 msgstr ""
 
-#: inc/gateways/class-base-stripe-gateway.php:1753
+#: inc/gateways/class-base-stripe-gateway.php:1762
 #. translators: 1 is the card brand (e.g. VISA), and 2 is the last 4 digits.
 msgid "%1$s ending in %2$s"
 msgstr ""
 
-#: inc/gateways/class-base-stripe-gateway.php:1788
+#: inc/gateways/class-base-stripe-gateway.php:1797
 msgid "Name on Card"
 msgstr ""
 
-#: inc/gateways/class-base-stripe-gateway.php:1934
+#: inc/gateways/class-base-stripe-gateway.php:1943
 msgid "Missing plan name or price."
 msgstr ""
 
-#: inc/gateways/class-base-stripe-gateway.php:1960
+#: inc/gateways/class-base-stripe-gateway.php:1969
 msgid "Empty plan ID."
 msgstr ""
 
@@ -230695,73 +230695,73 @@ msgstr ""
 msgid "Make sure you are placing the LIVE signature, not the test one."
 msgstr ""
 
-#: inc/gateways/class-paypal-gateway.php:477
-#: inc/gateways/class-paypal-gateway.php:1162
-#: inc/gateways/class-paypal-gateway.php:1297
+#: inc/gateways/class-paypal-gateway.php:487
+#: inc/gateways/class-paypal-gateway.php:1254
+#: inc/gateways/class-paypal-gateway.php:1418
 msgid "Something has gone wrong, please try again"
 msgstr ""
 
-#: inc/gateways/class-paypal-gateway.php:604
+#: inc/gateways/class-paypal-gateway.php:634
 msgid "You will be redirected to PayPal to complete the purchase."
 msgstr ""
 
-#: inc/gateways/class-paypal-gateway.php:642
+#: inc/gateways/class-paypal-gateway.php:672
 msgid "PayPal token no longer valid."
 msgstr ""
 
-#: inc/gateways/class-paypal-gateway.php:660
+#: inc/gateways/class-paypal-gateway.php:690
 msgid "Pending payment does not exist."
 msgstr ""
 
-#: inc/gateways/class-paypal-gateway.php:676
+#: inc/gateways/class-paypal-gateway.php:706
 msgid "Original cart does not exist."
 msgstr ""
 
-#: inc/gateways/class-paypal-gateway.php:692
+#: inc/gateways/class-paypal-gateway.php:722
 msgid "Missing membership or customer data."
 msgstr ""
 
-#: inc/gateways/class-paypal-gateway.php:765
+#: inc/gateways/class-paypal-gateway.php:794
 msgid "Exiting PayPal Express IPN - membership ID not found."
 msgstr ""
 
-#: inc/gateways/class-paypal-gateway.php:889
+#: inc/gateways/class-paypal-gateway.php:919
 msgid "Transaction ID %s failed in PayPal."
 msgstr ""
 
-#: inc/gateways/class-paypal-gateway.php:896
+#: inc/gateways/class-paypal-gateway.php:926
 msgid "unknown"
 msgstr ""
 
-#: inc/gateways/class-paypal-gateway.php:898
+#: inc/gateways/class-paypal-gateway.php:928
 msgid "Transaction ID %1$s is pending in PayPal for reason: %2$s"
 msgstr ""
 
-#: inc/gateways/class-paypal-gateway.php:922
+#: inc/gateways/class-paypal-gateway.php:971
 msgid "Initial payment failed in PayPal Express."
 msgstr ""
 
-#: inc/gateways/class-paypal-gateway.php:924
+#: inc/gateways/class-paypal-gateway.php:973
 msgid "Initial payment failed."
 msgstr ""
 
-#: inc/gateways/class-paypal-gateway.php:943
+#: inc/gateways/class-paypal-gateway.php:989
 msgid "Membership cancelled via PayPal Express IPN."
 msgstr ""
 
-#: inc/gateways/class-paypal-gateway.php:1162
-#: inc/gateways/class-paypal-gateway.php:1297
+#: inc/gateways/class-paypal-gateway.php:1254
+#: inc/gateways/class-paypal-gateway.php:1418
 #: inc/managers/class-gateway-manager.php:290
 #: inc/managers/class-gateway-manager.php:317
 #: inc/managers/class-gateway-manager.php:325 views/ui/jumper.php:23
 msgid "Error"
 msgstr ""
 
-#: inc/gateways/class-paypal-gateway.php:1317
+#: inc/gateways/class-paypal-gateway.php:1438
 msgid "Invalid response code from PayPal"
 msgstr ""
 
-#: inc/gateways/class-paypal-gateway.php:1320
+#: inc/gateways/class-paypal-gateway.php:1441
 #. translators: %s is the paypal error message.
 msgid "An unexpected PayPal error occurred. Error message: %s."
 msgstr ""

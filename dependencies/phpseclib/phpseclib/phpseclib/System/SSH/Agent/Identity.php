@@ -12,6 +12,7 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
+declare (strict_types=1);
 namespace phpseclib3\System\SSH\Agent;
 
 use phpseclib3\Common\Functions\Strings;
@@ -90,10 +91,8 @@ class Identity implements PrivateKey
      * Set Public Key
      *
      * Called by \phpseclib3\System\SSH\Agent::requestIdentities()
-     *
-     * @param \phpseclib3\Crypt\Common\PublicKey $key
      */
-    public function withPublicKey($key)
+    public function withPublicKey(PublicKey $key) : \phpseclib3\System\SSH\Agent\Identity
     {
         if ($key instanceof EC) {
             if (\is_array($key->getCurve()) || !isset(self::$curveAliases[$key->getCurve()])) {
@@ -109,10 +108,8 @@ class Identity implements PrivateKey
      *
      * Called by \phpseclib3\System\SSH\Agent::requestIdentities(). The key blob could be extracted from $this->key
      * but this saves a small amount of computation.
-     *
-     * @param string $key_blob
      */
-    public function withPublicKeyBlob($key_blob)
+    public function withPublicKeyBlob(string $key_blob) : \phpseclib3\System\SSH\Agent\Identity
     {
         $new = clone $this;
         $new->key_blob = $key_blob;
@@ -124,18 +121,15 @@ class Identity implements PrivateKey
      * Wrapper for $this->key->getPublicKey()
      *
      * @param string $type optional
-     * @return mixed
      */
-    public function getPublicKey($type = 'PKCS8')
+    public function getPublicKey(string $type = 'PKCS8') : PublicKey
     {
         return $this->key;
     }
     /**
      * Sets the hash
-     *
-     * @param string $hash
      */
-    public function withHash($hash)
+    public function withHash(string $hash) : \phpseclib3\System\SSH\Agent\Identity
     {
         $new = clone $this;
         $hash = \strtolower($hash);
@@ -182,10 +176,8 @@ class Identity implements PrivateKey
      * Sets the padding
      *
      * Only PKCS1 padding is supported
-     *
-     * @param string $padding
      */
-    public function withPadding($padding)
+    public function withPadding(int $padding) : \phpseclib3\System\SSH\Agent\Identity
     {
         if (!$this->key instanceof RSA) {
             throw new UnsupportedAlgorithmException('Only RSA keys support padding');
@@ -199,10 +191,8 @@ class Identity implements PrivateKey
      * Determines the signature padding mode
      *
      * Valid values are: ASN1, SSH2, Raw
-     *
-     * @param string $format
      */
-    public function withSignatureFormat($format)
+    public function withSignatureFormat(string $format) : \phpseclib3\System\SSH\Agent\Identity
     {
         if ($this->key instanceof RSA) {
             throw new UnsupportedAlgorithmException('Only DSA and EC keys support signature format setting');
@@ -232,11 +222,10 @@ class Identity implements PrivateKey
      * See "2.6.2 Protocol 2 private key signature request"
      *
      * @param string $message
-     * @return string
      * @throws \RuntimeException on connection errors
      * @throws \phpseclib3\Exception\UnsupportedAlgorithmException if the algorithm is unsupported
      */
-    public function sign($message)
+    public function sign($message) : string
     {
         // the last parameter (currently 0) is for flags and ssh-agent only defines one flag (for ssh-dss): SSH_AGENT_OLD_SIGNATURE
         $packet = Strings::packSSH2('CssN', Agent::SSH_AGENTC_SIGN_REQUEST, $this->key_blob, $message, $this->flags);
@@ -246,24 +235,22 @@ class Identity implements PrivateKey
         }
         $length = \current(\unpack('N', $this->readBytes(4)));
         $packet = $this->readBytes($length);
-        list($type, $signature_blob) = Strings::unpackSSH2('Cs', $packet);
+        [$type, $signature_blob] = Strings::unpackSSH2('Cs', $packet);
         if ($type != Agent::SSH_AGENT_SIGN_RESPONSE) {
             throw new \RuntimeException('Unable to retrieve signature');
         }
         if (!$this->key instanceof RSA) {
             return $signature_blob;
         }
-        list($type, $signature_blob) = Strings::unpackSSH2('ss', $signature_blob);
+        [$type, $signature_blob] = Strings::unpackSSH2('ss', $signature_blob);
         return $signature_blob;
     }
     /**
      * Returns the private key
      *
-     * @param string $type
      * @param array $options optional
-     * @return string
      */
-    public function toString($type, array $options = [])
+    public function toString(string $type, array $options = []) : string
     {
         throw new \RuntimeException('ssh-agent does not provide a mechanism to get the private key');
     }

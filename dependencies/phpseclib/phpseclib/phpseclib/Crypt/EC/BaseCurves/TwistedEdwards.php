@@ -23,6 +23,7 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://pear.php.net/package/Math_BigInteger
  */
+declare (strict_types=1);
 namespace phpseclib3\Crypt\EC\BaseCurves;
 
 use phpseclib3\Math\BigInteger;
@@ -80,7 +81,7 @@ class TwistedEdwards extends \phpseclib3\Crypt\EC\BaseCurves\Base
     /**
      * Sets the modulo
      */
-    public function setModulo(BigInteger $modulo)
+    public function setModulo(BigInteger $modulo) : void
     {
         $this->modulo = $modulo;
         $this->factory = new PrimeField($modulo);
@@ -91,7 +92,7 @@ class TwistedEdwards extends \phpseclib3\Crypt\EC\BaseCurves\Base
     /**
      * Set coefficients a and b
      */
-    public function setCoefficients(BigInteger $a, BigInteger $d)
+    public function setCoefficients(BigInteger $a, BigInteger $d) : void
     {
         if (!isset($this->factory)) {
             throw new \RuntimeException('setModulo needs to be called before this method');
@@ -102,7 +103,7 @@ class TwistedEdwards extends \phpseclib3\Crypt\EC\BaseCurves\Base
     /**
      * Set x and y coordinates for the base point
      */
-    public function setBasePoint($x, $y)
+    public function setBasePoint($x, $y) : void
     {
         switch (\true) {
             case !$x instanceof BigInteger && !$x instanceof PrimeInteger:
@@ -135,10 +136,8 @@ class TwistedEdwards extends \phpseclib3\Crypt\EC\BaseCurves\Base
     }
     /**
      * Retrieve the base point as an array
-     *
-     * @return array
      */
-    public function getBasePoint()
+    public function getBasePoint() : array
     {
         if (!isset($this->factory)) {
             throw new \RuntimeException('setModulo needs to be called before this method');
@@ -155,21 +154,19 @@ class TwistedEdwards extends \phpseclib3\Crypt\EC\BaseCurves\Base
      *
      * @return \phpseclib3\Math\PrimeField\Integer[]
      */
-    public function convertToAffine(array $p)
+    public function convertToAffine(array $p) : array
     {
         if (!isset($p[2])) {
             return $p;
         }
-        list($x, $y, $z) = $p;
+        [$x, $y, $z] = $p;
         $z = $this->one->divide($z);
         return [$x->multiply($z), $y->multiply($z)];
     }
     /**
      * Returns the modulo
-     *
-     * @return \phpseclib3\Math\BigInteger
      */
-    public function getModulo()
+    public function getModulo() : BigInteger
     {
         return $this->modulo;
     }
@@ -178,9 +175,9 @@ class TwistedEdwards extends \phpseclib3\Crypt\EC\BaseCurves\Base
      *
      * @return boolean
      */
-    public function verifyPoint(array $p)
+    public function verifyPoint(array $p) : bool
     {
-        list($x, $y) = $p;
+        [$x, $y] = $p;
         $x2 = $x->multiply($x);
         $y2 = $y->multiply($y);
         $lhs = $this->a->multiply($x2)->add($y2);

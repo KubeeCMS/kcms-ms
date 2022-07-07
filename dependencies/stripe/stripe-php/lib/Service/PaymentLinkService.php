@@ -31,7 +31,7 @@ class PaymentLinkService extends \WP_Ultimo\Dependencies\Stripe\Service\Abstract
      *
      * @throws \Stripe\Exception\ApiErrorException if the request fails
      *
-     * @return \Stripe\Collection<\Stripe\PaymentLink>
+     * @return \Stripe\Collection<\Stripe\LineItem>
      */
     public function allLineItems($id, $params = null, $opts = null)
     {

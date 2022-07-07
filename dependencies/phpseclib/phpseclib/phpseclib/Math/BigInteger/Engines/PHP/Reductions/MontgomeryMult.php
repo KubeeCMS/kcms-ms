@@ -10,6 +10,7 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://pear.php.net/package/Math_BigInteger
  */
+declare (strict_types=1);
 namespace phpseclib3\Math\BigInteger\Engines\PHP\Reductions;
 
 use phpseclib3\Math\BigInteger\Engines\PHP;
@@ -26,15 +27,11 @@ abstract class MontgomeryMult extends \phpseclib3\Math\BigInteger\Engines\PHP\Re
      * Interleaves the montgomery reduction and long multiplication algorithms together as described in
      * {@link http://www.cacr.math.uwaterloo.ca/hac/about/chap14.pdf#page=13 HAC 14.36}
      *
+     * @param class-string<PHP> $class
      * @see self::_prepMontgomery()
      * @see self::_montgomery()
-     * @param array $x
-     * @param array $y
-     * @param array $m
-     * @param class-string<PHP> $class
-     * @return array
      */
-    public static function multiplyReduce(array $x, array $y, array $m, $class)
+    public static function multiplyReduce(array $x, array $y, array $m, string $class) : array
     {
         // the following code, although not callable, can be run independently of the above code
         // although the above code performed better in my benchmarks the following could might

@@ -10,6 +10,7 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
+declare (strict_types=1);
 namespace phpseclib3\File\ASN1;
 
 /**
@@ -31,10 +32,9 @@ class Element
     /**
      * Constructor
      *
-     * @param string $encoded
      * @return \phpseclib3\File\ASN1\Element
      */
-    public function __construct($encoded)
+    public function __construct(string $encoded)
     {
         $this->element = $encoded;
     }

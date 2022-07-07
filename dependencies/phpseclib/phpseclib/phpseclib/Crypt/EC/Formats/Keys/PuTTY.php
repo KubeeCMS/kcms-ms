@@ -10,6 +10,7 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
+declare (strict_types=1);
 namespace phpseclib3\Crypt\EC\Formats\Keys;
 
 use WP_Ultimo\Dependencies\ParagonIE\ConstantTime\Base64;
@@ -41,11 +42,11 @@ abstract class PuTTY extends Progenitor
     /**
      * Break a public or private key down into its constituent components
      *
-     * @param string $key
-     * @param string $password optional
-     * @return array
+     * @param string|array $key
+     * @param string|false $password
+     * @return array|false
      */
-    public static function load($key, $password = '')
+    public static function load($key, $password)
     {
         $components = parent::load($key, $password);
         if (!isset($components['private'])) {
@@ -60,7 +61,7 @@ abstract class PuTTY extends Progenitor
             }
             $components['dA'] = $components['curve']->extractSecret($private);
         } else {
-            list($components['dA']) = Strings::unpackSSH2('i', $private);
+            [$components['dA']] = Strings::unpackSSH2('i', $private);
             $components['curve']->rangeCheck($components['dA']);
         }
         return $components;
@@ -68,20 +69,17 @@ abstract class PuTTY extends Progenitor
     /**
      * Convert a private key to the appropriate format.
      *
-     * @param \phpseclib3\Math\BigInteger $privateKey
-     * @param \phpseclib3\Crypt\EC\BaseCurves\Base $curve
      * @param \phpseclib3\Math\Common\FiniteField\Integer[] $publicKey
      * @param string $password optional
      * @param array $options optional
-     * @return string
      */
-    public static function savePrivateKey(BigInteger $privateKey, BaseCurve $curve, array $publicKey, $password = \false, array $options = [])
+    public static function savePrivateKey(BigInteger $privateKey, BaseCurve $curve, array $publicKey, $password = \false, array $options = []) : string
     {
         self::initialize_static_variables();
         $public = \explode(' ', \phpseclib3\Crypt\EC\Formats\Keys\OpenSSH::savePublicKey($curve, $publicKey));
         $name = $public[0];
         $public = Base64::decode($public[1]);
-        list(, $length) = \unpack('N', Strings::shift($public, 4));
+        [, $length] = \unpack('N', Strings::shift($public, 4));
         Strings::shift($public, $length);
         // PuTTY pads private keys with a null byte per the following:
         // https://github.com/github/putty/blob/a3d14d77f566a41fc61dfdc5c2e0e384c9e6ae8b/sshecc.c#L1926
@@ -97,16 +95,14 @@ abstract class PuTTY extends Progenitor
     /**
      * Convert an EC public key to the appropriate format
      *
-     * @param \phpseclib3\Crypt\EC\BaseCurves\Base $curve
      * @param \phpseclib3\Math\Common\FiniteField[] $publicKey
-     * @return string
      */
-    public static function savePublicKey(BaseCurve $curve, array $publicKey)
+    public static function savePublicKey(BaseCurve $curve, array $publicKey) : string
     {
         $public = \explode(' ', \phpseclib3\Crypt\EC\Formats\Keys\OpenSSH::savePublicKey($curve, $publicKey));
         $type = $public[0];
         $public = Base64::decode($public[1]);
-        list(, $length) = \unpack('N', Strings::shift($public, 4));
+        [, $length] = \unpack('N', Strings::shift($public, 4));
         Strings::shift($public, $length);
         return self::wrapPublicKey($public, $type);
     }

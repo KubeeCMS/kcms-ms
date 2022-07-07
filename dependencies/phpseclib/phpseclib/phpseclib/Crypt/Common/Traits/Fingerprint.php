@@ -10,6 +10,7 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
+declare (strict_types=1);
 namespace phpseclib3\Crypt\Common\Traits;
 
 use phpseclib3\Crypt\Hash;
@@ -29,7 +30,6 @@ trait Fingerprint
      *
      * @param string $algorithm The hashing algorithm to be used. Valid options are 'md5' and 'sha256'. False is returned
      * for invalid values.
-     * @return mixed
      */
     public function getFingerprint($algorithm = 'md5')
     {

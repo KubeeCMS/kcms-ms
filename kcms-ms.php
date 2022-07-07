@@ -5,7 +5,7 @@
  * Description: The Ultimate Website as a Service (WaaS) platform builder.
  * Plugin URI: http://kcms.com
  * Text Domain: wp-ultimo
- * Version: 2.0.15
+ * Version: 2.0.17
  * Author: Arindo Duque & NextPress
  * Author URI: http://kcms.com/
  * Network: true
@@ -28,7 +28,7 @@
  * @author   Arindo Duque and NextPress
  * @category Core
  * @package  WP_Ultimo
- * @version  2.0.15
+ * @version  2.0.17
  */
 
 // Exit if accessed directly

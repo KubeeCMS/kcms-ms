@@ -20,6 +20,7 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
+declare (strict_types=1);
 namespace phpseclib3\Crypt\RSA\Formats\Keys;
 
 use phpseclib3\Common\Functions\Strings;
@@ -61,7 +62,7 @@ abstract class PSS extends Progenitor
     /**
      * Initialize static variables
      */
-    private static function initialize_static_variables()
+    private static function initialize_static_variables() : void
     {
         if (!self::$oidsLoaded) {
             ASN1::loadOIDs(['md2' => '1.2.840.113549.2.2', 'md4' => '1.2.840.113549.2.4', 'md5' => '1.2.840.113549.2.5', 'id-sha1' => '1.3.14.3.2.26', 'id-sha256' => '2.16.840.1.101.3.4.2.1', 'id-sha384' => '2.16.840.1.101.3.4.2.2', 'id-sha512' => '2.16.840.1.101.3.4.2.3', 'id-sha224' => '2.16.840.1.101.3.4.2.4', 'id-sha512/224' => '2.16.840.1.101.3.4.2.5', 'id-sha512/256' => '2.16.840.1.101.3.4.2.6', 'id-mgf1' => '1.2.840.113549.1.1.8']);
@@ -71,11 +72,10 @@ abstract class PSS extends Progenitor
     /**
      * Break a public or private key down into its constituent components
      *
-     * @param string $key
-     * @param string $password optional
-     * @return array
+     * @param string|array $key
+     * @param string|false $password
      */
-    public static function load($key, $password = '')
+    public static function load($key, $password = '') : array
     {
         self::initialize_static_variables();
         if (!Strings::is_stringable($key)) {
@@ -119,17 +119,10 @@ abstract class PSS extends Progenitor
     /**
      * Convert a private key to the appropriate format.
      *
-     * @param \phpseclib3\Math\BigInteger $n
-     * @param \phpseclib3\Math\BigInteger $e
-     * @param \phpseclib3\Math\BigInteger $d
-     * @param array $primes
-     * @param array $exponents
-     * @param array $coefficients
-     * @param string $password optional
+     * @param string|false $password
      * @param array $options optional
-     * @return string
      */
-    public static function savePrivateKey(BigInteger $n, BigInteger $e, BigInteger $d, array $primes, array $exponents, array $coefficients, $password = '', array $options = [])
+    public static function savePrivateKey(BigInteger $n, BigInteger $e, BigInteger $d, array $primes, array $exponents, array $coefficients, $password = '', array $options = []) : string
     {
         self::initialize_static_variables();
         $key = \phpseclib3\Crypt\RSA\Formats\Keys\PKCS1::savePrivateKey($n, $e, $d, $primes, $exponents, $coefficients);
@@ -140,12 +133,9 @@ abstract class PSS extends Progenitor
     /**
      * Convert a public key to the appropriate format
      *
-     * @param \phpseclib3\Math\BigInteger $n
-     * @param \phpseclib3\Math\BigInteger $e
      * @param array $options optional
-     * @return string
      */
-    public static function savePublicKey(BigInteger $n, BigInteger $e, array $options = [])
+    public static function savePublicKey(BigInteger $n, BigInteger $e, array $options = []) : string
     {
         self::initialize_static_variables();
         $key = \phpseclib3\Crypt\RSA\Formats\Keys\PKCS1::savePublicKey($n, $e);
@@ -156,7 +146,6 @@ abstract class PSS extends Progenitor
     /**
      * Encodes PSS parameters
      *
-     * @param array $options
      * @return string
      */
     public static function savePSSParams(array $options)

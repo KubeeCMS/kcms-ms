@@ -457,7 +457,14 @@ class License {
 				 */
 				if (defined('WP_ULTIMO_LICENSE_KEY') && WP_ULTIMO_LICENSE_KEY) {
 
-					add_action('init', function() {
+					/**
+					 * Checks if init has run. If so, delay execution.
+					 *
+					 * @since 2.0.11
+					 */
+					$action = did_action('init') ? 'shutdown' : 'init';
+
+					add_action($action, function() {
 
 						$this->activate(WP_ULTIMO_LICENSE_KEY);
 

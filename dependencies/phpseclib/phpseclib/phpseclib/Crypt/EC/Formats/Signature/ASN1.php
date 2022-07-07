@@ -13,6 +13,7 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
+declare (strict_types=1);
 namespace phpseclib3\Crypt\EC\Formats\Signature;
 
 use phpseclib3\File\ASN1 as Encoder;
@@ -28,10 +29,9 @@ abstract class ASN1
     /**
      * Loads a signature
      *
-     * @param string $sig
      * @return array
      */
-    public static function load($sig)
+    public static function load(string $sig)
     {
         if (!\is_string($sig)) {
             return \false;
@@ -45,12 +45,8 @@ abstract class ASN1
     }
     /**
      * Returns a signature in the appropriate format
-     *
-     * @param \phpseclib3\Math\BigInteger $r
-     * @param \phpseclib3\Math\BigInteger $s
-     * @return string
      */
-    public static function save(BigInteger $r, BigInteger $s)
+    public static function save(BigInteger $r, BigInteger $s) : string
     {
         return Encoder::encodeDER(\compact('r', 's'), EcdsaSigValue::MAP);
     }

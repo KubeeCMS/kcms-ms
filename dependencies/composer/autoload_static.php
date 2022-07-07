@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitc308b5c05da9509f1d366ecf4d07326a
+class ComposerStaticInit5eff2df59b0cb3ea25035e8d33a18b81
 {
     public static $files = array (
         'ad155f8f1cf0d418fe49e248db8c661b' => __DIR__ . '/..' . '/react/promise/src/functions_include.php',
@@ -1527,6 +1527,7 @@ class ComposerStaticInitc308b5c05da9509f1d366ecf4d07326a
         'WP_Ultimo\\Dependencies\\Carbon\\Exceptions\\BadFluentConstructorException' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/BadFluentConstructorException.php',
         'WP_Ultimo\\Dependencies\\Carbon\\Exceptions\\BadFluentSetterException' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/BadFluentSetterException.php',
         'WP_Ultimo\\Dependencies\\Carbon\\Exceptions\\BadMethodCallException' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/BadMethodCallException.php',
+        'WP_Ultimo\\Dependencies\\Carbon\\Exceptions\\EndLessPeriodException' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/EndLessPeriodException.php',
         'WP_Ultimo\\Dependencies\\Carbon\\Exceptions\\Exception' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/Exception.php',
         'WP_Ultimo\\Dependencies\\Carbon\\Exceptions\\ImmutableException' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/ImmutableException.php',
         'WP_Ultimo\\Dependencies\\Carbon\\Exceptions\\InvalidArgumentException' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/InvalidArgumentException.php',
@@ -2311,6 +2312,9 @@ class ComposerStaticInitc308b5c05da9509f1d366ecf4d07326a
         'WP_Ultimo\\Dependencies\\Stripe\\Service\\Terminal\\LocationService' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Service/Terminal/LocationService.php',
         'WP_Ultimo\\Dependencies\\Stripe\\Service\\Terminal\\ReaderService' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Service/Terminal/ReaderService.php',
         'WP_Ultimo\\Dependencies\\Stripe\\Service\\Terminal\\TerminalServiceFactory' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Service/Terminal/TerminalServiceFactory.php',
+        'WP_Ultimo\\Dependencies\\Stripe\\Service\\TestHelpers\\CustomerService' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Service/TestHelpers/CustomerService.php',
+        'WP_Ultimo\\Dependencies\\Stripe\\Service\\TestHelpers\\Issuing\\CardService' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Service/TestHelpers/Issuing/CardService.php',
+        'WP_Ultimo\\Dependencies\\Stripe\\Service\\TestHelpers\\Issuing\\IssuingServiceFactory' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Service/TestHelpers/Issuing/IssuingServiceFactory.php',
         'WP_Ultimo\\Dependencies\\Stripe\\Service\\TestHelpers\\RefundService' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Service/TestHelpers/RefundService.php',
         'WP_Ultimo\\Dependencies\\Stripe\\Service\\TestHelpers\\Terminal\\ReaderService' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Service/TestHelpers/Terminal/ReaderService.php',
         'WP_Ultimo\\Dependencies\\Stripe\\Service\\TestHelpers\\Terminal\\TerminalServiceFactory' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Service/TestHelpers/Terminal/TerminalServiceFactory.php',
@@ -2378,6 +2382,7 @@ class ComposerStaticInitc308b5c05da9509f1d366ecf4d07326a
         'WP_Ultimo\\Dependencies\\Stripe\\Treasury\\TransactionEntry' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Treasury/TransactionEntry.php',
         'WP_Ultimo\\Dependencies\\Stripe\\UsageRecord' => __DIR__ . '/..' . '/stripe/stripe-php/lib/UsageRecord.php',
         'WP_Ultimo\\Dependencies\\Stripe\\UsageRecordSummary' => __DIR__ . '/..' . '/stripe/stripe-php/lib/UsageRecordSummary.php',
+        'WP_Ultimo\\Dependencies\\Stripe\\Util\\ApiVersion' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Util/ApiVersion.php',
         'WP_Ultimo\\Dependencies\\Stripe\\Util\\CaseInsensitiveArray' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Util/CaseInsensitiveArray.php',
         'WP_Ultimo\\Dependencies\\Stripe\\Util\\DefaultLogger' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Util/DefaultLogger.php',
         'WP_Ultimo\\Dependencies\\Stripe\\Util\\LoggerInterface' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Util/LoggerInterface.php',
@@ -2979,9 +2984,9 @@ class ComposerStaticInitc308b5c05da9509f1d366ecf4d07326a
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitc308b5c05da9509f1d366ecf4d07326a::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitc308b5c05da9509f1d366ecf4d07326a::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitc308b5c05da9509f1d366ecf4d07326a::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit5eff2df59b0cb3ea25035e8d33a18b81::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit5eff2df59b0cb3ea25035e8d33a18b81::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit5eff2df59b0cb3ea25035e8d33a18b81::$classMap;
 
         }, null, ClassLoader::class);
     }

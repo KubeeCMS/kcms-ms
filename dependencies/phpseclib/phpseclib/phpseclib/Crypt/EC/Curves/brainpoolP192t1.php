@@ -10,6 +10,7 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://pear.php.net/package/Math_BigInteger
  */
+declare (strict_types=1);
 namespace phpseclib3\Crypt\EC\Curves;
 
 use phpseclib3\Crypt\EC\BaseCurves\Prime;

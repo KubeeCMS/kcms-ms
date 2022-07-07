@@ -12,6 +12,7 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
+declare (strict_types=1);
 namespace phpseclib3\Crypt\Common\Formats\Keys;
 
 use WP_Ultimo\Dependencies\ParagonIE\ConstantTime\Base64;
@@ -42,19 +43,15 @@ abstract class PuTTY
     private static $version = 2;
     /**
      * Sets the default comment
-     *
-     * @param string $comment
      */
-    public static function setComment($comment)
+    public static function setComment(string $comment) : void
     {
         self::$comment = \str_replace(["\r", "\n"], '', $comment);
     }
     /**
      * Sets the default version
-     *
-     * @param int $version
      */
-    public static function setVersion($version)
+    public static function setVersion(int $version) : void
     {
         if ($version != 2 && $version != 3) {
             throw new \RuntimeException('Only supported versions are 2 and 3');
@@ -63,12 +60,8 @@ abstract class PuTTY
     }
     /**
      * Generate a symmetric key for PuTTY v2 keys
-     *
-     * @param string $password
-     * @param int $length
-     * @return string
      */
-    private static function generateV2Key($password, $length)
+    private static function generateV2Key(string $password, int $length) : string
     {
         $symkey = '';
         $sequence = 0;
@@ -80,15 +73,8 @@ abstract class PuTTY
     }
     /**
      * Generate a symmetric key for PuTTY v3 keys
-     *
-     * @param string $password
-     * @param string $flavour
-     * @param int $memory
-     * @param int $passes
-     * @param string $salt
-     * @return array
      */
-    private static function generateV3Key($password, $flavour, $memory, $passes, $salt)
+    private static function generateV3Key(string $password, string $flavour, int $memory, int $passes, string $salt) : array
     {
         if (!\function_exists('sodium_crypto_pwhash')) {
             throw new \RuntimeException('sodium_crypto_pwhash needs to exist for Argon2 password hasing');
@@ -114,9 +100,9 @@ abstract class PuTTY
     /**
      * Break a public or private key down into its constituent components
      *
-     * @param string $key
-     * @param string $password
-     * @return array
+     * @param array|string $key
+     * @param string|false $password
+     * @return array|false
      */
     public static function load($key, $password)
     {
@@ -178,7 +164,7 @@ abstract class PuTTY
         }
         $encryption = \trim(\preg_replace('#Encryption: (.+)#', '$1', $key[1]));
         $components['comment'] = \trim(\preg_replace('#Comment: (.+)#', '$1', $key[2]));
-        $publicLength = \trim(\preg_replace('#Public-Lines: (\\d+)#', '$1', $key[3]));
+        $publicLength = (int) \trim(\preg_replace('#Public-Lines: (\\d+)#', '$1', $key[3]));
         $public = Base64::decode(\implode('', \array_map('trim', \array_slice($key, 4, $publicLength))));
         $source = Strings::packSSH2('ssss', $type, $encryption, $components['comment'], $public);
         \extract(\unpack('Nlength', Strings::shift($public, 4)));
@@ -205,7 +191,7 @@ abstract class PuTTY
                         $passes = \trim(\preg_replace('#Argon2-Passes: (\\d+)#', '$1', $key[$offset++]));
                         $parallelism = \trim(\preg_replace('#Argon2-Parallelism: (\\d+)#', '$1', $key[$offset++]));
                         $salt = Hex::decode(\trim(\preg_replace('#Argon2-Salt: ([0-9a-f]+)#', '$1', $key[$offset++])));
-                        \extract(self::generateV3Key($password, $flavour, $memory, $passes, $salt));
+                        \extract(self::generateV3Key($password, $flavour, (int) $memory, (int) $passes, $salt));
                         break;
                     case 2:
                         $symkey = self::generateV2Key($password, 32);
@@ -222,7 +208,7 @@ abstract class PuTTY
                 $hash = new Hash('sha1');
                 $hash->setKey(\sha1($hashkey, \true));
         }
-        $privateLength = \trim(\preg_replace('#Private-Lines: (\\d+)#', '$1', $key[$offset++]));
+        $privateLength = (int) \trim(\preg_replace('#Private-Lines: (\\d+)#', '$1', $key[$offset++]));
         $private = Base64::decode(\implode('', \array_map('trim', \array_slice($key, $offset, $privateLength))));
         if ($encryption != 'none') {
             $crypto->setKey($symkey);
@@ -242,18 +228,14 @@ abstract class PuTTY
     /**
      * Wrap a private key appropriately
      *
-     * @param string $public
-     * @param string $private
-     * @param string $type
-     * @param string $password
+     * @param string|false $password
      * @param array $options optional
-     * @return string
      */
-    protected static function wrapPrivateKey($public, $private, $type, $password, array $options = [])
+    protected static function wrapPrivateKey(string $public, string $private, string $type, $password, array $options = []) : string
     {
         $encryption = !empty($password) || \is_string($password) ? 'aes256-cbc' : 'none';
-        $comment = isset($options['comment']) ? $options['comment'] : self::$comment;
-        $version = isset($options['version']) ? $options['version'] : self::$version;
+        $comment = $options['comment'] ?? self::$comment;
+        $version = $options['version'] ?? self::$version;
         $key = "PuTTY-User-Key-File-{$version}: {$type}\r\n";
         $key .= "Encryption: {$encryption}\r\n";
         $key .= "Comment: {$comment}\r\n";
@@ -312,12 +294,8 @@ abstract class PuTTY
      * Wrap a public key appropriately
      *
      * This is basically the format described in RFC 4716 (https://tools.ietf.org/html/rfc4716)
-     *
-     * @param string $key
-     * @param string $type
-     * @return string
      */
-    protected static function wrapPublicKey($key, $type)
+    protected static function wrapPublicKey(string $key, string $type) : string
     {
         $key = \pack('Na*a*', \strlen($type), $type, $key);
         $key = "---- BEGIN SSH2 PUBLIC KEY ----\r\n" . 'Comment: "' . \str_replace(['\\', '"'], ['\\\\', '\\"'], self::$comment) . "\"\r\n" . \chunk_split(Base64::encode($key), 64) . '---- END SSH2 PUBLIC KEY ----';

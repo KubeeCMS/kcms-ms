@@ -16,6 +16,7 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
+declare (strict_types=1);
 namespace phpseclib3\Crypt\DH\Formats\Keys;
 
 use phpseclib3\Common\Functions\Strings;
@@ -51,11 +52,10 @@ abstract class PKCS8 extends Progenitor
     /**
      * Break a public or private key down into its constituent components
      *
-     * @param string $key
-     * @param string $password optional
-     * @return array
+     * @param string|array $key
+     * @param string|false $password
      */
-    public static function load($key, $password = '')
+    public static function load($key, $password = '') : array
     {
         if (!Strings::is_stringable($key)) {
             throw new \UnexpectedValueException('Key should be a string - not a ' . \gettype($key));
@@ -79,8 +79,7 @@ abstract class PKCS8 extends Progenitor
         }
         $decoded = ASN1::decodeBER($key[$type]);
         switch (\true) {
-            case empty($decoded):
-            case !\is_array($decoded):
+            case !isset($decoded):
             case !isset($decoded[0]['content']):
             case !$decoded[0]['content'] instanceof BigInteger:
                 throw new \RuntimeException('Unable to decode BER of parameters');
@@ -91,15 +90,10 @@ abstract class PKCS8 extends Progenitor
     /**
      * Convert a private key to the appropriate format.
      *
-     * @param \phpseclib3\Math\BigInteger $prime
-     * @param \phpseclib3\Math\BigInteger $base
-     * @param \phpseclib3\Math\BigInteger $privateKey
-     * @param \phpseclib3\Math\BigInteger $publicKey
-     * @param string $password optional
+     * @param string|false $password optional
      * @param array $options optional
-     * @return string
      */
-    public static function savePrivateKey(BigInteger $prime, BigInteger $base, BigInteger $privateKey, BigInteger $publicKey, $password = '', array $options = [])
+    public static function savePrivateKey(BigInteger $prime, BigInteger $base, BigInteger $privateKey, BigInteger $publicKey, $password = '', array $options = []) : string
     {
         $params = ['prime' => $prime, 'base' => $base];
         $params = ASN1::encodeDER($params, Maps\DHParameter::MAP);
@@ -110,13 +104,9 @@ abstract class PKCS8 extends Progenitor
     /**
      * Convert a public key to the appropriate format
      *
-     * @param \phpseclib3\Math\BigInteger $prime
-     * @param \phpseclib3\Math\BigInteger $base
-     * @param \phpseclib3\Math\BigInteger $publicKey
      * @param array $options optional
-     * @return string
      */
-    public static function savePublicKey(BigInteger $prime, BigInteger $base, BigInteger $publicKey, array $options = [])
+    public static function savePublicKey(BigInteger $prime, BigInteger $base, BigInteger $publicKey, array $options = []) : string
     {
         $params = ['prime' => $prime, 'base' => $base];
         $params = ASN1::encodeDER($params, Maps\DHParameter::MAP);

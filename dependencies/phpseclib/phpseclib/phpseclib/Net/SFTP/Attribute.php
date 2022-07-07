@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace phpseclib3\Net\SFTP;
 
 /**
@@ -37,9 +38,8 @@ abstract class Attribute
     // that's not a problem, however, and 'anded' and a 32-bit number, as all the leading 1 bits are ignored.
     const EXTENDED = -1 << 31 & 0xffffffff;
     /**
-     * @return array
      */
-    public static function getConstants()
+    public static function getConstants() : array
     {
         $reflectionClass = new \ReflectionClass(static::class);
         return $reflectionClass->getConstants();

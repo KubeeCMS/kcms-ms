@@ -122,7 +122,9 @@
         },
         add_step(data, cb = null) {
 
-          const existing_step = this.find_step(data.id);
+          const existing_step = data.original_id ? this.find_step(data.original_id) : this.find_step(data.id) ;
+
+          delete data.original_id;
 
           if (typeof existing_step !== 'undefined') {
 
