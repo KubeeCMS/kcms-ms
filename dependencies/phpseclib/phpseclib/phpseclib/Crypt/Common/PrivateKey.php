@@ -23,7 +23,7 @@ interface PrivateKey
     public function getPublicKey();
     public function toString(string $type, array $options = []) : string;
     /**
-     * @param string|false $password
+     * @return static
      */
-    public function withPassword($password = \false);
+    public function withPassword(?string $password = null) : \phpseclib3\Crypt\Common\PrivateKey;
 }

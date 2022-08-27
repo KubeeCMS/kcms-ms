@@ -16,11 +16,19 @@ use WP_Ultimo\Dependencies\ScssPhp\ScssPhp\Exception\SassScriptException;
 use WP_Ultimo\Dependencies\ScssPhp\ScssPhp\Logger\LoggerInterface;
 use WP_Ultimo\Dependencies\ScssPhp\ScssPhp\Parser\SelectorParser;
 use WP_Ultimo\Dependencies\ScssPhp\ScssPhp\Util\EquatableUtil;
+use WP_Ultimo\Dependencies\ScssPhp\ScssPhp\Util\ListUtil;
 /**
  * An abstract superclass for simple selectors.
  */
 abstract class SimpleSelector extends Selector
 {
+    /**
+     * Names of pseudo-classes that take selectors as arguments, and that are
+     * subselectors of their arguments.
+     *
+     * For example, `.foo` is a superselector of `:matches(.foo)`.
+     */
+    private const SUBSELECTOR_PSEUDOS = ['is', 'matches', 'where', 'any', 'nth-child', 'nth-last-child'];
     /**
      * Parses a simple selector from $contents.
      *
@@ -111,5 +119,29 @@ abstract class SimpleSelector extends Selector
             $result[] = $this;
         }
         return $result;
+    }
+    public function isSuperselector(SimpleSelector $other) : bool
+    {
+        if ($this === $other || $this->equals($other)) {
+            return \true;
+        }
+        if ($other instanceof PseudoSelector && $other->isClass()) {
+            $list = $other->getSelector();
+            if ($list !== null && \in_array($other->getNormalizedName(), self::SUBSELECTOR_PSEUDOS, \true)) {
+                foreach ($list->getComponents() as $complex) {
+                    if (\count($complex->getComponents()) === 0) {
+                        return \false;
+                    }
+                    foreach (ListUtil::last($complex->getComponents())->getSelector()->getComponents() as $simple) {
+                        if ($this->isSuperselector($simple)) {
+                            continue 2;
+                        }
+                    }
+                    return \false;
+                }
+                return \true;
+            }
+        }
+        return \false;
     }
 }

@@ -21,5 +21,5 @@ use phpseclib3\File\ASN1;
  */
 abstract class Validity
 {
-    const MAP = ['type' => ASN1::TYPE_SEQUENCE, 'children' => ['notBefore' => \phpseclib3\File\ASN1\Maps\Time::MAP, 'notAfter' => \phpseclib3\File\ASN1\Maps\Time::MAP]];
+    public const MAP = ['type' => ASN1::TYPE_SEQUENCE, 'children' => ['notBefore' => \phpseclib3\File\ASN1\Maps\Time::MAP, 'notAfter' => \phpseclib3\File\ASN1\Maps\Time::MAP]];
 }

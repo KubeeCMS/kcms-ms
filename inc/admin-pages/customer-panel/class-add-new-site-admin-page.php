@@ -180,7 +180,8 @@ class Add_New_Site_Admin_Page extends Base_Customer_Facing_Admin_Page {
 		\WP_Ultimo\UI\Simple_Text_Element::get_instance()->as_inline_content(get_current_screen()->id, 'wu_dash_before_metaboxes');
 
 		\WP_Ultimo\UI\Checkout_Element::get_instance()->as_inline_content(get_current_screen()->id, 'wu_dash_before_metaboxes', array(
-			'slug' => 'wu-add-new-site'
+			'slug'                   => 'wu-add-new-site',
+			'membership_limitations' => array('sites'),
 		));
 
 	} // end register_widgets;

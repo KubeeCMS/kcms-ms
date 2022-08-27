@@ -20,5 +20,5 @@ namespace phpseclib3\File\ASN1\Maps;
  */
 abstract class SubjectAltName
 {
-    const MAP = \phpseclib3\File\ASN1\Maps\GeneralNames::MAP;
+    public const MAP = \phpseclib3\File\ASN1\Maps\GeneralNames::MAP;
 }

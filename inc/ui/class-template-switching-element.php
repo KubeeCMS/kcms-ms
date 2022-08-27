@@ -34,6 +34,15 @@ class Template_Switching_Element extends Base_Element {
 	public $id = 'template-switching';
 
 	/**
+	 * The current site element.
+	 *
+	 * @since 2.0.18
+	 *
+	 * @var string
+	 */
+	public $site;
+
+	/**
 	 * The icon of the UI element.
 	 * e.g. return fa fa-search
 	 *

@@ -38,6 +38,14 @@ class Current {
 	protected $customer;
 
 	/**
+	 * The current membership instance.
+	 *
+	 * @since 2.0.18
+	 * @var \WP_Ultimo\Models\Membership
+	 */
+	protected $membership;
+
+	/**
 	 * Wether or not the site was set via request.
 	 *
 	 * @since 2.0.0
@@ -52,6 +60,14 @@ class Current {
 	 * @var boolean
 	 */
 	protected $customer_set_via_request = false;
+
+	/**
+	 * Wether or not the membership was set via request.
+	 *
+	 * @since 2.0.18
+	 * @var boolean
+	 */
+	protected $membership_set_via_request = false;
 
 	/**
 	 * Called when the singleton is first initialized.
@@ -156,8 +172,9 @@ class Current {
 	public static function param_key($type = 'site') {
 
 		$params = array(
-			'site'     => apply_filters('wu_current_get_site_param', 'site'),
-			'customer' => apply_filters('wu_current_get_customer_param', 'customer'),
+			'site'       => apply_filters('wu_current_get_site_param', 'site'),
+			'customer'   => apply_filters('wu_current_get_customer_param', 'customer'),
+			'membership' => apply_filters('wu_current_get_membership_param', 'membership'),
 		);
 
 		return wu_get_isset($params, $type, $type);
@@ -285,6 +302,40 @@ class Current {
 
 		$this->set_customer($customer);
 
+		$membership = false;
+
+		if ($site) {
+
+			$membership = $site->get_membership();
+
+		} else {
+			/*
+			 * By default, we'll use the `membership` parameter.
+			 */
+			$membership_url_param = self::param_key('membership');
+
+			$membership_hash = wu_request($membership_url_param, get_query_var('membership_hash'));
+
+			if ($membership_hash) {
+
+				$this->membership_set_via_request = true;
+
+				$membership = get_membership_by_hash($membership_hash);
+
+			} // end if;
+
+		} // end if;
+
+		if ($customer && !$membership) {
+
+			$memberships = (array) $customer->get_memberships();
+
+			$membership = isset($memberships[0]) ? $memberships[0] : false;
+
+		} // end if;
+
+		$this->set_membership($membership);
+
 	} // end load_currents;
 
 	/**
@@ -372,5 +423,54 @@ class Current {
 		$this->customer = $customer;
 
 	} // end set_customer;
+
+	/**
+	 * Get the current membership instance.
+	 *
+	 * @since 2.0.18
+	 * @return \WP_Ultimo\Models\Membership
+	 */
+	public function get_membership() {
+
+		return $this->membership;
+
+	} // end get_membership;
+
+	/**
+	 * Set the current membership instance.
+	 *
+	 * @since 2.0.18
+	 * @param \WP_Ultimo\Models\Membership $membership The current membership instance.
+	 * @return void
+	 */
+	public function set_membership($membership) {
+
+		/**
+		 * Allow developers to modify the default behavior and set
+		 * the current membership differently.
+		 *
+		 * @since 2.0.18
+		 *
+		 * @param \WP_Ultimo\Models\Membership $membership The current membership to set.
+		 * @param self The Current class instance.
+		 * @return \WP_Ultimo\Models\Membership
+		 */
+		$membership = apply_filters('wu_current_set_membership', $membership, $this);
+
+		$this->membership = $membership;
+
+	} // end set_membership;
+
+	/**
+	 * Get wether or not the membership was set via request.
+	 *
+	 * @since 2.0.18
+	 * @return boolean
+	 */
+	public function is_membership_set_via_request() {
+
+		return $this->membership_set_via_request;
+
+	} // end is_membership_set_via_request;
 
 } // end class Current;

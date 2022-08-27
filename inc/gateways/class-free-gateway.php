@@ -68,12 +68,6 @@ class Free_Gateway extends Base_Gateway {
 			$membership->schedule_swap($cart);
 
 			/*
-			 * Mark the membership as active,
-			 * as this is a downgrade to free.
-			 */
-			$membership->set_status(Membership_Status::ACTIVE);
-
-			/*
 			 * Saves the membership with the changes.
 			 */
 			$status = $membership->save();

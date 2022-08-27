@@ -13,34 +13,59 @@ namespace WP_Ultimo\Dependencies\phpDocumentor\Reflection;
 
 use ArrayIterator;
 use InvalidArgumentException;
+use WP_Ultimo\Dependencies\phpDocumentor\Reflection\PseudoTypes\CallableString;
+use WP_Ultimo\Dependencies\phpDocumentor\Reflection\PseudoTypes\False_;
+use WP_Ultimo\Dependencies\phpDocumentor\Reflection\PseudoTypes\HtmlEscapedString;
 use WP_Ultimo\Dependencies\phpDocumentor\Reflection\PseudoTypes\IntegerRange;
 use WP_Ultimo\Dependencies\phpDocumentor\Reflection\PseudoTypes\List_;
+use WP_Ultimo\Dependencies\phpDocumentor\Reflection\PseudoTypes\LiteralString;
+use WP_Ultimo\Dependencies\phpDocumentor\Reflection\PseudoTypes\LowercaseString;
+use WP_Ultimo\Dependencies\phpDocumentor\Reflection\PseudoTypes\NegativeInteger;
+use WP_Ultimo\Dependencies\phpDocumentor\Reflection\PseudoTypes\NonEmptyLowercaseString;
+use WP_Ultimo\Dependencies\phpDocumentor\Reflection\PseudoTypes\NonEmptyString;
+use WP_Ultimo\Dependencies\phpDocumentor\Reflection\PseudoTypes\Numeric_;
+use WP_Ultimo\Dependencies\phpDocumentor\Reflection\PseudoTypes\NumericString;
+use WP_Ultimo\Dependencies\phpDocumentor\Reflection\PseudoTypes\PositiveInteger;
+use WP_Ultimo\Dependencies\phpDocumentor\Reflection\PseudoTypes\TraitString;
+use WP_Ultimo\Dependencies\phpDocumentor\Reflection\PseudoTypes\True_;
 use WP_Ultimo\Dependencies\phpDocumentor\Reflection\Types\Array_;
 use WP_Ultimo\Dependencies\phpDocumentor\Reflection\Types\ArrayKey;
+use WP_Ultimo\Dependencies\phpDocumentor\Reflection\Types\Boolean;
+use WP_Ultimo\Dependencies\phpDocumentor\Reflection\Types\Callable_;
 use WP_Ultimo\Dependencies\phpDocumentor\Reflection\Types\ClassString;
 use WP_Ultimo\Dependencies\phpDocumentor\Reflection\Types\Collection;
 use WP_Ultimo\Dependencies\phpDocumentor\Reflection\Types\Compound;
 use WP_Ultimo\Dependencies\phpDocumentor\Reflection\Types\Context;
 use WP_Ultimo\Dependencies\phpDocumentor\Reflection\Types\Expression;
+use WP_Ultimo\Dependencies\phpDocumentor\Reflection\Types\Float_;
 use WP_Ultimo\Dependencies\phpDocumentor\Reflection\Types\Integer;
 use WP_Ultimo\Dependencies\phpDocumentor\Reflection\Types\InterfaceString;
 use WP_Ultimo\Dependencies\phpDocumentor\Reflection\Types\Intersection;
 use WP_Ultimo\Dependencies\phpDocumentor\Reflection\Types\Iterable_;
+use WP_Ultimo\Dependencies\phpDocumentor\Reflection\Types\Mixed_;
+use WP_Ultimo\Dependencies\phpDocumentor\Reflection\Types\Never_;
+use WP_Ultimo\Dependencies\phpDocumentor\Reflection\Types\Null_;
 use WP_Ultimo\Dependencies\phpDocumentor\Reflection\Types\Nullable;
 use WP_Ultimo\Dependencies\phpDocumentor\Reflection\Types\Object_;
+use WP_Ultimo\Dependencies\phpDocumentor\Reflection\Types\Parent_;
+use WP_Ultimo\Dependencies\phpDocumentor\Reflection\Types\Resource_;
+use WP_Ultimo\Dependencies\phpDocumentor\Reflection\Types\Scalar;
+use WP_Ultimo\Dependencies\phpDocumentor\Reflection\Types\Self_;
+use WP_Ultimo\Dependencies\phpDocumentor\Reflection\Types\Static_;
 use WP_Ultimo\Dependencies\phpDocumentor\Reflection\Types\String_;
+use WP_Ultimo\Dependencies\phpDocumentor\Reflection\Types\This;
+use WP_Ultimo\Dependencies\phpDocumentor\Reflection\Types\Void_;
 use RuntimeException;
 use function array_key_exists;
+use function array_key_last;
 use function array_pop;
 use function array_values;
 use function class_exists;
 use function class_implements;
 use function count;
 use function current;
-use function end;
 use function in_array;
 use function is_numeric;
-use function key;
 use function preg_split;
 use function strpos;
 use function strtolower;
@@ -65,12 +90,9 @@ final class TypeResolver
      * @var array<string, string> List of recognized keywords and unto which Value Object they map
      * @psalm-var array<string, class-string<Type>>
      */
-    private $keywords = ['string' => Types\String_::class, 'class-string' => Types\ClassString::class, 'interface-string' => Types\InterfaceString::class, 'html-escaped-string' => PseudoTypes\HtmlEscapedString::class, 'lowercase-string' => PseudoTypes\LowercaseString::class, 'non-empty-lowercase-string' => PseudoTypes\NonEmptyLowercaseString::class, 'non-empty-string' => PseudoTypes\NonEmptyString::class, 'numeric-string' => PseudoTypes\NumericString::class, 'numeric' => PseudoTypes\Numeric_::class, 'trait-string' => PseudoTypes\TraitString::class, 'int' => Types\Integer::class, 'integer' => Types\Integer::class, 'positive-int' => PseudoTypes\PositiveInteger::class, 'negative-int' => PseudoTypes\NegativeInteger::class, 'bool' => Types\Boolean::class, 'boolean' => Types\Boolean::class, 'real' => Types\Float_::class, 'float' => Types\Float_::class, 'double' => Types\Float_::class, 'object' => Types\Object_::class, 'mixed' => Types\Mixed_::class, 'array' => Types\Array_::class, 'array-key' => Types\ArrayKey::class, 'resource' => Types\Resource_::class, 'void' => Types\Void_::class, 'null' => Types\Null_::class, 'scalar' => Types\Scalar::class, 'callback' => Types\Callable_::class, 'callable' => Types\Callable_::class, 'callable-string' => PseudoTypes\CallableString::class, 'false' => PseudoTypes\False_::class, 'true' => PseudoTypes\True_::class, 'literal-string' => PseudoTypes\LiteralString::class, 'self' => Types\Self_::class, '$this' => Types\This::class, 'static' => Types\Static_::class, 'parent' => Types\Parent_::class, 'iterable' => Types\Iterable_::class, 'never' => Types\Never_::class, 'list' => PseudoTypes\List_::class];
-    /**
-     * @var FqsenResolver
-     * @psalm-readonly
-     */
-    private $fqsenResolver;
+    private array $keywords = ['string' => String_::class, 'class-string' => ClassString::class, 'interface-string' => InterfaceString::class, 'html-escaped-string' => HtmlEscapedString::class, 'lowercase-string' => LowercaseString::class, 'non-empty-lowercase-string' => NonEmptyLowercaseString::class, 'non-empty-string' => NonEmptyString::class, 'numeric-string' => NumericString::class, 'numeric' => Numeric_::class, 'trait-string' => TraitString::class, 'int' => Integer::class, 'integer' => Integer::class, 'positive-int' => PositiveInteger::class, 'negative-int' => NegativeInteger::class, 'bool' => Boolean::class, 'boolean' => Boolean::class, 'real' => Float_::class, 'float' => Float_::class, 'double' => Float_::class, 'object' => Object_::class, 'mixed' => Mixed_::class, 'array' => Array_::class, 'array-key' => ArrayKey::class, 'resource' => Resource_::class, 'void' => Void_::class, 'null' => Null_::class, 'scalar' => Scalar::class, 'callback' => Callable_::class, 'callable' => Callable_::class, 'callable-string' => CallableString::class, 'false' => False_::class, 'true' => True_::class, 'literal-string' => LiteralString::class, 'self' => Self_::class, '$this' => This::class, 'static' => Static_::class, 'parent' => Parent_::class, 'iterable' => Iterable_::class, 'never' => Never_::class, 'list' => List_::class];
+    /** @psalm-readonly */
+    private FqsenResolver $fqsenResolver;
     /**
      * Initializes this TypeResolver with the means to create and resolve Fqsen objects.
      */
@@ -133,13 +155,13 @@ final class TypeResolver
                 if (count($types) === 0) {
                     throw new RuntimeException('A type is missing before a type separator');
                 }
-                if (!in_array($parserContext, [self::PARSER_IN_COMPOUND, self::PARSER_IN_ARRAY_EXPRESSION, self::PARSER_IN_COLLECTION_EXPRESSION], \true)) {
+                if (!in_array($parserContext, [self::PARSER_IN_COMPOUND, self::PARSER_IN_ARRAY_EXPRESSION, self::PARSER_IN_COLLECTION_EXPRESSION, self::PARSER_IN_NULLABLE], \true)) {
                     throw new RuntimeException('Unexpected type separator');
                 }
                 $compoundToken = $token;
                 $tokens->next();
             } elseif ($token === '?') {
-                if (!in_array($parserContext, [self::PARSER_IN_COMPOUND, self::PARSER_IN_ARRAY_EXPRESSION, self::PARSER_IN_COLLECTION_EXPRESSION], \true)) {
+                if (!in_array($parserContext, [self::PARSER_IN_COMPOUND, self::PARSER_IN_ARRAY_EXPRESSION, self::PARSER_IN_COLLECTION_EXPRESSION, self::PARSER_IN_NULLABLE], \true)) {
                     throw new RuntimeException('Unexpected nullable character');
                 }
                 $tokens->next();
@@ -178,8 +200,7 @@ final class TypeResolver
             } elseif ($parserContext === self::PARSER_IN_COLLECTION_EXPRESSION && ($token === '>' || trim($token) === ',')) {
                 break;
             } elseif ($token === self::OPERATOR_ARRAY) {
-                end($types);
-                $last = key($types);
+                $last = array_key_last($types);
                 if ($last === null) {
                     throw new InvalidArgumentException('Unexpected array operator');
                 }
@@ -190,12 +211,8 @@ final class TypeResolver
                 $types[$last] = new Array_($lastItem);
                 $tokens->next();
             } else {
-                $type = $this->resolveSingleType($token, $context);
+                $types[] = $this->resolveSingleType($token, $context);
                 $tokens->next();
-                if ($parserContext === self::PARSER_IN_NULLABLE) {
-                    return $type;
-                }
-                $types[] = $type;
             }
         }
         if ($token === '|' || $token === '&') {

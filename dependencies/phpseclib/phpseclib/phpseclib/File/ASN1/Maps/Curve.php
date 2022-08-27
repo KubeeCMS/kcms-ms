@@ -21,5 +21,5 @@ use phpseclib3\File\ASN1;
  */
 abstract class Curve
 {
-    const MAP = ['type' => ASN1::TYPE_SEQUENCE, 'children' => ['a' => \phpseclib3\File\ASN1\Maps\FieldElement::MAP, 'b' => \phpseclib3\File\ASN1\Maps\FieldElement::MAP, 'seed' => ['type' => ASN1::TYPE_BIT_STRING, 'optional' => \true]]];
+    public const MAP = ['type' => ASN1::TYPE_SEQUENCE, 'children' => ['a' => \phpseclib3\File\ASN1\Maps\FieldElement::MAP, 'b' => \phpseclib3\File\ASN1\Maps\FieldElement::MAP, 'seed' => ['type' => ASN1::TYPE_BIT_STRING, 'optional' => \true]]];
 }

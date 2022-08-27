@@ -18,5 +18,5 @@ namespace WP_Ultimo\Dependencies\ScssPhp\ScssPhp;
  */
 final class Version
 {
-    const VERSION = '1.10.3';
+    const VERSION = '1.10.5';
 }

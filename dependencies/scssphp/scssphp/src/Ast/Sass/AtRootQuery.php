@@ -11,6 +11,11 @@
  */
 namespace WP_Ultimo\Dependencies\ScssPhp\ScssPhp\Ast\Sass;
 
+use WP_Ultimo\Dependencies\ScssPhp\ScssPhp\Ast\Css\CssAtRule;
+use WP_Ultimo\Dependencies\ScssPhp\ScssPhp\Ast\Css\CssMediaRule;
+use WP_Ultimo\Dependencies\ScssPhp\ScssPhp\Ast\Css\CssParentNode;
+use WP_Ultimo\Dependencies\ScssPhp\ScssPhp\Ast\Css\CssStyleRule;
+use WP_Ultimo\Dependencies\ScssPhp\ScssPhp\Ast\Css\CssSupportsRule;
 use WP_Ultimo\Dependencies\ScssPhp\ScssPhp\Exception\SassFormatException;
 use WP_Ultimo\Dependencies\ScssPhp\ScssPhp\Logger\LoggerInterface;
 use WP_Ultimo\Dependencies\ScssPhp\ScssPhp\Parser\AtRootQueryParser;
@@ -110,6 +115,28 @@ final class AtRootQuery
     public function excludesStyleRules() : bool
     {
         return ($this->all || $this->rule) !== $this->include;
+    }
+    /**
+     * Returns whether $this excludes $node
+     */
+    public function excludes(CssParentNode $node) : bool
+    {
+        if ($this->all) {
+            return !$this->include;
+        }
+        if ($node instanceof CssStyleRule) {
+            return $this->excludesStyleRules();
+        }
+        if ($node instanceof CssMediaRule) {
+            return $this->excludesName('media');
+        }
+        if ($node instanceof CssSupportsRule) {
+            return $this->excludesName('supports');
+        }
+        if ($node instanceof CssAtRule) {
+            return $this->excludesName(\strtolower($node->getName()->getValue()));
+        }
+        return \false;
     }
     /**
      * Returns whether $this excludes an at-rule with the given $name.

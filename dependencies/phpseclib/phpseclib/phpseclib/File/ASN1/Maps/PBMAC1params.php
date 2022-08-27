@@ -23,5 +23,5 @@ use phpseclib3\File\ASN1;
  */
 abstract class PBMAC1params
 {
-    const MAP = ['type' => ASN1::TYPE_SEQUENCE, 'children' => ['keyDerivationFunc' => \phpseclib3\File\ASN1\Maps\AlgorithmIdentifier::MAP, 'messageAuthScheme' => \phpseclib3\File\ASN1\Maps\AlgorithmIdentifier::MAP]];
+    public const MAP = ['type' => ASN1::TYPE_SEQUENCE, 'children' => ['keyDerivationFunc' => \phpseclib3\File\ASN1\Maps\AlgorithmIdentifier::MAP, 'messageAuthScheme' => \phpseclib3\File\ASN1\Maps\AlgorithmIdentifier::MAP]];
 }

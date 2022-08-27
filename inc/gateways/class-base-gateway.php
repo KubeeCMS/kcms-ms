@@ -550,7 +550,6 @@ abstract class Base_Gateway {
 
 		return add_query_arg(array(
 			'payment' => $this->payment->get_hash(),
-			'status'  => 'cancel',
 		), $this->cancel_url);
 
 	} // end get_cancel_url;

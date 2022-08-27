@@ -52,9 +52,6 @@ final class StringUtil
     }
     public static function trimAsciiRight(string $string, bool $excludeEscape = \false) : string
     {
-        if (!$excludeEscape) {
-            return \rtrim($string, ' ');
-        }
         $end = self::lastNonWhitespace($string, $excludeEscape);
         if ($end === null) {
             return '';

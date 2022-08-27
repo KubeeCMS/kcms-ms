@@ -571,17 +571,6 @@ class Cart implements \JsonSerializable {
 		} // end if;
 
 		/*
-		 * If the membership is active
-		 * this can't be a retry, so we skip
-		 * the rest.
-		 */
-		if ($membership->get_status() === Membership_Status::ACTIVE || $membership->get_status() === Membership_Status::TRIALING) {
-
-			return false;
-
-		} // end if;
-
-		/*
 		 * If the payment is completed
 		 * this can't be a retry, so we skip
 		 * the rest.
@@ -591,15 +580,6 @@ class Cart implements \JsonSerializable {
 			return false;
 
 		} // end if;
-
-		/*
-		 * We got here, that means
-		 * the intend behind this cart was to actually
-		 * recover a payment.
-		 *
-		 * That means we can safely set the cart type to retry.
-		 */
-		$this->cart_type = 'retry';
 
 		/*
 		 * Check for payment status.
@@ -642,6 +622,26 @@ class Cart implements \JsonSerializable {
 			$this->add_line_item($line_item);
 
 		} // end foreach;
+
+		/*
+		 * If the membership is active or is
+		 * already in trial this can't be a
+		 * retry, so we skip the rest.
+		 */
+		if ($membership->get_status() === Membership_Status::ACTIVE || ($membership->get_status() === Membership_Status::TRIALING && !$this->has_trial())) {
+
+			return false;
+
+		} // end if;
+
+		/*
+		 * We got here, that means
+		 * the intend behind this cart was to actually
+		 * recover a payment.
+		 *
+		 * That means we can safely set the cart type to retry.
+		 */
+		$this->cart_type = 'retry';
 
 		return true;
 

@@ -41,6 +41,8 @@ class Stripe_Checkout_Gateway extends Base_Stripe_Gateway {
 	 */
 	public function settings() {
 
+		$error_message_wrap = '<span class="wu-p-2 wu-bg-red-100 wu-text-red-600 wu-rounded wu-mt-3 wu-mb-0 wu-block wu-text-xs">%s</span>';
+
 		wu_register_settings_field('payment-gateways', 'stripe_checkout_header', array(
 			'title'           => __('Stripe Checkout', 'wp-ultimo'),
 			'desc'            => __('Use the settings section below to configure Stripe Checkout as a payment method.', 'wp-ultimo'),
@@ -74,9 +76,11 @@ class Stripe_Checkout_Gateway extends Base_Stripe_Gateway {
 			),
 		));
 
+		$pk_test_status = wu_get_setting('stripe_checkout_test_pk_key_status', '');
+
 		wu_register_settings_field('payment-gateways', 'stripe_checkout_test_pk_key', array(
 			'title'       => __('Stripe Test Publishable Key', 'wp-ultimo'),
-			'desc'        => '',
+			'desc'        => !empty($pk_test_status) ? sprintf($error_message_wrap, $pk_test_status) : '',
 			'tooltip'     => __('Make sure you are placing the TEST keys, not the live ones.', 'wp-ultimo'),
 			'placeholder' => __('pk_test_***********', 'wp-ultimo'),
 			'type'        => 'text',
@@ -88,9 +92,11 @@ class Stripe_Checkout_Gateway extends Base_Stripe_Gateway {
 			),
 		));
 
+		$sk_test_status = wu_get_setting('stripe_checkout_test_sk_key_status', '');
+
 		wu_register_settings_field('payment-gateways', 'stripe_checkout_test_sk_key', array(
 			'title'       => __('Stripe Test Secret Key', 'wp-ultimo'),
-			'desc'        => '',
+			'desc'        => !empty($sk_test_status) ? sprintf($error_message_wrap, $sk_test_status) : '',
 			'tooltip'     => __('Make sure you are placing the TEST keys, not the live ones.', 'wp-ultimo'),
 			'placeholder' => __('sk_test_***********', 'wp-ultimo'),
 			'type'        => 'text',
@@ -102,9 +108,11 @@ class Stripe_Checkout_Gateway extends Base_Stripe_Gateway {
 			),
 		));
 
+		$pk_status = wu_get_setting('stripe_checkout_live_pk_key_status', '');
+
 		wu_register_settings_field('payment-gateways', 'stripe_checkout_live_pk_key', array(
 			'title'       => __('Stripe Live Publishable Key', 'wp-ultimo'),
-			'desc'        => '',
+			'desc'        => !empty($pk_status) ? sprintf($error_message_wrap, $pk_status) : '',
 			'tooltip'     => __('Make sure you are placing the LIVE keys, not the test ones.', 'wp-ultimo'),
 			'placeholder' => __('pk_live_***********', 'wp-ultimo'),
 			'type'        => 'text',
@@ -116,9 +124,11 @@ class Stripe_Checkout_Gateway extends Base_Stripe_Gateway {
 			),
 		));
 
+		$sk_status = wu_get_setting('stripe_checkout_live_sk_key_status', '');
+
 		wu_register_settings_field('payment-gateways', 'stripe_checkout_live_sk_key', array(
 			'title'       => __('Stripe Live Secret Key', 'wp-ultimo'),
-			'desc'        => '',
+			'desc'        => !empty($sk_status) ? sprintf($error_message_wrap, $sk_status) : '',
 			'tooltip'     => __('Make sure you are placing the LIVE keys, not the test ones.', 'wp-ultimo'),
 			'placeholder' => __('sk_live_***********', 'wp-ultimo'),
 			'type'        => 'text',
@@ -167,6 +177,12 @@ class Stripe_Checkout_Gateway extends Base_Stripe_Gateway {
 	 * @return void|array
 	 */
 	public function run_preflight() {
+
+		/**
+		 * Ensure the correct api keys are set
+		 */
+		$this->setup_api_keys();
+
 		/*
 		 * Creates or retrieves the Stripe Customer
 		 */
@@ -261,14 +277,12 @@ class Stripe_Checkout_Gateway extends Base_Stripe_Gateway {
 		 * If we have pro-rata credit (in case of an upgrade, for example)
 		 * try to create a custom coupon.
 		 */
-		$coupon_data = $this->generate_credit_coupon_data($this->order);
+		$s_coupon = $this->get_credit_coupon($this->order);
 
-		if ($coupon_data) {
-
-			$stripe_coupon = Stripe\Coupon::create($coupon_data);
+		if ($s_coupon) {
 
 			$subscription_data['discounts'] = array(
-				array('coupon' => $stripe_coupon->id),
+				array('coupon' => $s_coupon),
 			);
 
 		} // end if;
@@ -307,7 +321,7 @@ class Stripe_Checkout_Gateway extends Base_Stripe_Gateway {
 
 		$saved_swap = $this->get_saved_swap(wu_request('swap'));
 
-		$membership = wu_get_membership_by_hash(wu_request('membership'));
+		$membership = $this->payment ? $this->payment->get_membership() : wu_get_membership_by_hash(wu_request('membership'));
 
 		if ($saved_swap && $membership) {
 
@@ -323,7 +337,24 @@ class Stripe_Checkout_Gateway extends Base_Stripe_Gateway {
 
 			$membership->save();
 
-			wp_redirect(admin_url());
+			if (!is_admin()) {
+
+				$redirect_url = add_query_arg(array(
+					'payment' => $this->payment->get_hash(),
+					'status'  => 'done',
+				), wu_get_current_url());
+
+				wp_redirect($redirect_url);
+
+				exit;
+
+			} // end if;
+
+			$redirect_url = add_query_arg(array(
+				'page' => 'account',
+			), admin_url('admin.php'));
+
+			wp_redirect($redirect_url);
 
 			exit;
 
@@ -448,6 +479,11 @@ class Stripe_Checkout_Gateway extends Base_Stripe_Gateway {
 			));
 
 			$stripe_customer_id = current(array_column($stripe_customer_id, 'gateway_customer_id'));
+
+			/**
+			 * Ensure the correct api keys are set
+			 */
+			$this->setup_api_keys();
 
 			$payment_methods = Stripe\PaymentMethod::all(array(
 				'customer' => $stripe_customer_id,

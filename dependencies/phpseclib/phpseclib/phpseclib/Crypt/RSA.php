@@ -72,7 +72,7 @@ abstract class RSA extends AsymmetricKey
      *
      * @var string
      */
-    const ALGORITHM = 'RSA';
+    public const ALGORITHM = 'RSA';
     /**
      * Use {@link http://en.wikipedia.org/wiki/Optimal_Asymmetric_Encryption_Padding Optimal Asymmetric Encryption Padding}
      * (OAEP) for encryption / decryption.
@@ -84,7 +84,7 @@ abstract class RSA extends AsymmetricKey
      * @see self::encrypt()
      * @see self::decrypt()
      */
-    const ENCRYPTION_OAEP = 1;
+    public const ENCRYPTION_OAEP = 1;
     /**
      * Use PKCS#1 padding.
      *
@@ -94,7 +94,7 @@ abstract class RSA extends AsymmetricKey
      * @see self::encrypt()
      * @see self::decrypt()
      */
-    const ENCRYPTION_PKCS1 = 2;
+    public const ENCRYPTION_PKCS1 = 2;
     /**
      * Do not use any padding
      *
@@ -104,7 +104,7 @@ abstract class RSA extends AsymmetricKey
      * @see self::encrypt()
      * @see self::decrypt()
      */
-    const ENCRYPTION_NONE = 4;
+    public const ENCRYPTION_NONE = 4;
     /**
      * Use the Probabilistic Signature Scheme for signing
      *
@@ -117,7 +117,7 @@ abstract class RSA extends AsymmetricKey
      * @see self::verify()
      * @see self::setHash()
      */
-    const SIGNATURE_PSS = 16;
+    public const SIGNATURE_PSS = 16;
     /**
      * Use a relaxed version of PKCS#1 padding for signature verification
      *
@@ -125,7 +125,7 @@ abstract class RSA extends AsymmetricKey
      * @see self::verify()
      * @see self::setHash()
      */
-    const SIGNATURE_RELAXED_PKCS1 = 32;
+    public const SIGNATURE_RELAXED_PKCS1 = 32;
     /**
      * Use PKCS#1 padding for signature verification
      *
@@ -133,7 +133,7 @@ abstract class RSA extends AsymmetricKey
      * @see self::verify()
      * @see self::setHash()
      */
-    const SIGNATURE_PKCS1 = 64;
+    public const SIGNATURE_PKCS1 = 64;
     /**
      * Encryption padding mode
      *
@@ -258,10 +258,8 @@ abstract class RSA extends AsymmetricKey
      * Create a private key
      *
      * The public key can be extracted from the private key
-     *
-     * @return RSA
      */
-    public static function createKey(int $bits = 2048)
+    public static function createKey(int $bits = 2048) : PrivateKey
     {
         self::initialize_static_variables();
         $regSize = $bits >> 1;
@@ -367,7 +365,7 @@ abstract class RSA extends AsymmetricKey
     /**
      * OnLoad Handler
      *
-     * @return bool
+     * @return PrivateKey|PublicKey|RSA
      */
     protected static function onLoad(array $components)
     {

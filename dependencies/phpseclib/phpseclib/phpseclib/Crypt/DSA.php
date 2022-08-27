@@ -47,7 +47,7 @@ abstract class DSA extends AsymmetricKey
      *
      * @var string
      */
-    const ALGORITHM = 'DSA';
+    public const ALGORITHM = 'DSA';
     /**
      * DSA Prime P
      *
@@ -184,7 +184,7 @@ abstract class DSA extends AsymmetricKey
     /**
      * OnLoad Handler
      *
-     * @return bool
+     * @return Parameters|PrivateKey|PublicKey
      */
     protected static function onLoad(array $components)
     {

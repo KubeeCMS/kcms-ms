@@ -28,13 +28,13 @@ class BCMath extends \phpseclib3\Math\BigInteger\Engines\Engine
      * @see parent::bitwise_leftRotate()
      * @see parent::bitwise_rightRotate()
      */
-    const FAST_BITWISE = \false;
+    public const FAST_BITWISE = \false;
     /**
      * Engine Directory
      *
      * @see parent::setModExpEngine
      */
-    const ENGINE_DIR = 'BCMath';
+    public const ENGINE_DIR = 'BCMath';
     /**
      * Test for engine validity
      *
@@ -404,7 +404,7 @@ class BCMath extends \phpseclib3\Math\BigInteger\Engines\Engine
         if ($this->value === '2') {
             return \true;
         }
-        if ($this->value[\strlen($this->value) - 1] % 2 == 0) {
+        if ($this->value[-1] % 2 == 0) {
             return \false;
         }
         $value = $this->value;
@@ -428,7 +428,7 @@ class BCMath extends \phpseclib3\Math\BigInteger\Engines\Engine
         $r_value =& $r->value;
         $s = 0;
         // if $n was 1, $r would be 0 and this would be an infinite loop, hence our $this->equals(static::$one[static::class]) check earlier
-        while ($r_value[\strlen($r_value) - 1] % 2 == 0) {
+        while ($r_value[-1] % 2 == 0) {
             $r_value = \bcdiv($r_value, '2', 0);
             ++$s;
         }
@@ -479,7 +479,7 @@ class BCMath extends \phpseclib3\Math\BigInteger\Engines\Engine
      */
     public function isOdd() : bool
     {
-        return $this->value[\strlen($this->value) - 1] % 2 == 1;
+        return $this->value[-1] % 2 == 1;
     }
     /**
      * Tests if a bit is set

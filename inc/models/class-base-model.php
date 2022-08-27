@@ -639,6 +639,13 @@ abstract class Base_Model implements \JsonSerializable {
 		 */
 		do_action("wu_{$this->model}_post_save", $data, $this);
 
+		/**
+		 * Delete object cache to prevent errors.
+		 * As BerlinDB groups are protected, we try
+		 * guess the group name with model name.
+		 */
+        wp_cache_delete($this->get_id(), "wu-{$this->model}s");
+
 		return $saved;
 
 	} // end save;

@@ -43,9 +43,8 @@ abstract class PKCS1 extends Progenitor
      * Break a public or private key down into its constituent components
      *
      * @param string|array $key
-     * @param string|false $password
      */
-    public static function load($key, $password = '') : array
+    public static function load($key, ?string $password = null) : array
     {
         $key = parent::load($key, $password);
         $decoded = ASN1::decodeBER($key);

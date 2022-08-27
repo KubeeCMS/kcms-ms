@@ -127,6 +127,16 @@ class Parser
         return \false;
     }
     /**
+     * Like {@see whitespace}, but throws an error if no whitespace is consumed.
+     */
+    protected function expectWhitespace() : void
+    {
+        if ($this->scanner->isDone() || !(Character::isWhitespace($this->scanner->peekChar()) || $this->scanComment())) {
+            $this->scanner->error('Expected whitespace.');
+        }
+        $this->whitespace();
+    }
+    /**
      * Consumes and ignores a silent (Sass-style) comment.
      */
     protected function silentComment() : void
@@ -633,18 +643,43 @@ class Parser
             return \false;
         }
         $start = $this->scanner->getPosition();
-        for ($i = 0; $i < \strlen($text); $i++) {
-            if ($this->scanIdentChar($text[$i], $caseSensitive)) {
-                continue;
-            }
-            $this->scanner->setPosition($start);
-            return \false;
-        }
-        if (!$this->lookingAtIdentifierBody()) {
+        if ($this->consumeIdentifier($text, $caseSensitive) && !$this->lookingAtIdentifierBody()) {
             return \true;
         }
         $this->scanner->setPosition($start);
         return \false;
+    }
+    /**
+     * Returns whether an identifier whose name exactly matches $text is at the
+     * current scanner position.
+     *
+     * This doesn't move the scan pointer forward
+     */
+    protected function matchesIdentifier(string $text, bool $caseSensitive = \false) : bool
+    {
+        if (!$this->lookingAtIdentifier()) {
+            return \false;
+        }
+        $start = $this->scanner->getPosition();
+        $result = $this->consumeIdentifier($text, $caseSensitive) && !$this->lookingAtIdentifierBody();
+        $this->scanner->setPosition($start);
+        return $result;
+    }
+    /**
+     * Consumes $text as an identifer, but doesn't verify whether there's
+     * additional identifier text afterwards.
+     *
+     * Returns `true` if the full $text is consumed and `false` otherwise, but
+     * doesn't reset the scan pointer.
+     */
+    private function consumeIdentifier(string $text, bool $caseSensitive) : bool
+    {
+        for ($i = 0; $i < \strlen($text); $i++) {
+            if (!$this->scanIdentChar($text[$i], $caseSensitive)) {
+                return \false;
+            }
+        }
+        return \true;
     }
     /**
      * Consumes an identifier asserts that its name exactly matches $text.

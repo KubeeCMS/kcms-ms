@@ -21,5 +21,5 @@ use phpseclib3\File\ASN1;
  */
 abstract class SignedPublicKeyAndChallenge
 {
-    const MAP = ['type' => ASN1::TYPE_SEQUENCE, 'children' => ['publicKeyAndChallenge' => \phpseclib3\File\ASN1\Maps\PublicKeyAndChallenge::MAP, 'signatureAlgorithm' => \phpseclib3\File\ASN1\Maps\AlgorithmIdentifier::MAP, 'signature' => ['type' => ASN1::TYPE_BIT_STRING]]];
+    public const MAP = ['type' => ASN1::TYPE_SEQUENCE, 'children' => ['publicKeyAndChallenge' => \phpseclib3\File\ASN1\Maps\PublicKeyAndChallenge::MAP, 'signatureAlgorithm' => \phpseclib3\File\ASN1\Maps\AlgorithmIdentifier::MAP, 'signature' => ['type' => ASN1::TYPE_BIT_STRING]]];
 }

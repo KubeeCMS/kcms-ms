@@ -593,6 +593,7 @@ trait Localization
         }
         if ($translator && !($translator instanceof LocaleAwareInterface || \method_exists($translator, 'getLocale'))) {
             throw new NotLocaleAwareException($translator);
+            // @codeCoverageIgnore
         }
         return $translator;
     }

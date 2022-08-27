@@ -96,6 +96,14 @@ class Checkout {
 	protected $type = 'new';
 
 	/**
+	 * Check if setup method already run.
+	 *
+	 * @since 2.0.18
+	 * @var bool
+	 */
+	protected $already_setup = false;
+
+	/**
 	 * Initializes the Checkout singleton and adds hooks.
 	 *
 	 * @since 2.0.0
@@ -301,6 +309,12 @@ class Checkout {
 	 */
 	public function setup_checkout($element = null) {
 
+		if ($this->already_setup) {
+
+			return;
+
+		} // end if;
+
 		$checkout_form_slug = wu_request('checkout_form');
 
 		if (is_a($element, \WP_Ultimo\UI\Checkout_Element::class)) {
@@ -340,6 +354,8 @@ class Checkout {
 			$_REQUEST['user_id'] = get_current_user_id();
 
 		} // end if;
+
+		$this->already_setup = true;
 
 		wu_no_cache(); // Prevent the registration page from being cached.
 
@@ -794,8 +810,6 @@ class Checkout {
 				$gateway->trigger_payment_processed($this->payment, $this->membership);
 
 			} elseif ($this->order->has_trial()) {
-
-				$this->membership->set_status(Membership_Status::TRIALING);
 
 				$this->membership->set_date_trial_end(gmdate('Y-m-d 23:59:59', $this->order->get_billing_start_date()));
 				$this->membership->set_date_expiration(gmdate('Y-m-d 23:59:59', $this->order->get_billing_start_date()));
@@ -1590,6 +1604,8 @@ class Checkout {
 
 		} // end if;
 
+		$products = array_merge($this->request_or_session('products', array()), wu_request('products', array()));
+
 		/*
 		 * Set the default variables.
 		 */
@@ -1598,22 +1614,18 @@ class Checkout {
 			'ajaxurl'            => wu_ajax_url(),
 			'late_ajaxurl'       => wu_ajax_url('init'),
 			'baseurl'            => remove_query_arg('pre-flight', wu_get_current_url()),
-
 			'country'            => $this->request_or_session('billing_country'),
 			'city'               => $this->request_or_session('billing_city'),
 			'state'              => $this->request_or_session('billing_state'),
 			'duration'           => $duration,
 			'duration_unit'      => $duration_unit,
-
 			'site_url'           => $this->request_or_session('site_url'),
 			'site_domain'        => $this->request_or_session('site_domain', preg_replace('#^https?://#', '', $site_domain)),
 			'is_subdomain'       => is_subdomain_install(),
-
 			'gateway'            => wu_request('gateway', $default_gateway),
-
 			'needs_billing_info' => true,
 			'auto_renew'         => true,
-			'products'           => array(),
+			'products'           => array_unique($products),
 		);
 
 		/*
@@ -1665,8 +1677,6 @@ class Checkout {
 			$variables['membership_id'] = $membership_id;
 
 		} // end if;
-
-		$variables['products'] = $this->request_or_session('products', array());
 
 		list($plan, $other_products) = wu_segregate_products($variables['products']);
 

@@ -450,33 +450,27 @@ class Line_Item implements \JsonSerializable {
 
 		$sub_total = $this->get_quantity() * $this->get_unit_price();
 
-		$original_sub_total = $sub_total;
-
 		$discounts = $this->calculate_discounts($sub_total);
 
-		$original_sub_total = $sub_total;
+		$discounted_subtotal = $sub_total - $discounts;
 
-		$sub_total = $sub_total - $discounts;
+		if ($sub_total > 0 && $discounted_subtotal < 0) {
 
-		if ($original_sub_total > 0 && $sub_total < 0) {
+			$discounted_subtotal = 0;
 
-			$sub_total = 0;
-
-			$discounts = $original_sub_total;
+			$discounts = $sub_total;
 
 		} // end if;
 
-		$taxes = $this->calculate_taxes($sub_total);
+		$taxes = $this->calculate_taxes($discounted_subtotal);
 
 		if ($this->get_tax_inclusive()) {
 
-			$total = $this->is_tax_exempt() ? $sub_total - $taxes : $sub_total;
-
-			$sub_total = $sub_total - $taxes; // tax inclusive
+			$total = $this->is_tax_exempt() ? $discounted_subtotal - $taxes : $discounted_subtotal;
 
 		} else {
 
-			$total = $this->is_tax_exempt() ? $sub_total : $sub_total + $taxes; // tax exclusive
+			$total = $this->is_tax_exempt() ? $discounted_subtotal : $discounted_subtotal + $taxes; // tax exclusive
 
 		} // end if;
 

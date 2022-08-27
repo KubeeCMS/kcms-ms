@@ -19,6 +19,20 @@ defined('ABSPATH') || exit;
  */
 function wu_get_session($session_key) {
 
-	return new \WP_Ultimo\Session($session_key);
+	global $wu_session;
+
+	$wu_session = (array) $wu_session;
+
+	$session = wu_get_isset($wu_session, $session_key, false);
+
+	if ($session && is_a( $session, \WP_Ultimo\Session_Cookie::class)) {
+
+		return $session;
+
+	} // end if;
+
+	$wu_session[$session_key] = new \WP_Ultimo\Session_Cookie($session_key);
+
+	return $wu_session[$session_key];
 
 } // end wu_get_session;

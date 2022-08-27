@@ -23,5 +23,4 @@ namespace WP_Ultimo\Dependencies\Stripe;
 class LineItem extends ApiResource
 {
     const OBJECT_NAME = 'item';
-    use ApiOperations\All;
 }

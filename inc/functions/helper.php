@@ -140,7 +140,7 @@ function wu_url($dir) {
  */
 function wu_request($key, $default = false) {
 
-	$value = isset($_REQUEST[$key]) ? $_REQUEST[$key] : $default;
+	$value = isset($_REQUEST[$key]) ? stripslashes_deep($_REQUEST[$key]) : $default;
 
 	return apply_filters('wu_request', $value, $key, $default);
 

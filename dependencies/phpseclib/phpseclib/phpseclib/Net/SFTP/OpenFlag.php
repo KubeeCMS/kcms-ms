@@ -12,12 +12,12 @@ namespace phpseclib3\Net\SFTP;
  */
 abstract class OpenFlag
 {
-    const READ = 0x1;
-    const WRITE = 0x2;
-    const APPEND = 0x4;
-    const CREATE = 0x8;
-    const TRUNCATE = 0x10;
-    const EXCL = 0x20;
-    const TEXT = 0x40;
+    public const READ = 0x1;
+    public const WRITE = 0x2;
+    public const APPEND = 0x4;
+    public const CREATE = 0x8;
+    public const TRUNCATE = 0x10;
+    public const EXCL = 0x20;
+    public const TEXT = 0x40;
     // defined in SFTPv4
 }

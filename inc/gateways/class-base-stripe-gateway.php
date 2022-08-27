@@ -112,9 +112,9 @@ class Base_Stripe_Gateway extends Base_Gateway {
 	 * @param string $id The gateway stripe id.
 	 * @return void
 	 */
-	public function setup_api_keys($id) {
+	public function setup_api_keys($id = false) {
 
-		$id = wu_replace_dashes($this->get_id());
+		$id = $id ? $id : wu_replace_dashes($this->get_id());
 
 		if ($this->test_mode) {
 
@@ -128,7 +128,7 @@ class Base_Stripe_Gateway extends Base_Gateway {
 
 		} // end if;
 
-		if ($this->secret_key) {
+		if ($this->secret_key && Stripe\Stripe::getApiKey() !== $this->secret_key) {
 
 			Stripe\Stripe::setApiKey($this->secret_key);
 
@@ -147,6 +147,10 @@ class Base_Stripe_Gateway extends Base_Gateway {
 	public function hooks() {
 
 		add_action('wu_after_save_settings', array($this, 'install_webhook'), 10, 3);
+
+		add_action('wu_after_save_settings', array($this, 'check_keys_status'), 10, 3);
+
+		add_filter('wu_pre_save_settings', array($this, 'fix_saving_settings'), 10, 3);
 
 	} // end hooks;
 
@@ -185,7 +189,9 @@ class Base_Stripe_Gateway extends Base_Gateway {
 
 			$webhook_url = $this->get_webhook_listener_url();
 
-			$search_webhook = \WP_Ultimo\Dependencies\Stripe\WebhookEndpoint::all(array(
+			$this->setup_api_keys();
+
+			$search_webhook = Stripe\WebhookEndpoint::all(array(
 				'limit' => 100,
 			));
 
@@ -203,13 +209,167 @@ class Base_Stripe_Gateway extends Base_Gateway {
 
 		} catch (\Throwable $e) {
 
-			return new \WP_Error($e->getCode(), $e->getMessage());
+			$error_code = $e->getCode();
+
+			// WP Error did not handle empty error code
+			if (empty($error_code)) {
+
+				if (method_exists($e, 'getHttpStatus')) {
+
+					$error_code = $e->getHttpStatus();
+
+				} else {
+
+					$error_code = 500;
+
+				} // end if;
+
+			} // end if;
+
+			return new \WP_Error($error_code, $e->getMessage());
 
 		} // end try;
 
 		return false;
 
 	} // end has_webhook_installed;
+
+	/**
+	 * Fix stripe settings
+	 *
+	 * @since 2.0.18
+	 *
+	 * @param array $settings The final settings array being saved, containing ALL options.
+	 * @param array $settings_to_save Array containing just the options being updated.
+	 * @param array $saved_settings Array containing the original settings.
+	 * @return array
+	 */
+	public function fix_saving_settings($settings, $settings_to_save, $saved_settings) {
+
+		$id = wu_replace_dashes($this->get_id());
+
+		$active_gateways = (array) wu_get_isset($settings_to_save, 'active_gateways', array());
+
+		if (!in_array($this->get_id(), $active_gateways, true)) {
+
+			return $settings;
+
+		} // end if;
+
+		if (!isset($settings_to_save["{$id}_sandbox_mode"])) {
+
+			$settings["{$id}_sandbox_mode"] = false;
+
+		} // end if;
+
+		// Unset webhook url to show the get_webhook_listener_url value to customer
+		unset($settings["{$id}_webhook_listener_explanation"]);
+
+		return $settings;
+
+	} // end fix_saving_settings;
+
+	/**
+	 * Check stripe API keys
+	 *
+	 * @since 2.0.18
+	 *
+	 * @param array $settings The final settings array being saved, containing ALL options.
+	 * @param array $settings_to_save Array containing just the options being updated.
+	 * @param array $saved_settings Array containing the original settings.
+	 * @return void
+	 */
+	public function check_keys_status($settings, $settings_to_save, $saved_settings) {
+
+		$id = wu_replace_dashes($this->get_id());
+
+		$active_gateways = (array) wu_get_isset($settings_to_save, 'active_gateways', array());
+
+		if (!in_array($this->get_id(), $active_gateways, true)) {
+
+			return;
+
+		} // end if;
+
+		$stripe_mode = (bool) (int) $settings["{$id}_sandbox_mode"] ? 'test' : 'live';
+
+		/*
+		 * Checked if the Stripe Settings changed, so we can install webhooks.
+		 */
+		$changed_settings = array(
+			$settings["{$id}_sandbox_mode"],
+			$settings["{$id}_{$stripe_mode}_pk_key"],
+			$settings["{$id}_{$stripe_mode}_sk_key"],
+		);
+
+		$original_settings = array(
+			$saved_settings["{$id}_sandbox_mode"],
+			$saved_settings["{$id}_{$stripe_mode}_pk_key"],
+			$saved_settings["{$id}_{$stripe_mode}_sk_key"],
+		);
+
+		if ($changed_settings == $original_settings) { // phpcs:ignore
+
+			return;
+
+		} // end if;
+
+		try {
+
+			Stripe\Stripe::setApiKey($settings["{$id}_{$stripe_mode}_sk_key"]);
+
+			Stripe\Token::create(array(
+				'card' => array(
+					'number'    => '4242424242424242',
+					'exp_month' => 7,
+					'exp_year'  => 2028,
+					'cvc'       => '314',
+				),
+			));
+
+			wu_save_setting("{$id}_{$stripe_mode}_sk_key_status", '');
+
+		} catch (\Throwable $e) {
+
+			if (substr($e->getMessage(), 0, 24) === 'Invalid API Key provided') {
+				/**
+				 *  The secret key is invalid;
+				 */
+				$t = "{$id}_{$stripe_mode}_sk_key_status";
+				wu_save_setting("{$id}_{$stripe_mode}_sk_key_status", __('Invalid API Key provided', 'wp-ultimo'));
+
+			} // end if;
+
+		} // end try;
+
+		try {
+
+			Stripe\Stripe::setApiKey($settings["{$id}_{$stripe_mode}_pk_key"]);
+
+			Stripe\Token::create(array(
+				'card' => array(
+					'number'    => '4242424242424242',
+					'exp_month' => 7,
+					'exp_year'  => 2028,
+					'cvc'       => '314',
+				),
+			));
+
+			wu_save_setting("{$id}_{$stripe_mode}_pk_key_status", '');
+
+		} catch (\Throwable $e) {
+
+			if (substr($e->getMessage(), 0, 24) === 'Invalid API Key provided') {
+				/**
+				 *  The public key is invalid;
+				 */
+				wu_save_setting("{$id}_{$stripe_mode}_pk_key_status", __('Invalid API Key provided', 'wp-ultimo'));
+
+			} // end if;
+
+		} // end try;
+
+	} // end check_keys_status;
 
 	/**
 	 * Installs webhook urls onto Stripe.
@@ -231,7 +391,9 @@ class Base_Stripe_Gateway extends Base_Gateway {
 
 		$id = wu_replace_dashes($this->get_id());
 
-		if (!isset($settings_to_save["{$id}_sandbox_mode"])) {
+		$active_gateways = (array) wu_get_isset($settings_to_save, 'active_gateways', array());
+
+		if (!in_array($this->get_id(), $active_gateways, true)) {
 
 			return;
 
@@ -241,11 +403,11 @@ class Base_Stripe_Gateway extends Base_Gateway {
 		 * Checked if the Stripe Settings changed, so we can install webhooks.
 		 */
 		$changed_settings = array(
-			$settings_to_save["{$id}_sandbox_mode"],
-			$settings_to_save["{$id}_test_pk_key"],
-			$settings_to_save["{$id}_test_sk_key"],
-			$settings_to_save["{$id}_live_pk_key"],
-			$settings_to_save["{$id}_live_sk_key"],
+			$settings["{$id}_sandbox_mode"],
+			$settings["{$id}_test_pk_key"],
+			$settings["{$id}_test_sk_key"],
+			$settings["{$id}_live_pk_key"],
+			$settings["{$id}_live_sk_key"],
 		);
 
 		$original_settings = array(
@@ -272,6 +434,8 @@ class Base_Stripe_Gateway extends Base_Gateway {
 
 		} // end if;
 
+		$this->setup_api_keys($id);
+
 		try {
 			/*
 			 * If already exists, checks for status
@@ -280,7 +444,7 @@ class Base_Stripe_Gateway extends Base_Gateway {
 
 				if ($existing_webhook->status === 'disabled') {
 
-					$status = \WP_Ultimo\Dependencies\Stripe\WebhookEndpoint::update($existing_webhook->id, array(
+					$status = Stripe\WebhookEndpoint::update($existing_webhook->id, array(
 						'status' => 'enabled',
 					));
 
@@ -293,7 +457,7 @@ class Base_Stripe_Gateway extends Base_Gateway {
 			/*
 			 * Otherwise, create it.
 			 */
-			\WP_Ultimo\Dependencies\Stripe\WebhookEndpoint::create(array(
+			Stripe\WebhookEndpoint::create(array(
 				'enabled_events' => array('*'),
 				'url'            => $webhook_url,
 				'description'    => 'Added by WP Ultimo. Required to correctly handle changes in subscription status.',
@@ -303,7 +467,24 @@ class Base_Stripe_Gateway extends Base_Gateway {
 
 		} catch (\Throwable $e) {
 
-			return new \WP_Error($e->getCode(), $e->getMessage());
+			$error_code = $e->getCode();
+
+			// WP Error did not handle empty error code
+			if (empty($error_code)) {
+
+				if (method_exists($e, 'getHttpStatus')) {
+
+					$error_code = $e->getHttpStatus();
+
+				} else {
+
+					$error_code = 500;
+
+				} // end if;
+
+			} // end if;
+
+			return new \WP_Error($error_code, $e->getMessage());
 
 		} // end try;
 
@@ -356,6 +537,11 @@ class Base_Stripe_Gateway extends Base_Gateway {
 			$stripe_customer_id = wu_get_customer_gateway_id($customer_id, array('stripe', 'stripe-checkout'));
 
 		} // end if;
+
+		/**
+		 * Ensure the correct api keys are set
+		 */
+		$this->setup_api_keys();
 
 		/*
 		 * We found a Stripe Customer ID!
@@ -417,7 +603,24 @@ class Base_Stripe_Gateway extends Base_Gateway {
 
 			} catch (\Exception $e) {
 
-				return new \WP_Error($e->getCode(), $e->getMessage());
+				$error_code = $e->getCode();
+
+				// WP Error did not handle empty error code
+				if (empty($error_code)) {
+
+					if (method_exists($e, 'getHttpStatus')) {
+
+						$error_code = $e->getHttpStatus();
+
+					} else {
+
+						$error_code = 500;
+
+					} // end if;
+
+				} // end if;
+
+				return new \WP_Error($error_code, $e->getMessage());
 
 			} // end try;
 
@@ -630,9 +833,9 @@ class Base_Stripe_Gateway extends Base_Gateway {
 	 * @since 2.0.0
 	 *
 	 * @param \WP_Ultimo\Checkout\Cart $cart The current cart.
-	 * @return array|false
+	 * @return string|false
 	 */
-	protected function generate_credit_coupon_data($cart) {
+	protected function get_credit_coupon($cart) {
 
 		$amount = 0;
 
@@ -641,6 +844,10 @@ class Base_Stripe_Gateway extends Base_Gateway {
 			if ($line_item->get_total() < 0) {
 
 				$amount += $line_item->get_total();
+
+			} elseif (!$line_item->should_apply_discount_to_renewals()) {
+
+				$amount += - $line_item->get_discount_total();
 
 			} // end if;
 
@@ -652,14 +859,82 @@ class Base_Stripe_Gateway extends Base_Gateway {
 
 		} // end if;
 
-		return array(
+		$s_amount = - round($amount * wu_stripe_get_currency_multiplier());
+		$currency = strtolower($cart->get_currency());
+
+		$coupon_data = array(
+			'id'         => sprintf('%s-%s-%s', $s_amount, $currency, 'once'),
 			'name'       => __('Account credit and other discounts', 'wp-ultimo'),
-			'amount_off' => - round($amount * wu_stripe_get_currency_multiplier()),
+			'amount_off' => $s_amount,
 			'duration'   => 'once',
-			'currency'   => $cart->get_currency(),
+			'currency'   => $currency,
 		);
 
-	} // end generate_credit_coupon_data;
+		return $this->get_stripe_coupon($coupon_data);
+
+	} // end get_credit_coupon;
+
+	/**
+	 * Checks to see if the coupon exists, and if so, returns the ID of
+	 * that coupon. If not, a new coupon is created.
+	 *
+	 * @since 2.0.18
+	 *
+	 * @param array $coupon_data The cart/order object.
+	 * @return string
+	 */
+	protected function get_stripe_coupon($coupon_data) {
+
+		// First check to see if a coupon exists with this ID. If so, return that.
+		try {
+
+			$coupon = Stripe\Coupon::retrieve($coupon_data['id']);
+
+			Stripe\Coupon::update($coupon->id, array(
+				'name' => $coupon_data['name'],
+			));
+
+			return $coupon->id;
+
+		} catch (\Exception $e) {
+
+			// silence is golden
+
+		} // end try;
+
+		// Otherwise, create a new plan.
+		try {
+
+			$coupon = Stripe\Coupon::create($coupon_data);
+
+			return $coupon->id;
+
+		} catch (\Exception $e) {
+
+			$error_code = $e->getCode();
+
+			// WP Error did not handle empty error code
+			if (empty($error_code)) {
+
+				if (method_exists($e, 'getHttpStatus')) {
+
+					$error_code = $e->getHttpStatus();
+
+				} else {
+
+					$error_code = 500;
+
+				} // end if;
+
+			} // end if;
+
+			wu_log_add('stripe', sprintf('Error creating Stripe coupon. Code: %s; Message: %s', $error_code, $e->getMessage()));
+
+			throw new \WP_Error('stripe_exception', sprintf('Error creating Stripe coupon. Code: %s; Message: %s', $error_code, $e->getMessage()));
+
+		} // end try;
+
+	} // end get_stripe_coupon;
 
 	/**
 	 * Builds the non-recurring list of items to be paid on Stripe.
@@ -1098,6 +1373,11 @@ class Base_Stripe_Gateway extends Base_Gateway {
 
 		} // end if;
 
+		/**
+		 * Ensure the correct api keys are set
+		 */
+		$this->setup_api_keys();
+
 		/*
 		 * Check if we have an invoice,
 		 * or a charge at hand.
@@ -1159,6 +1439,10 @@ class Base_Stripe_Gateway extends Base_Gateway {
 		$subscription_id = $membership->get_gateway_subscription_id();
 
 		if (!empty($subscription_id)) {
+			/**
+			 * Ensure the correct api keys are set
+			 */
+			$this->setup_api_keys();
 
 			$subscription = Stripe\Subscription::retrieve($subscription_id);
 
@@ -1341,9 +1625,12 @@ class Base_Stripe_Gateway extends Base_Gateway {
 
 			$this->test_mode = !$received_event->livemode;
 
-			$this->setup_api_keys($this->get_id());
-
 		} // end if;
+
+		/**
+		 * Ensure the correct api keys are set
+		 */
+		$this->setup_api_keys();
 
 		$event_id = $received_event->id;
 
@@ -1442,6 +1729,16 @@ class Base_Stripe_Gateway extends Base_Gateway {
 
 		} // end if;
 
+		/**
+		 *  Ensure the membership is using the current gateway
+		 */
+		if ($this->get_id() !== $membership->get_gateway()) {
+
+			// translators: %s is the customer ID.
+			throw new Ignorable_Exception(sprintf(__('Exiting Stripe webhook - This call must be handled by %s webhook', 'wp-ultimo'), $membership->get_gateway()));
+
+		} // end if;
+
 		/*
 		 * Set the WP Ultimo customer.
 		 */
@@ -1478,7 +1775,7 @@ class Base_Stripe_Gateway extends Base_Gateway {
 
 			$membership->set_gateway_subscription_id($payment_event->subscription);
 
-			$membership->set_gateway($this->id);
+			$membership->set_gateway($this->get_id());
 
 			$membership->save();
 
@@ -1490,6 +1787,12 @@ class Base_Stripe_Gateway extends Base_Gateway {
 		 * Next, let's deal with charges that went through!
 		 */
 		if ($event->type === 'charge.succeeded' || $event->type === 'invoice.payment_succeeded') {
+			/**
+			 * Here we need to handle invoice.payment_succeeded
+			 * events due subscriptions with trials and we need
+			 * to handle charge.succeeded for payments without
+			 * stripe invoices.
+			 */
 
 			$payment_data = array(
 				'status'  => Payment_Status::COMPLETED,
@@ -1593,7 +1896,7 @@ class Base_Stripe_Gateway extends Base_Gateway {
 
 					$payment = $pending_payment;
 
-				} else {
+				} elseif ($event->type === 'charge.succeeded') {
 					/**
 					 * These must be retrieved after the status
 					 * is set to active in order for upgrades to work properly
@@ -1602,6 +1905,12 @@ class Base_Stripe_Gateway extends Base_Gateway {
 					$payment_data['customer_id']      = $customer->get_id();
 					$payment_data['membership_id']    = $membership->get_id();
 					$payment                          = wu_create_payment($payment_data);
+
+				} else {
+					/**
+					 *  We do not have a payment to change
+					 */
+					return true;
 
 				} // end if;
 
@@ -1956,6 +2265,7 @@ class Base_Stripe_Gateway extends Base_Gateway {
 			$plan_level->price         = $args['price'];
 			$plan_level->duration      = $args['interval_count'];
 			$plan_level->duration_unit = $args['interval'];
+			$plan_level->currency      = $args['currency'];
 			$plan_id                   = $this->generate_plan_id($plan_level);
 
 		} else {
@@ -2001,7 +2311,7 @@ class Base_Stripe_Gateway extends Base_Gateway {
 		try {
 
 			$product = Stripe\Product::create(array(
-				'name' => $args['name'],
+				'name' => $args['name'] . ' - ' . $args['currency'],
 				'type' => 'service'
 			) );
 
@@ -2019,9 +2329,26 @@ class Base_Stripe_Gateway extends Base_Gateway {
 
 		} catch (\Exception $e) {
 
-			wu_log_add('stripe', sprintf('Error creating Stripe plan. Code: %s; Message: %s', $e->getCode(), $e->getMessage()));
+			$error_code = $e->getCode();
 
-			return new \WP_Error('stripe_exception', sprintf('Error creating Stripe plan. Code: %s; Message: %s', $e->getCode(), $e->getMessage()));
+			// WP Error did not handle empty error code
+			if (empty($error_code)) {
+
+				if (method_exists($e, 'getHttpStatus')) {
+
+					$error_code = $e->getHttpStatus();
+
+				} else {
+
+					$error_code = 500;
+
+				} // end if;
+
+			} // end if;
+
+			wu_log_add('stripe', sprintf('Error creating Stripe plan. Code: %s; Message: %s', $error_code, $e->getMessage()));
+
+			return new \WP_Error('stripe_exception', sprintf('Error creating Stripe plan. Code: %s; Message: %s', $error_code, $e->getMessage()));
 
 		} // end try;
 
@@ -2043,7 +2370,7 @@ class Base_Stripe_Gateway extends Base_Gateway {
 
 		$product_name = strtolower(str_replace(' ', '', sanitize_title_with_dashes($product_info->name)));
 
-		$plan_id = sprintf('%s-%s-%s', $product_name, $product_info->price, $product_info->duration . $product_info->duration_unit);
+		$plan_id = sprintf('%s-%s-%s-%s', $product_name, $product_info->price, $product_info->currency, $product_info->duration . $product_info->duration_unit);
 
 		$plan_id = preg_replace('/[^a-z0-9_\-]/', '-', $plan_id);
 
@@ -2071,6 +2398,11 @@ class Base_Stripe_Gateway extends Base_Gateway {
 		} // end if;
 
 		$customer_id = $customer->get_id();
+
+		/**
+		 * Ensure the correct api keys are set
+		 */
+		$this->setup_api_keys();
 
 		try {
 			/*

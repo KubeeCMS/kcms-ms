@@ -20,8 +20,7 @@ use WP_Ultimo\Dependencies\phpDocumentor\Reflection\Type;
  */
 final class InterfaceString implements Type
 {
-    /** @var Fqsen|null */
-    private $fqsen;
+    private ?Fqsen $fqsen;
     /**
      * Initializes this representation of a class string with the given Fqsen.
      */

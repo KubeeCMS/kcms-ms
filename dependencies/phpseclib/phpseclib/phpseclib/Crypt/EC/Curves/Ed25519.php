@@ -19,7 +19,7 @@ use phpseclib3\Math\BigInteger;
 use phpseclib3\Math\PrimeField\Integer;
 class Ed25519 extends TwistedEdwards
 {
-    const HASH = 'sha512';
+    public const HASH = 'sha512';
     /*
       Per https://tools.ietf.org/html/rfc8032#page-6 EdDSA has several parameters, one of which is b:
     
@@ -30,7 +30,7 @@ class Ed25519 extends TwistedEdwards
     
       SIZE corresponds to b
     */
-    const SIZE = 32;
+    public const SIZE = 32;
     public function __construct()
     {
         // 2^255 - 19

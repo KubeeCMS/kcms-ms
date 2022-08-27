@@ -157,6 +157,12 @@ function wu_stripe_update_styles(cardElement, selector) {
 
   }
 
+  if (document.getElementById('wu-stripe-styles')) {
+
+    return;
+
+  }
+
   const inputStyles = window.getComputedStyle(inputField);
 
   const styleTag = document.createElement('style');
@@ -183,7 +189,14 @@ function wu_stripe_update_styles(cardElement, selector) {
     'padding-right:' + inputStyles.getPropertyValue('padding-right') + ';' +
     'padding-bottom:' + inputStyles.getPropertyValue('padding-bottom') + ';' +
     'padding-left:' + inputStyles.getPropertyValue('padding-left') + ';' +
+    'line-height:' + inputStyles.getPropertyValue('height') + ';' +
+    'height:' + inputStyles.getPropertyValue('height') + ';' +
+    `display: flex;
+    flex-direction: column;
+    justify-content: center;` +
     '}';
+
+  styleTag.id = 'wu-stripe-styles';
 
   document.body.appendChild(styleTag);
 

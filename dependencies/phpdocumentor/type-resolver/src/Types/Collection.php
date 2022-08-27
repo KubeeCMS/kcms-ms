@@ -28,8 +28,7 @@ use WP_Ultimo\Dependencies\phpDocumentor\Reflection\Type;
  */
 final class Collection extends AbstractList
 {
-    /** @var Fqsen|null */
-    private $fqsen;
+    private ?Fqsen $fqsen;
     /**
      * Initializes this representation of an array with the given Type or Fqsen.
      */

@@ -18,8 +18,8 @@ use phpseclib3\Crypt\Random;
 use phpseclib3\Math\BigInteger;
 class Ed448 extends TwistedEdwards
 {
-    const HASH = 'shake256-912';
-    const SIZE = 57;
+    public const HASH = 'shake256-912';
+    public const SIZE = 57;
     public function __construct()
     {
         // 2^448 - 2^224 - 1

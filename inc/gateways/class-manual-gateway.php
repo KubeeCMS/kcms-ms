@@ -17,6 +17,7 @@ namespace WP_Ultimo\Gateways;
 
 use \WP_Ultimo\Gateways\Base_Gateway;
 use \WP_Ultimo\Database\Memberships\Membership_Status;
+use \WP_Ultimo\Database\Payments\Payment_Status;
 
 // Exit if accessed directly
 defined('ABSPATH') || exit;
@@ -250,6 +251,15 @@ class Manual_Gateway extends Base_Gateway {
 		if (is_wp_error($status)) {
 
 			throw new \Exception($status->get_error_message(), $status->get_error_code());
+
+		} // end if;
+
+		// In case of trials with payment method
+		if ($payment->get_total() === 0.00) {
+
+			$payment->set_status(Payment_Status::COMPLETED);
+
+			$payment->save();
 
 		} // end if;
 

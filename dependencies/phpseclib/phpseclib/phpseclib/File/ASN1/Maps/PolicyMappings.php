@@ -21,5 +21,5 @@ use phpseclib3\File\ASN1;
  */
 abstract class PolicyMappings
 {
-    const MAP = ['type' => ASN1::TYPE_SEQUENCE, 'min' => 1, 'max' => -1, 'children' => ['type' => ASN1::TYPE_SEQUENCE, 'children' => ['issuerDomainPolicy' => \phpseclib3\File\ASN1\Maps\CertPolicyId::MAP, 'subjectDomainPolicy' => \phpseclib3\File\ASN1\Maps\CertPolicyId::MAP]]];
+    public const MAP = ['type' => ASN1::TYPE_SEQUENCE, 'min' => 1, 'max' => -1, 'children' => ['type' => ASN1::TYPE_SEQUENCE, 'children' => ['issuerDomainPolicy' => \phpseclib3\File\ASN1\Maps\CertPolicyId::MAP, 'subjectDomainPolicy' => \phpseclib3\File\ASN1\Maps\CertPolicyId::MAP]]];
 }

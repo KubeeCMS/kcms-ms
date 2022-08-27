@@ -3,7 +3,7 @@
 /**
  * Pure-PHP implementation of AES.
  *
- * Uses mcrypt, if available/possible, and an internal implementation, otherwise.
+ * Uses OpenSSL, if available/possible, and an internal implementation, otherwise
  *
  * PHP version 5
  *

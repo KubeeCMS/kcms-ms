@@ -1808,6 +1808,27 @@ class Membership extends Base_Model {
 	} // end get_last_pending_payment;
 
 	/**
+	 * Returns the published sites attached to this membership.
+	 *
+	 * @since 2.0.18
+	 * @return array
+	 */
+	public function get_published_sites() {
+
+		$sites = Site::query(array(
+			'meta_query' => array(
+				'customer_id' => array(
+					'key'   => 'wu_membership_id',
+					'value' => $this->get_id(),
+				),
+			),
+		));
+
+		return $sites;
+
+	} // end get_published_sites;
+
+	/**
 	 * Returns the sites attached to this membership.
 	 *
 	 * @since 2.0.0
@@ -2414,7 +2435,7 @@ class Membership extends Base_Model {
 
 		} // end if;
 
-		$limit = $limit === '' ? PHP_INT_MAX : $limit;
+		$limit = $limit === '' ? 1 : $limit;
 
 		return $limit - count($this->get_sites());
 
@@ -2433,6 +2454,18 @@ class Membership extends Base_Model {
 	} // end has_remaining_sites;
 
 	/**
+	 * Checks if the current membership has remaining sites available.
+	 *
+	 * @since 2.0.18
+	 * @return boolean
+	 */
+	protected function is_trialing() {
+
+		return $this->get_date_trial_end() > gmdate('Y-m-d 23:59:59');
+
+	} // end is_trialing;
+
+	/**
 	 * Save (create or update) the model on the database.
 	 *
 	 * @since 2.0.0
@@ -2441,7 +2474,16 @@ class Membership extends Base_Model {
 	 */
 	public function save() {
 
-		$saved = parent::save();
+		// Set trial status if needed
+		if ($this->get_status() === Membership_Status::PENDING && $this->is_trialing()) {
+
+			if (!wu_get_setting('enable_email_verification', true) || $this->get_customer()->get_email_verification() !== 'pending') {
+
+				$this->set_status(Membership_Status::TRIALING);
+
+			} // end if;
+
+		} // end if;
 
 		if ($this->has_product_changes()) {
 
@@ -2472,7 +2514,7 @@ class Membership extends Base_Model {
 
 		} // end if;
 
-		return $saved;
+		return parent::save();
 
 	} // end save;
 

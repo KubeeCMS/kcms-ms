@@ -68,7 +68,9 @@ trait Creator
         // Work-around for PHP bug https://bugs.php.net/bug.php?id=67127
         if (!\str_contains((string) 0.1, '.')) {
             $locale = \setlocale(\LC_NUMERIC, '0');
+            // @codeCoverageIgnore
             \setlocale(\LC_NUMERIC, 'C');
+            // @codeCoverageIgnore
         }
         try {
             parent::__construct($time ?: 'now', static::safeCreateDateTimeZone($tz) ?: null);
@@ -78,6 +80,7 @@ trait Creator
         $this->constructedObjectId = \spl_object_hash($this);
         if (isset($locale)) {
             \setlocale(\LC_NUMERIC, $locale);
+            // @codeCoverageIgnore
         }
         self::setLastErrors(parent::getLastErrors());
     }

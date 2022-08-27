@@ -31,4 +31,4 @@ final class False_ extends Boolean implements PseudoType
         return 'false';
     }
 }
-class_alias('WP_Ultimo\\Dependencies\\phpDocumentor\\Reflection\\PseudoTypes\\False_', 'WP_Ultimo\\Dependencies\\phpDocumentor\\Reflection\\Types\\False_', \false);
+class_alias(False_::class, 'WP_Ultimo\\Dependencies\\phpDocumentor\\Reflection\\Types\\False_', \false);

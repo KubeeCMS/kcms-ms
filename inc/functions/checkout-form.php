@@ -78,6 +78,16 @@ function wu_get_checkout_form_by_slug($checkout_form_slug) {
 
 		return $checkout_form;
 
+	} elseif ($checkout_form_slug === 'wu-finish-checkout') {
+
+		$checkout_form = new \WP_Ultimo\Models\Checkout_Form;
+
+		$checkout_fields = Checkout_Form::finish_checkout_form_fields();
+
+		$checkout_form->set_settings($checkout_fields);
+
+		return $checkout_form;
+
 	} // end if;
 
 	return \WP_Ultimo\Models\Checkout_Form::get_by('slug', $checkout_form_slug);

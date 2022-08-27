@@ -2980,7 +2980,7 @@ EOL;
         $lowercasedName = \strtolower($normalizedName);
         // Special functions overriding a CSS function are case-insensitive. We normalize them as lowercase
         // to avoid the deprecation warning about the wrong case being used.
-        if ($lowercasedName === 'min' || $lowercasedName === 'max') {
+        if ($lowercasedName === 'min' || $lowercasedName === 'max' || $lowercasedName === 'rgb' || $lowercasedName === 'rgba' || $lowercasedName === 'hsl' || $lowercasedName === 'hsla') {
             $normalizedName = $lowercasedName;
         }
         if (($f = $this->getBuiltinFunction($normalizedName)) && \is_callable($f)) {
@@ -6529,7 +6529,7 @@ EOL;
     private function libNth($args)
     {
         $list = $this->coerceList($args[0], ',', \false);
-        $n = $this->assertNumber($args[1])->getDimension();
+        $n = $this->assertInteger($args[1]);
         if ($n > 0) {
             $n--;
         } elseif ($n < 0) {
@@ -6541,7 +6541,7 @@ EOL;
     private function libSetNth($args)
     {
         $list = $this->coerceList($args[0]);
-        $n = $this->assertNumber($args[1])->getDimension();
+        $n = $this->assertInteger($args[1]);
         if ($n > 0) {
             $n--;
         } elseif ($n < 0) {

@@ -304,13 +304,7 @@ class PayPal_Gateway extends Base_Gateway {
 		/*
 		 * Sets the cancel URL.
 		 */
-		$cancel_url = wp_get_referer();
-
-		if (empty($cancel_url)) {
-
-			$cancel_url = add_query_arg('cancel', '1', home_url());
-
-		} // end if;
+		$cancel_url = $this->get_cancel_url();
 
 		$url = wu_get_current_url();
 
@@ -326,10 +320,7 @@ class PayPal_Gateway extends Base_Gateway {
 		 * Calculates the return URL
 		 * for the intermediary return URL.
 		 */
-		$return_url = add_query_arg(array(
-			'wu-confirm' => 'paypal',
-			'payment-id' => urlencode($this->payment->get_id()),
-		), $url);
+		$return_url = $this->get_confirm_url();
 
 		/*
 		 * Setup variables

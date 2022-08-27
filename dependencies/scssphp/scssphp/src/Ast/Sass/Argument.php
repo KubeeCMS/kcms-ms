@@ -12,6 +12,7 @@
 namespace WP_Ultimo\Dependencies\ScssPhp\ScssPhp\Ast\Sass;
 
 use WP_Ultimo\Dependencies\ScssPhp\ScssPhp\SourceSpan\FileSpan;
+use WP_Ultimo\Dependencies\ScssPhp\ScssPhp\Util;
 use WP_Ultimo\Dependencies\ScssPhp\ScssPhp\Util\SpanUtil;
 /**
  * An argument declared as part of an {@see ArgumentDeclaration}.
@@ -44,6 +45,20 @@ final class Argument implements SassNode, SassDeclaration
     public function getName() : string
     {
         return $this->name;
+    }
+    /**
+     * The variable name as written in the document, without underscores
+     * converted to hyphens and including the leading `$`.
+     *
+     * This isn't particularly efficient, and should only be used for error
+     * messages.
+     */
+    public function getOriginalName() : string
+    {
+        if ($this->defaultValue === null) {
+            return $this->span->getText();
+        }
+        return Util::declarationName($this->span);
     }
     public function getNameSpan() : FileSpan
     {

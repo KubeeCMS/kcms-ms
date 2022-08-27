@@ -12,6 +12,7 @@ namespace WP_Ultimo\UI;
 use \WP_Ultimo\UI\Base_Element;
 use \WP_Ultimo\Dependencies\ScssPhp\ScssPhp\Compiler;
 use \WP_Ultimo\Dependencies\Arrch\Arrch as Array_Search;
+use \WP_Ultimo\Database\Memberships\Membership_Status;
 
 // Exit if accessed directly
 defined('ABSPATH') || exit;
@@ -175,9 +176,10 @@ class Checkout_Element extends Base_Element {
 	public function defaults() {
 
 		return array(
-			'slug'          => 'main-form',
-			'step'          => false,
-			'display_title' => false,
+			'slug'                   => 'main-form',
+			'step'                   => false,
+			'display_title'          => false,
+			'membership_limitations' => array(),
 		);
 
 	} // end defaults;
@@ -281,6 +283,202 @@ class Checkout_Element extends Base_Element {
 		$atts['step'] = wu_request('step', $atts['step']);
 
 		$slug = $atts['slug'];
+
+		$customer = wu_get_current_customer();
+
+		if ($customer && $slug !== 'wu-finish-checkout') {
+
+			$membership = WP_Ultimo()->currents->get_membership();
+
+			$published_sites = $membership->get_published_sites();
+
+			$pending_payment = $membership ? $membership->get_last_pending_payment() : false;
+
+			if ($pending_payment && !$membership->is_active() && $membership->get_status() !== Membership_Status::TRIALING) {
+				/**
+				 *  We are talking about membership with a pending payment
+				 */
+
+				// Translators: Placeholder receives the customer display name
+				$message = sprintf(__('Hi %s. You have a pending payment for your membership!', 'wp-ultimo'), $customer->get_display_name());
+
+				$payment_url = add_query_arg(array(
+					'payment' => $pending_payment->get_hash(),
+				), wu_get_registration_url());
+
+				// Translators: The link to registration url with payment hash
+				$message .= '<br>' . sprintf(__('Click <a href="%s">here</a> to pay.', 'wp-ultimo'), $payment_url);
+
+				$message = '<p>' . $message . '</p>';
+
+				/**
+				 * Allow developers to change the message if membership have a pending payment
+				 *
+				 * @param string                      $message    The HTML message to print in screen.
+				 * @param WP_Ultimo\Models\Membership $membership The membership in use.
+				 * @param WP_Ultimo\Models\Customer   $customer   The active customer in use.
+				 */
+				return apply_filters('wu_checkout_pending_payment_error_message', $message, $membership, $customer);
+
+			} // end if;
+
+			if (!wu_multiple_memberships_enabled() && $membership) {
+
+				/**
+				 * Allow developers to add new form slugs to bypass this behaviour.
+				 *
+				 * @param array $slugs a list of form slugs to bypass.
+				 */
+				$allowed_forms = apply_filters('wu_get_membership_allowed_forms', array(
+					'wu-checkout',
+					'wu-add-new-site',
+				));
+
+				if (!in_array($slug, $allowed_forms, true) && !wu_request('payment')) {
+
+					$message = sprintf('<p>%s</p>', __('You already have a membership!', 'wp-ultimo'));
+
+					if (isset($published_sites[0])) {
+
+						$account_link = get_admin_url($published_sites[0]->get_id(), 'admin.php?page=account');
+						$button_text  = __('Go to my account', 'wp-ultimo');
+
+						$message .= "<p><a class=\"wu-no-underline button button-primary\" href=\"$account_link\">$button_text</a><p>";
+
+					} // end if;
+
+					/**
+					 * Allow developers to change the message about the limitation of a single membership for customer.
+					 *
+					 * @param string                      $message    The HTML message to print in screen.
+					 * @param WP_Ultimo\Models\Customer   $customer   The active customer in use.
+					 */
+					return apply_filters('wu_checkout_single_membership_message', $message, $customer);
+
+				} // end if;
+
+			} // end if;
+
+			if ($membership && $membership->get_customer_id() !== $customer->get_id()) {
+
+				$message = sprintf('<p>%s</p>', __('You are not allowed to change this membership!', 'wp-ultimo'));
+
+				/**
+				 * Allow developers to change the message if customer is not part of the membership
+				 *
+				 * @param string                      $message    The HTML message to print in screen.
+				 * @param WP_Ultimo\Models\Membership $membership The membership in use.
+				 * @param WP_Ultimo\Models\Customer   $customer   The active customer in use.
+				 */
+				return apply_filters('wu_checkout_customer_error_message', $message, $membership, $customer);
+
+			} // end if;
+
+			/**
+			 *  Now we filter the current membership for each membership_limitations
+			 *  field in element atts to check if we can show the form, if not we show
+			 *  a error message informing the user about and with buttons to allow
+			 *  account upgrade and/or to buy a new membership.
+			 */
+			if ($membership && !empty($atts['membership_limitations'])) {
+
+				$limits = $membership->get_limitations();
+
+				foreach ($atts['membership_limitations'] as $limitation) {
+
+					if (!method_exists($membership, "get_$limitation")) {
+
+						continue;
+
+					} // end if;
+
+					$current_limit = $limits->{$limitation};
+
+					$limit_max = $current_limit->is_enabled() ? $current_limit->get_limit() : PHP_INT_MAX;
+
+					$limit_max = !empty($limit_max) ? (int) $limit_max : 1;
+
+					$used_limit = $membership->{"get_$limitation"}();
+
+					$used_limit = is_array($used_limit) ? count($used_limit) : (int) $used_limit;
+
+					if ($used_limit >= $limit_max) {
+
+						// Translators: Placeholder receives the limit name
+						$message = '<p>' . sprintf(__('You reached your membership %s limit!', 'wp-ultimo'), $limitation) . '</p>';
+
+						if (wu_multiple_memberships_enabled()) {
+
+							$register_page = wu_get_registration_url();
+							$button_text   = __('Buy a new membership', 'wp-ultimo');
+
+							$message .= "<p><a class=\"wu-no-underline button button-primary\" href=\"$register_page\">$button_text</a><p>";
+
+						} // end if;
+
+						if ($limitation !== 'sites' || wu_get_setting('enable_multiple_sites')) {
+
+							$update_link = '';
+
+							if (!is_admin()) {
+
+								$update_link = admin_url('admin.php?page=wu-checkout&membership=' . $membership->get_hash());
+
+							} else {
+
+								if (isset($published_sites[0])) {
+
+									$update_link = get_admin_url($published_sites[0]->get_id(), 'admin.php?page=wu-checkout&membership=' . $membership->get_hash());
+
+								} // end if;
+
+							} // end if;
+
+							if (!empty($update_link)) {
+
+								$button_text = __('Upgrade your account', 'wp-ultimo');
+
+								$message .= "<p><a class=\"wu-no-underline button button-primary\" href=\"$update_link\">$button_text</a><p>";
+
+							} // end if;
+
+						} // end if;
+
+						/**
+						 * Allow developers to change the message about the membership limit
+						 *
+						 * @param string                      $message    The HTML message to print in screen.
+						 * @param string                      $limitation The limitation name.
+						 * @param int                         $limit_max  The allowed limit.
+						 * @param int                         $used_limit The limit used in membership.
+						 * @param WP_Ultimo\Models\Membership $membership The membership in use.
+						 * @param WP_Ultimo\Models\Customer   $customer   The active customer in use.
+						 */
+						return apply_filters('wu_checkout_membership_limit_message', $message, $limitation, $limit_max, $used_limit, $membership, $customer);
+
+					} // end if;
+
+				} // end foreach;
+
+			} // end if;
+
+		} elseif (!$customer && $slug === 'wu-finish-checkout') {
+
+			$message = __('You need to be logged in to complete a payment', 'wp-ultimo');
+
+			// Translators: The link to login url with redirect_to url
+			$message .= '<br>' . sprintf(__('Click <a href="%s">here</a> sign in.', 'wp-ultimo'), wp_login_url(wu_get_current_url()));
+
+			$message = '<p>' . $message . '</p>';
+
+			/**
+			 * Allow developers to change the message
+			 *
+			 * @param string $message The HTML message to print in screen.
+			 */
+			return apply_filters('wu_checkout_payment_login_error_message', $message);
+
+		} // end if;
 
 		$checkout_form = wu_get_checkout_form_by_slug($slug);
 
@@ -490,6 +688,25 @@ class Checkout_Element extends Base_Element {
 		if ($this->is_thank_you_page()) {
 
 			return $this->output_thank_you($atts, $content);
+
+		} // end if;
+
+		/**
+		 * Allow developers to add new update form slugs.
+		 *
+		 * @param array $slugs a list of form slugs to bypass.
+		 */
+		$update_forms = apply_filters('wu_membership_update_forms', array(
+			'wu-checkout',
+		));
+
+		if (!in_array($atts['slug'], $update_forms, true) && wu_request('payment') || wu_request('payment_id')) {
+
+			$atts = array(
+				'slug'          => 'wu-finish-checkout',
+				'step'          => false,
+				'display_title' => false,
+			);
 
 		} // end if;
 

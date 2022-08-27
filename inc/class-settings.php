@@ -286,11 +286,22 @@ class Settings {
 
 		} // end foreach;
 
+		/**
+		 * Allow developers to filter settings before save by WP Ultimo.
+		 *
+		 * @since 2.0.18
+		 *
+		 * @param array  $settings         The settings to be saved.
+		 * @param array  $settings_to_save The new settings to add.
+		 * @param string $saved_settings   The current settings saved.
+		 */
+		$settings = apply_filters('wu_pre_save_settings', $settings, $settings_to_save, $saved_settings);
+
 		wu_save_option(Settings::KEY, $settings);
 
-		do_action('wu_after_save_settings', $settings, $settings_to_save, $saved_settings);
-
 		$this->settings = $settings;
+
+		do_action('wu_after_save_settings', $settings, $settings_to_save, $saved_settings);
 
 		return $settings;
 

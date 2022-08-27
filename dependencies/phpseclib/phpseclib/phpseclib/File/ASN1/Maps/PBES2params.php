@@ -23,5 +23,5 @@ use phpseclib3\File\ASN1;
  */
 abstract class PBES2params
 {
-    const MAP = ['type' => ASN1::TYPE_SEQUENCE, 'children' => ['keyDerivationFunc' => \phpseclib3\File\ASN1\Maps\AlgorithmIdentifier::MAP, 'encryptionScheme' => \phpseclib3\File\ASN1\Maps\AlgorithmIdentifier::MAP]];
+    public const MAP = ['type' => ASN1::TYPE_SEQUENCE, 'children' => ['keyDerivationFunc' => \phpseclib3\File\ASN1\Maps\AlgorithmIdentifier::MAP, 'encryptionScheme' => \phpseclib3\File\ASN1\Maps\AlgorithmIdentifier::MAP]];
 }

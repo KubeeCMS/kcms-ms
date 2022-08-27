@@ -23,5 +23,5 @@ use phpseclib3\File\ASN1;
  */
 abstract class SpecifiedECDomain
 {
-    const MAP = ['type' => ASN1::TYPE_SEQUENCE, 'children' => ['version' => ['type' => ASN1::TYPE_INTEGER, 'mapping' => [1 => 'ecdpVer1', 'ecdpVer2', 'ecdpVer3']], 'fieldID' => \phpseclib3\File\ASN1\Maps\FieldID::MAP, 'curve' => \phpseclib3\File\ASN1\Maps\Curve::MAP, 'base' => \phpseclib3\File\ASN1\Maps\ECPoint::MAP, 'order' => ['type' => ASN1::TYPE_INTEGER], 'cofactor' => ['type' => ASN1::TYPE_INTEGER, 'optional' => \true], 'hash' => ['optional' => \true] + \phpseclib3\File\ASN1\Maps\HashAlgorithm::MAP]];
+    public const MAP = ['type' => ASN1::TYPE_SEQUENCE, 'children' => ['version' => ['type' => ASN1::TYPE_INTEGER, 'mapping' => [1 => 'ecdpVer1', 'ecdpVer2', 'ecdpVer3']], 'fieldID' => \phpseclib3\File\ASN1\Maps\FieldID::MAP, 'curve' => \phpseclib3\File\ASN1\Maps\Curve::MAP, 'base' => \phpseclib3\File\ASN1\Maps\ECPoint::MAP, 'order' => ['type' => ASN1::TYPE_INTEGER], 'cofactor' => ['type' => ASN1::TYPE_INTEGER, 'optional' => \true], 'hash' => ['optional' => \true] + \phpseclib3\File\ASN1\Maps\HashAlgorithm::MAP]];
 }

@@ -143,7 +143,7 @@ trait RedisTrait
             throw new InvalidArgumentException(\sprintf('Cannot use both "redis_cluster" and "redis_sentinel" at the same time: "%s".', $dsn));
         }
         if (null === $params['class'] && \extension_loaded('redis')) {
-            $class = $params['redis_cluster'] ? \RedisCluster::class : (1 < \count($hosts) ? \RedisArray::class : \Redis::class);
+            $class = $params['redis_cluster'] ? \RedisCluster::class : (1 < \count($hosts) && !isset($params['redis_sentinel']) ? \RedisArray::class : \Redis::class);
         } else {
             $class = $params['class'] ?? \WP_Ultimo\Dependencies\Predis\Client::class;
             if (isset($params['redis_sentinel']) && !\is_a($class, \WP_Ultimo\Dependencies\Predis\Client::class, \true) && !\class_exists(\RedisSentinel::class)) {
@@ -154,17 +154,24 @@ trait RedisTrait
             $connect = $params['persistent'] || $params['persistent_id'] ? 'pconnect' : 'connect';
             $redis = new $class();
             $initializer = static function ($redis) use($connect, $params, $dsn, $auth, $hosts, $tls) {
-                $host = $hosts[0]['host'] ?? $hosts[0]['path'];
-                $port = $hosts[0]['port'] ?? 0;
-                if (isset($hosts[0]['host']) && $tls) {
-                    $host = 'tls://' . $host;
-                }
-                if (isset($params['redis_sentinel'])) {
-                    $sentinel = new \RedisSentinel($host, $port, $params['timeout'], (string) $params['persistent_id'], $params['retry_interval'], $params['read_timeout']);
-                    if (!($address = $sentinel->getMasterAddrByName($params['redis_sentinel']))) {
-                        throw new InvalidArgumentException(\sprintf('Failed to retrieve master information from master name "%s" and address "%s:%d".', $params['redis_sentinel'], $host, $port));
+                $hostIndex = 0;
+                do {
+                    $host = $hosts[$hostIndex]['host'] ?? $hosts[$hostIndex]['path'];
+                    $port = $hosts[$hostIndex]['port'] ?? 0;
+                    $address = \false;
+                    if (isset($hosts[$hostIndex]['host']) && $tls) {
+                        $host = 'tls://' . $host;
                     }
-                    [$host, $port] = $address;
+                    if (!isset($params['redis_sentinel'])) {
+                        break;
+                    }
+                    $sentinel = new \RedisSentinel($host, $port, $params['timeout'], (string) $params['persistent_id'], $params['retry_interval'], $params['read_timeout']);
+                    if ($address = $sentinel->getMasterAddrByName($params['redis_sentinel'])) {
+                        [$host, $port] = $address;
+                    }
+                } while (++$hostIndex < \count($hosts) && !$address);
+                if (isset($params['redis_sentinel']) && !$address) {
+                    throw new InvalidArgumentException(\sprintf('Failed to retrieve master information from sentinel "%s" and dsn "%s".', $params['redis_sentinel'], $dsn));
                 }
                 try {
                     @$redis->{$connect}($host, $port, $params['timeout'], (string) $params['persistent_id'], $params['retry_interval'], $params['read_timeout'], ...\defined('Redis::SCAN_PREFIX') ? [['stream' => $params['ssl'] ?? null]] : []);

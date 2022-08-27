@@ -11,6 +11,7 @@
  */
 namespace WP_Ultimo\Dependencies\ScssPhp\ScssPhp\Ast\Sass\Expression;
 
+use WP_Ultimo\Dependencies\ScssPhp\ScssPhp\Ast\Sass\ArgumentDeclaration;
 use WP_Ultimo\Dependencies\ScssPhp\ScssPhp\Ast\Sass\ArgumentInvocation;
 use WP_Ultimo\Dependencies\ScssPhp\ScssPhp\Ast\Sass\CallableInvocation;
 use WP_Ultimo\Dependencies\ScssPhp\ScssPhp\Ast\Sass\Expression;
@@ -39,10 +40,24 @@ final class IfExpression implements Expression, CallableInvocation
      * @readonly
      */
     private $span;
+    /**
+     * @var ArgumentDeclaration|null
+     */
+    private static $declaration;
     public function __construct(ArgumentInvocation $arguments, FileSpan $span)
     {
         $this->span = $span;
         $this->arguments = $arguments;
+    }
+    /**
+     * The declaration of `if()`, as though it were a normal function.
+     */
+    public static function getDeclaration() : ArgumentDeclaration
+    {
+        if (self::$declaration === null) {
+            self::$declaration = ArgumentDeclaration::parse('@function if($condition, $if-true, $if-false) {');
+        }
+        return self::$declaration;
     }
     public function getArguments() : ArgumentInvocation
     {

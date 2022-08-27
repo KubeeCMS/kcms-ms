@@ -97,12 +97,6 @@ function wu_get_broadcast_targets($broadcast_id, $type) {
 
 	$targets = $object->get_message_targets();
 
-	if (!is_array($targets)) {
-
-		return array();
-
-	} // end if;
-
 	if (is_array($targets[$type])) {
 
 		return $targets[$type];

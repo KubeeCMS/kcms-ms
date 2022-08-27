@@ -27,7 +27,7 @@
         <div class="wu-ml-auto">
 
           <a 
-            title="<?php esc_attr_e('Update Billing Address', 'wp-ultimo'); ?>" 
+            title="<?php esc_attr_e('Update your membership', 'wp-ultimo'); ?>" 
             class="wu-text-sm wu-no-underline button" 
             href="<?php echo esc_attr($element->get_upgrade_form_url($membership->get_hash())); ?>"
           >

@@ -98,10 +98,9 @@ abstract class PKCS1 extends \phpseclib3\Crypt\Common\Formats\Keys\PKCS
      * Break a public or private key down into its constituent components
      *
      * @param string|array $key
-     * @param string|false $password
      * @return array|string
      */
-    protected static function load($key, $password = '')
+    protected static function load($key, ?string $password = null)
     {
         if (!Strings::is_stringable($key)) {
             throw new \UnexpectedValueException('Key should be a string - not a ' . \gettype($key));

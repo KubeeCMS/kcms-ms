@@ -2,9 +2,9 @@
 # This file is distributed under the GPL2.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Ultimo 2.0.17\n"
+"Project-Id-Version: WP Ultimo 2.0.18\n"
 "Report-Msgid-Bugs-To: arindo+translation@wpultimo.com\n"
-"POT-Creation-Date: 2022-07-04 20:10:11+00:00\n"
+"POT-Creation-Date: 2022-08-05 18:05:46+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,7 +24,7 @@ msgstr ""
 "X-Textdomain-Support: yes\n"
 "X-Generator: grunt-wp-i18n 1.0.3\n"
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:506
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:489
 msgid "100"
 msgstr ""
 
@@ -114,8 +114,8 @@ msgstr ""
 msgid "Growth & Scaling"
 msgstr ""
 
-#: inc/admin-pages/class-addons-admin-page.php:507 inc/class-settings.php:1172
-#: inc/class-settings.php:1173
+#: inc/admin-pages/class-addons-admin-page.php:507 inc/class-settings.php:1183
+#: inc/class-settings.php:1184
 msgid "Integrations"
 msgstr ""
 
@@ -181,7 +181,7 @@ msgid "Exit Customize Mode"
 msgstr ""
 
 #: inc/admin-pages/class-broadcast-edit-admin-page.php:94
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1358
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1343
 #: inc/admin-pages/class-customer-edit-admin-page.php:628
 #: inc/admin-pages/class-discount-code-edit-admin-page.php:235
 #: inc/admin-pages/class-domain-edit-admin-page.php:265
@@ -204,7 +204,7 @@ msgid "Broadcast Type"
 msgstr ""
 
 #: inc/admin-pages/class-broadcast-edit-admin-page.php:110
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1200
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1185
 #: inc/admin-pages/class-payment-edit-admin-page.php:655
 #: inc/list-tables/class-broadcast-list-table.php:433
 #: inc/list-tables/class-event-list-table.php:217
@@ -319,7 +319,7 @@ msgstr ""
 #: inc/admin-pages/class-broadcast-edit-admin-page.php:351
 #: inc/admin-pages/class-edit-admin-page.php:501
 #: inc/admin-pages/class-tax-rates-admin-page.php:187
-#: inc/checkout/class-checkout.php:1548 views/base/addons.php:252
+#: inc/checkout/class-checkout.php:1562 views/base/addons.php:252
 #: views/base/edit/widget-tabs.php:104
 #: views/dashboard-statistics/widget-mrr-growth.php:14
 #: views/dashboard-statistics/widget-tax-graph.php:14
@@ -363,7 +363,7 @@ msgid "Delete Broadcast"
 msgstr ""
 
 #: inc/admin-pages/class-broadcast-edit-admin-page.php:413
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1488
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1473
 #: inc/admin-pages/class-customer-edit-admin-page.php:863
 #: inc/admin-pages/class-discount-code-edit-admin-page.php:586
 #: inc/admin-pages/class-domain-edit-admin-page.php:435
@@ -461,10 +461,10 @@ msgid "Enter a title for your broadcast."
 msgstr ""
 
 #: inc/admin-pages/class-broadcast-list-admin-page.php:382
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:910
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:895
 #: inc/admin-pages/class-email-template-customize-admin-page.php:242
 #: inc/admin-pages/class-placeholders-admin-page.php:113
-#: inc/checkout/signup-fields/class-base-signup-field.php:532
+#: inc/checkout/signup-fields/class-base-signup-field.php:544
 #: inc/list-tables/class-broadcast-list-table.php:434
 #: inc/list-tables/class-email-list-table.php:215
 #: inc/ui/class-simple-text-element.php:131
@@ -516,11 +516,11 @@ msgstr ""
 msgid "System Emails"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:164
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:133
 msgid "Generate Shortcode"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:209
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:178
 #: inc/admin-pages/class-email-list-admin-page.php:233
 #: inc/admin-pages/class-email-list-admin-page.php:609
 #: inc/admin-pages/class-email-list-admin-page.php:631
@@ -530,214 +530,214 @@ msgstr ""
 msgid "Something wrong happened."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:257
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:226
 msgid "Step Separator"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:411
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:394
 msgid "Field"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:412
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:395
 msgid "Additional Settings"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:413
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:912
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:396
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:897
 #: inc/admin-pages/class-email-edit-admin-page.php:297
 msgid "Style"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:423
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:406
 msgid "Field Type"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:424
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:407
 msgid "Select the type of field you want to add to the checkout form."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:441
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:424
 msgid "&larr; Back to Field Type Selection"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:460
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:443
 msgid "Pre-fill from Request"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:461
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:444
 msgid ""
 "The key is the field slug. If your field has the slug \"my-color\" for "
 "example, adding ?my-color=blue will pre-fill this field with the value "
 "\"blue\"."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:462
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:445
 msgid ""
 "Enable this to allow this field to be pre-filled based on the request "
 "parameters."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:478
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:461
 msgid "Field Visibility"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:479
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:462
 msgid "Select the visibility of this field."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:481
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:981
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:464
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:966
 msgid "Always show"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:482
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:982
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:465
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:967
 msgid "Only show for logged in users"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:483
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:983
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:466
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:968
 msgid "Only show for guests"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:505
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:488
 msgid "Wrapper Width"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:507
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:490
 msgid "Set the width of this field wrapper (in %)."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:522
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:505
 msgid "Wrapper CSS Classes"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:523
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:538
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:506
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:521
 msgid "e.g. custom-field example-class"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:524
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:507
 msgid ""
 "You can enter multiple CSS classes separated by spaces. These will be "
 "applied to the field wrapper element."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:537
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:520
 msgid "Field CSS Classes"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:539
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:522
 msgid ""
 "You can enter multiple CSS classes separated by spaces. These will be "
 "applied to the field element itself, when possible."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:600
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:583
 msgid "Add Field"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:600
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:583
 msgid "Save Field"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:763
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:748
 #: inc/compat/class-legacy-shortcodes.php:341
 #: inc/models/class-checkout-form.php:784
 #: views/legacy/signup/pricing-table/frequency-selector.php:31
 msgid "Monthly"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:825
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1090
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:810
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1075
 msgid "The checkout form could not be found."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:911
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:896
 #: views/limitations/plugin-selector.php:61
 #: views/limitations/theme-selector.php:65
 msgid "Visibility"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:919
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:904
 msgid "Step ID"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:920
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:905
 msgid "e.g. step-name"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:921
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:906
 msgid "This will be used on the URL. Only alpha-numeric and hyphens allowed."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:943
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:928
 msgid "Step Title"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:944
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:929
 msgid "e.g. My Extra Step"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:945
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:961
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:930
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:946
 msgid "Mostly used internally, but made available for templates."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:959
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:944
 msgid "Step Description"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:960
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:945
 msgid "e.g. This is the last step!"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:978
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:963
 msgid "Logged Status"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:979
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:964
 msgid "Select the visibility of this step."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:997
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:982
 msgid "Element ID"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:998
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:983
 msgid "myfield"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:999
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:984
 msgid "A custom ID to be added to the form element. Do not add the # symbol."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1012
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:997
 msgid "Extra CSS Classes"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1013
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:998
 msgid "custom-field example-class"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1014
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:999
 msgid "You can enter multiple CSS classes separated by spaces."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1028
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1013
 msgid "Add Step"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1028
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1013
 msgid "Save Step"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1198
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1183
 #: views/base/checkout-forms/js-templates.php:43
 msgid "Order"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1199
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1184
 #: inc/admin-pages/class-tax-rates-admin-page.php:114
 #: inc/checkout/signup-fields/class-signup-field-period-selection.php:261
 #: inc/checkout/signup-fields/class-signup-field-select.php:213
@@ -745,19 +745,19 @@ msgstr ""
 msgid "Label"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1201
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1186
 #: inc/admin-pages/class-email-edit-admin-page.php:152
 #: inc/list-tables/class-product-list-table.php:266
-#: inc/ui/class-checkout-element.php:124
+#: inc/ui/class-checkout-element.php:125
 #: views/base/checkout-forms/js-templates.php:126
 msgid "Slug"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1249
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1234
 msgid "Conversion Snippets"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1250
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1235
 msgid ""
 "Add custom snippets in HTML (with javascript support) to add conversion "
 "tracking pixels and such. This code is only run on the successful Thank You "
@@ -766,13 +766,13 @@ msgid ""
 "%%ORDER_AMOUNT%%"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1286
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1271
 #: inc/admin-pages/class-discount-code-edit-admin-page.php:224
 #: inc/admin-pages/class-email-edit-admin-page.php:282
 msgid "Advanced Options"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1293
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1278
 #: inc/ui/class-thank-you-element.php:154
 #: inc/ui/class-thank-you-element.php:205
 #: inc/ui/class-thank-you-element.php:224
@@ -781,68 +781,68 @@ msgstr ""
 msgid "Thank You"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1294
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1304
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1279
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1289
 msgid "Configure the Thank You page for this Checkout Form."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1303
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1288
 msgid "Scripts"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1313
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1298
 msgid "Custom CSS"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1314
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1299
 msgid "Add custom CSS code to your checkout form. SCSS syntax is supported."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1321
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1306
 msgid "Restrictions"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1322
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1307
 msgid "Control the access to this checkout form."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1330
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1315
 msgid "Restrict by Country"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1331
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1316
 msgid "Restrict this checkout form to specific countries."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1338
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1323
 msgid "Allowed Countries"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1339
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1324
 msgid "Select the allowed countries."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1340
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1325
 msgid "Type to search countries..."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1375
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1360
 msgid "Checkout Form Slug"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1376
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1361
 msgid "This is used to create shortcodes and more."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1389
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1374
 msgid ""
 "You are changing the form slug. If you save this change, all the shortcodes "
 "and blocks referencing this slug will stop working until you update them "
 "with the new slug."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1400
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1404
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1385
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1389
 #: inc/admin-pages/class-discount-code-edit-admin-page.php:360
 #: inc/admin-pages/class-discount-code-edit-admin-page.php:364
 #: inc/admin-pages/class-domain-edit-admin-page.php:318
@@ -866,84 +866,84 @@ msgstr ""
 msgid "Active"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1405
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1390
 msgid "Use this option to manually enable or disable this checkout form."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1414
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1399
 msgid "Welcome to the Checkout Form builder!"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1416
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1401
 msgid ""
 "You should be able to create registration forms in any way, shape, and form "
 "you desire. This editor allows you to do just that 😃"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1417
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1402
 msgid ""
 "Want a registration form with multiple steps? Check! A single step? Check! "
 "Control the visibility of certain steps and fields based on the context of "
 "the customer? Check!"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1422
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1407
 msgid "Adding new Steps"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1424
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1409
 msgid "To add a new step to the registration form, use this button here."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1433
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1418
 msgid "Adding new Fields"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1435
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1420
 msgid ""
 "To add a new field to a step, use this button here. You can add fields to "
 "capture additional data from your customers and use that data to populate "
 "site templates."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1436
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1421
 msgid "You can learn more about that here &rarr;"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1455
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1480
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1440
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1465
 msgid "Edit Checkout Form"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1455
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1481
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1440
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1466
 msgid "Add new Checkout Form"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1467
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1452
 msgid "Edit Checkout_Form"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1482
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1467
 msgid "Checkout Form updated with success!"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1483
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1468
 msgid "Enter Checkout Form Name"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1484
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1469
 #: inc/admin-pages/class-email-template-customize-admin-page.php:545
 #: inc/admin-pages/class-invoice-template-customize-admin-page.php:339
 #: inc/admin-pages/class-template-previewer-customize-admin-page.php:283
 msgid "This name is used for internal reference only."
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1485
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1470
 msgid "Save Checkout Form"
 msgstr ""
 
-#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1487
+#: inc/admin-pages/class-checkout-form-edit-admin-page.php:1472
 msgid "Delete Checkout Form"
 msgstr ""
 
@@ -1125,7 +1125,7 @@ msgstr ""
 #: inc/admin-pages/class-membership-list-admin-page.php:271
 #: inc/admin-pages/class-membership-list-admin-page.php:283
 #: inc/admin-pages/class-membership-list-admin-page.php:295
-#: inc/class-settings.php:782 inc/class-settings.php:783
+#: inc/class-settings.php:793 inc/class-settings.php:794
 #: inc/debug/class-debug.php:193
 #: inc/list-tables/class-customer-list-table.php:244
 #: inc/list-tables/class-membership-list-table-widget.php:41
@@ -1145,12 +1145,12 @@ msgstr ""
 #: inc/admin-pages/class-membership-edit-admin-page.php:391
 #: inc/admin-pages/class-product-edit-admin-page.php:608
 #: inc/admin-pages/class-template-previewer-customize-admin-page.php:128
-#: inc/class-settings.php:541 inc/class-settings.php:542
+#: inc/class-settings.php:552 inc/class-settings.php:553
 #: inc/ui/class-account-summary-element.php:116
 #: inc/ui/class-account-summary-element.php:117
 #: inc/ui/class-billing-info-element.php:146
 #: inc/ui/class-billing-info-element.php:147
-#: inc/ui/class-checkout-element.php:118 inc/ui/class-checkout-element.php:119
+#: inc/ui/class-checkout-element.php:119 inc/ui/class-checkout-element.php:120
 #: inc/ui/class-current-membership-element.php:151
 #: inc/ui/class-current-membership-element.php:152
 #: inc/ui/class-current-site-element.php:150
@@ -1214,8 +1214,8 @@ msgstr ""
 #: inc/admin-pages/class-payment-list-admin-page.php:233
 #: inc/admin-pages/class-payment-list-admin-page.php:245
 #: inc/admin-pages/class-payment-list-admin-page.php:257
-#: inc/admin-pages/class-top-admin-nav-menu.php:118 inc/class-settings.php:1048
-#: inc/class-settings.php:1049 inc/debug/class-debug.php:261
+#: inc/admin-pages/class-top-admin-nav-menu.php:118 inc/class-settings.php:1059
+#: inc/class-settings.php:1060 inc/debug/class-debug.php:261
 #: inc/list-tables/class-payment-list-table-widget.php:41
 #: inc/list-tables/class-payment-list-table.php:41 views/ui/jumper.php:67
 msgid "Payments"
@@ -1226,7 +1226,7 @@ msgstr ""
 #: inc/admin-pages/class-site-list-admin-page.php:513
 #: inc/admin-pages/class-site-list-admin-page.php:525
 #: inc/admin-pages/class-site-list-admin-page.php:537
-#: inc/class-settings.php:956 inc/class-settings.php:957
+#: inc/class-settings.php:967 inc/class-settings.php:968
 #: inc/debug/class-debug.php:210 inc/list-tables/class-site-list-table.php:44
 #: inc/managers/class-limitation-manager.php:310 inc/ui/class-jumper.php:253
 #: inc/ui/class-jumper.php:257 views/ui/jumper.php:63
@@ -4079,7 +4079,7 @@ msgstr ""
 #: inc/admin-pages/class-product-edit-admin-page.php:738
 #: inc/checkout/signup-fields/class-signup-field-period-selection.php:228
 #: inc/checkout/signup-fields/class-signup-field-select.php:197
-#: inc/class-settings.php:904
+#: inc/class-settings.php:915
 #: inc/list-tables/class-membership-line-item-list-table.php:140
 #: inc/list-tables/class-payment-line-item-list-table.php:82
 #: views/checkout/templates/order-bump/simple.php:51
@@ -4728,7 +4728,7 @@ msgid "Tell your customers what this site is about."
 msgstr ""
 
 #: inc/admin-pages/class-site-edit-admin-page.php:346
-#: inc/class-settings.php:962
+#: inc/class-settings.php:973
 msgid "Site Options"
 msgstr ""
 
@@ -4931,7 +4931,7 @@ msgstr ""
 #: inc/checkout/signup-fields/class-signup-field-site-title.php:72
 #: inc/models/class-checkout-form.php:527
 #: inc/models/class-checkout-form.php:620
-#: inc/models/class-checkout-form.php:1388
+#: inc/models/class-checkout-form.php:1453
 #: inc/ui/class-current-site-element.php:372
 msgid "Site Title"
 msgstr ""
@@ -5510,7 +5510,7 @@ msgid "Reset Password"
 msgstr ""
 
 #: inc/admin-pages/customer-panel/class-account-admin-page.php:428
-#: inc/gateways/class-paypal-gateway.php:618
+#: inc/gateways/class-paypal-gateway.php:609
 #: inc/list-tables/class-base-list-table.php:712
 #: inc/managers/class-form-manager.php:508
 #: inc/ui/class-billing-info-element.php:376
@@ -5559,9 +5559,9 @@ msgstr ""
 msgid "Account"
 msgstr ""
 
-#: inc/admin-pages/customer-panel/class-add-new-site-admin-page.php:196
-#: inc/admin-pages/customer-panel/class-add-new-site-admin-page.php:208
-#: inc/admin-pages/customer-panel/class-add-new-site-admin-page.php:220
+#: inc/admin-pages/customer-panel/class-add-new-site-admin-page.php:197
+#: inc/admin-pages/customer-panel/class-add-new-site-admin-page.php:209
+#: inc/admin-pages/customer-panel/class-add-new-site-admin-page.php:221
 msgid "Add New Site"
 msgstr ""
 
@@ -5574,7 +5574,8 @@ msgstr ""
 #: inc/models/class-checkout-form.php:593
 #: inc/models/class-checkout-form.php:720
 #: inc/models/class-checkout-form.php:964
-#: inc/models/class-checkout-form.php:1301 inc/ui/class-checkout-element.php:75
+#: inc/models/class-checkout-form.php:1228
+#: inc/models/class-checkout-form.php:1366 inc/ui/class-checkout-element.php:76
 msgid "Checkout"
 msgstr ""
 
@@ -6735,7 +6736,7 @@ msgid "The date when this webhook last fail."
 msgstr ""
 
 #: inc/api/trait-rest-api.php:191 inc/api/trait-rest-api.php:277
-#: inc/api/trait-rest-api.php:350 inc/models/class-base-model.php:657
+#: inc/api/trait-rest-api.php:350 inc/models/class-base-model.php:664
 #: inc/models/class-site.php:1618
 msgid "Item not found."
 msgstr ""
@@ -6789,7 +6790,7 @@ msgstr ""
 msgid "The membership in question was not found."
 msgstr ""
 
-#: inc/checkout/class-cart.php:616
+#: inc/checkout/class-cart.php:596
 msgid "The payment in question has an invalid status."
 msgstr ""
 
@@ -6899,22 +6900,22 @@ msgstr ""
 msgid "WP Ultimo - Site Blocked Page"
 msgstr ""
 
-#: inc/checkout/class-checkout.php:613 inc/checkout/class-checkout.php:627
-#: inc/checkout/class-checkout.php:2076 inc/checkout/class-checkout.php:2086
+#: inc/checkout/class-checkout.php:629 inc/checkout/class-checkout.php:643
+#: inc/checkout/class-checkout.php:2086 inc/checkout/class-checkout.php:2096
 msgid "Payment gateway not registered."
 msgstr ""
 
-#: inc/checkout/class-checkout.php:1024
+#: inc/checkout/class-checkout.php:1038
 msgid ""
 "Something wrong happened while attempting to save the customer billing "
 "address"
 msgstr ""
 
-#: inc/checkout/class-checkout.php:1549
+#: inc/checkout/class-checkout.php:1563
 msgid "The item was added!"
 msgstr ""
 
-#: inc/checkout/class-checkout.php:1550
+#: inc/checkout/class-checkout.php:1564
 msgid "The Password entered is too weak."
 msgstr ""
 
@@ -6937,8 +6938,8 @@ msgstr ""
 #: inc/checkout/class-legacy-checkout.php:704
 #: inc/checkout/signup-fields/class-signup-field-template-selection.php:151
 #: inc/models/class-checkout-form.php:855
-#: inc/models/class-checkout-form.php:1340
-#: inc/models/class-checkout-form.php:1357
+#: inc/models/class-checkout-form.php:1405
+#: inc/models/class-checkout-form.php:1422
 msgid "Template Selection"
 msgstr ""
 
@@ -6996,7 +6997,7 @@ msgstr ""
 #: inc/checkout/signup-fields/class-signup-field-site-url.php:72
 #: inc/models/class-checkout-form.php:537
 #: inc/models/class-checkout-form.php:630
-#: inc/models/class-checkout-form.php:1399
+#: inc/models/class-checkout-form.php:1464
 #: views/emails/admin/domain-created.php:78
 #: views/emails/admin/site-published.php:29
 msgid "Site URL"
@@ -7033,7 +7034,7 @@ msgid ""
 "alternatives such as \"url\" or \"website\"."
 msgstr ""
 
-#: inc/checkout/class-line-item.php:1143
+#: inc/checkout/class-line-item.php:1137
 #. translators: %1$s the duration, and %2$s the duration unit (day, week,
 #. month, etc)
 msgid "%2$s"
@@ -7041,138 +7042,138 @@ msgid_plural "every %1$s %2$s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/checkout/signup-fields/class-base-signup-field.php:322
+#: inc/checkout/signup-fields/class-base-signup-field.php:334
 msgid ""
 "This is a site-related field. For that reason, this field will not show up "
 "when no plans are present on the shopping cart."
 msgstr ""
 
-#: inc/checkout/signup-fields/class-base-signup-field.php:336
+#: inc/checkout/signup-fields/class-base-signup-field.php:348
 msgid ""
 "This is a customer-related field. For that reason, this field will not show "
 "up when the user is logged and already has a customer on file."
 msgstr ""
 
-#: inc/checkout/signup-fields/class-base-signup-field.php:469
+#: inc/checkout/signup-fields/class-base-signup-field.php:481
 msgid "Field ID"
 msgstr ""
 
-#: inc/checkout/signup-fields/class-base-signup-field.php:470
+#: inc/checkout/signup-fields/class-base-signup-field.php:482
 msgid "e.g. info-name"
 msgstr ""
 
-#: inc/checkout/signup-fields/class-base-signup-field.php:471
+#: inc/checkout/signup-fields/class-base-signup-field.php:483
 msgid "Only alpha-numeric and hyphens allowed."
 msgstr ""
 
-#: inc/checkout/signup-fields/class-base-signup-field.php:472
+#: inc/checkout/signup-fields/class-base-signup-field.php:484
 msgid "The ID of the field. This is used to reference the field."
 msgstr ""
 
-#: inc/checkout/signup-fields/class-base-signup-field.php:482
+#: inc/checkout/signup-fields/class-base-signup-field.php:494
 msgid "Field Label"
 msgstr ""
 
-#: inc/checkout/signup-fields/class-base-signup-field.php:483
+#: inc/checkout/signup-fields/class-base-signup-field.php:495
 msgid "e.g. Your Name"
 msgstr ""
 
-#: inc/checkout/signup-fields/class-base-signup-field.php:484
+#: inc/checkout/signup-fields/class-base-signup-field.php:496
 msgid "This is what your customer see as the field title."
 msgstr ""
 
-#: inc/checkout/signup-fields/class-base-signup-field.php:485
+#: inc/checkout/signup-fields/class-base-signup-field.php:497
 msgid ""
 "Leave blank to hide the field label. You can also set a placeholder value "
 "and tip in the \"Additional Settings\" tab."
 msgstr ""
 
-#: inc/checkout/signup-fields/class-base-signup-field.php:494
+#: inc/checkout/signup-fields/class-base-signup-field.php:506
 msgid "Field Placeholder"
 msgstr ""
 
-#: inc/checkout/signup-fields/class-base-signup-field.php:495
+#: inc/checkout/signup-fields/class-base-signup-field.php:507
 msgid "e.g. Placeholder value"
 msgstr ""
 
-#: inc/checkout/signup-fields/class-base-signup-field.php:496
+#: inc/checkout/signup-fields/class-base-signup-field.php:508
 msgid "This value appears inside the field, as an example of how to fill it."
 msgstr ""
 
-#: inc/checkout/signup-fields/class-base-signup-field.php:507
+#: inc/checkout/signup-fields/class-base-signup-field.php:519
 msgid "Field Tooltip"
 msgstr ""
 
-#: inc/checkout/signup-fields/class-base-signup-field.php:508
+#: inc/checkout/signup-fields/class-base-signup-field.php:520
 msgid "e.g. This field is great, be sure to fill it."
 msgstr ""
 
-#: inc/checkout/signup-fields/class-base-signup-field.php:510
+#: inc/checkout/signup-fields/class-base-signup-field.php:522
 #. translators: %is is the icon for a question mark.
 msgid ""
 "Any text entered here will be shown when the customer hovers the %s icon "
 "next to the field label."
 msgstr ""
 
-#: inc/checkout/signup-fields/class-base-signup-field.php:510
+#: inc/checkout/signup-fields/class-base-signup-field.php:522
 msgid "Just like this!"
 msgstr ""
 
-#: inc/checkout/signup-fields/class-base-signup-field.php:522
+#: inc/checkout/signup-fields/class-base-signup-field.php:534
 msgid "Default Value"
 msgstr ""
 
-#: inc/checkout/signup-fields/class-base-signup-field.php:523
+#: inc/checkout/signup-fields/class-base-signup-field.php:535
 msgid "e.g. None"
 msgstr ""
 
-#: inc/checkout/signup-fields/class-base-signup-field.php:543
+#: inc/checkout/signup-fields/class-base-signup-field.php:555
 msgid "Field Length"
 msgstr ""
 
-#: inc/checkout/signup-fields/class-base-signup-field.php:549
+#: inc/checkout/signup-fields/class-base-signup-field.php:561
 msgid "Min"
 msgstr ""
 
-#: inc/checkout/signup-fields/class-base-signup-field.php:558
+#: inc/checkout/signup-fields/class-base-signup-field.php:570
 msgid "Max"
 msgstr ""
 
-#: inc/checkout/signup-fields/class-base-signup-field.php:569
+#: inc/checkout/signup-fields/class-base-signup-field.php:581
 msgid "Save As"
 msgstr ""
 
-#: inc/checkout/signup-fields/class-base-signup-field.php:570
+#: inc/checkout/signup-fields/class-base-signup-field.php:582
 msgid ""
 "Select how you want to save this piece of meta data. You can attach it to "
 "the customer or the site as site meta or as site option."
 msgstr ""
 
-#: inc/checkout/signup-fields/class-base-signup-field.php:576
+#: inc/checkout/signup-fields/class-base-signup-field.php:588
 msgid "Customer Meta"
 msgstr ""
 
-#: inc/checkout/signup-fields/class-base-signup-field.php:577
+#: inc/checkout/signup-fields/class-base-signup-field.php:589
 msgid "User Meta"
 msgstr ""
 
-#: inc/checkout/signup-fields/class-base-signup-field.php:578
+#: inc/checkout/signup-fields/class-base-signup-field.php:590
 msgid "Site Meta"
 msgstr ""
 
-#: inc/checkout/signup-fields/class-base-signup-field.php:579
+#: inc/checkout/signup-fields/class-base-signup-field.php:591
 msgid "Site Option"
 msgstr ""
 
-#: inc/checkout/signup-fields/class-base-signup-field.php:580
+#: inc/checkout/signup-fields/class-base-signup-field.php:592
 msgid "Do not save"
 msgstr ""
 
-#: inc/checkout/signup-fields/class-base-signup-field.php:589
+#: inc/checkout/signup-fields/class-base-signup-field.php:601
 msgid "Required"
 msgstr ""
 
-#: inc/checkout/signup-fields/class-base-signup-field.php:590
+#: inc/checkout/signup-fields/class-base-signup-field.php:602
 msgid ""
 "Mark this field as required. The checkout will not proceed unless this "
 "field is filled."
@@ -7335,7 +7336,7 @@ msgstr ""
 #: inc/checkout/signup-fields/class-signup-field-pricing-table.php:298
 #: inc/checkout/signup-fields/class-signup-field-steps.php:218
 #: inc/checkout/signup-fields/class-signup-field-template-selection.php:318
-#: inc/ui/class-template-switching-element.php:337
+#: inc/ui/class-template-switching-element.php:346
 msgid "Template does not exist."
 msgstr ""
 
@@ -7372,14 +7373,14 @@ msgstr ""
 
 #: inc/checkout/signup-fields/class-signup-field-order-summary.php:193
 #: inc/checkout/signup-fields/class-signup-field-steps.php:179
-#: inc/ui/class-template-switching-element.php:124
-#: inc/ui/class-template-switching-element.php:125
+#: inc/ui/class-template-switching-element.php:133
+#: inc/ui/class-template-switching-element.php:134
 msgid "Layout"
 msgstr ""
 
 #: inc/checkout/signup-fields/class-signup-field-order-summary.php:194
 #: inc/checkout/signup-fields/class-signup-field-steps.php:180
-#: inc/ui/class-template-switching-element.php:136
+#: inc/ui/class-template-switching-element.php:145
 msgid "Select your Layout"
 msgstr ""
 
@@ -8038,7 +8039,8 @@ msgstr ""
 
 #: inc/class-dashboard-widgets.php:203 inc/models/class-checkout-form.php:556
 #: inc/models/class-checkout-form.php:706
-#: inc/models/class-checkout-form.php:1283
+#: inc/models/class-checkout-form.php:1212
+#: inc/models/class-checkout-form.php:1348
 #: views/dashboard-widgets/billing-info.php:102 views/invoice/template.php:275
 msgid "Payment Method"
 msgstr ""
@@ -8291,144 +8293,144 @@ msgstr ""
 msgid "%d years"
 msgstr ""
 
-#: inc/class-settings.php:193 inc/class-settings.php:404
+#: inc/class-settings.php:193 inc/class-settings.php:415
 msgid ""
 "Dashes are no longer supported when registering a setting. You should "
 "change it to underscores in later versions."
 msgstr ""
 
-#: inc/class-settings.php:546
+#: inc/class-settings.php:557
 msgid "Your Business"
 msgstr ""
 
-#: inc/class-settings.php:547
+#: inc/class-settings.php:558
 msgid "General information about your business.."
 msgstr ""
 
-#: inc/class-settings.php:552 inc/objects/class-billing-address.php:277
+#: inc/class-settings.php:563 inc/objects/class-billing-address.php:277
 msgid "Company Name"
 msgstr ""
 
-#: inc/class-settings.php:553
+#: inc/class-settings.php:564
 msgid "This name is used when generating invoices, for example."
 msgstr ""
 
-#: inc/class-settings.php:559
+#: inc/class-settings.php:570
 msgid "Upload Company Logo"
 msgstr ""
 
-#: inc/class-settings.php:560
+#: inc/class-settings.php:571
 msgid "Add your company logo to be used on the login page and other places."
 msgstr ""
 
-#: inc/class-settings.php:566
+#: inc/class-settings.php:577
 msgid "Company Email Address"
 msgstr ""
 
-#: inc/class-settings.php:567
+#: inc/class-settings.php:578
 msgid "This email is used when generating invoices, for example."
 msgstr ""
 
-#: inc/class-settings.php:573
+#: inc/class-settings.php:584
 msgid "Company Address"
 msgstr ""
 
-#: inc/class-settings.php:574
+#: inc/class-settings.php:585
 msgid "This address is used when generating invoices."
 msgstr ""
 
-#: inc/class-settings.php:584
+#: inc/class-settings.php:595
 msgid "Company Country"
 msgstr ""
 
-#: inc/class-settings.php:585
+#: inc/class-settings.php:596
 msgid ""
 "This info is used when generating invoices, as well as for calculating when "
 "taxes apply in some contexts."
 msgstr ""
 
-#: inc/class-settings.php:592
+#: inc/class-settings.php:603
 msgid "Currency Options"
 msgstr ""
 
-#: inc/class-settings.php:593 inc/class-settings.php:1055
+#: inc/class-settings.php:604 inc/class-settings.php:1066
 msgid ""
 "The following options affect how prices are displayed on the frontend, the "
 "backend and in reports."
 msgstr ""
 
-#: inc/class-settings.php:598
+#: inc/class-settings.php:609
 msgid "Currency"
 msgstr ""
 
-#: inc/class-settings.php:599
+#: inc/class-settings.php:610
 msgid "Select the currency to be used in WP Ultimo."
 msgstr ""
 
-#: inc/class-settings.php:606
+#: inc/class-settings.php:617
 msgid "Currency Position"
 msgstr ""
 
-#: inc/class-settings.php:607 inc/class-settings.php:621
-#: inc/class-settings.php:628 inc/class-settings.php:636
+#: inc/class-settings.php:618 inc/class-settings.php:632
+#: inc/class-settings.php:639 inc/class-settings.php:647
 msgid "This setting affects all prices displayed across the plugin elements."
 msgstr ""
 
-#: inc/class-settings.php:612
+#: inc/class-settings.php:623
 msgid "Left ($99.99)"
 msgstr ""
 
-#: inc/class-settings.php:613
+#: inc/class-settings.php:624
 msgid "Right (99.99$)"
 msgstr ""
 
-#: inc/class-settings.php:614
+#: inc/class-settings.php:625
 msgid "Left with space ($ 99.99)"
 msgstr ""
 
-#: inc/class-settings.php:615
+#: inc/class-settings.php:626
 msgid "Right with space (99.99 $)"
 msgstr ""
 
-#: inc/class-settings.php:620
+#: inc/class-settings.php:631
 msgid "Decimal Separator"
 msgstr ""
 
-#: inc/class-settings.php:627
+#: inc/class-settings.php:638
 msgid "Thousand Separator"
 msgstr ""
 
-#: inc/class-settings.php:635
+#: inc/class-settings.php:646
 msgid "Number of Decimals"
 msgstr ""
 
-#: inc/class-settings.php:648 inc/class-settings.php:649
+#: inc/class-settings.php:659 inc/class-settings.php:660
 msgid "Login & Registration"
 msgstr ""
 
-#: inc/class-settings.php:654
+#: inc/class-settings.php:665
 msgid "Login and Registration Options"
 msgstr ""
 
-#: inc/class-settings.php:655
+#: inc/class-settings.php:666
 msgid "Options related to registration and login behavior."
 msgstr ""
 
-#: inc/class-settings.php:660
+#: inc/class-settings.php:671
 msgid "Enable Registration"
 msgstr ""
 
-#: inc/class-settings.php:661
+#: inc/class-settings.php:672
 msgid ""
 "Turning this toggle off will disable registration in all checkout forms "
 "across the network."
 msgstr ""
 
-#: inc/class-settings.php:667
+#: inc/class-settings.php:678
 msgid "Enable email verification"
 msgstr ""
 
-#: inc/class-settings.php:668
+#: inc/class-settings.php:679
 msgid ""
 "Enabling this option will require the customer to verify their email "
 "address when subscribing to a free plan or a plan with a trial period. "
@@ -8436,65 +8438,65 @@ msgid ""
 "changed to verified."
 msgstr ""
 
-#: inc/class-settings.php:675
+#: inc/class-settings.php:686
 msgid "Default Registration Page"
 msgstr ""
 
-#: inc/class-settings.php:676 inc/class-settings.php:699
+#: inc/class-settings.php:687 inc/class-settings.php:710
 msgid "Search pages on the main site..."
 msgstr ""
 
-#: inc/class-settings.php:677
+#: inc/class-settings.php:688
 msgid ""
 "Only published pages on the main site are available for selection, and you "
 "need to make sure they contain a [wu_checkout] shortcode."
 msgstr ""
 
-#: inc/class-settings.php:690
+#: inc/class-settings.php:701
 msgid "Use Custom Login Page"
 msgstr ""
 
-#: inc/class-settings.php:691
+#: inc/class-settings.php:702
 msgid "Turn this toggle on to select a custom page to be used as the login page."
 msgstr ""
 
-#: inc/class-settings.php:698
+#: inc/class-settings.php:709
 msgid "Default Login Page"
 msgstr ""
 
-#: inc/class-settings.php:700
+#: inc/class-settings.php:711
 msgid ""
 "Only published pages on the main site are available for selection, and you "
 "need to make sure they contain a [wu_login_form] shortcode."
 msgstr ""
 
-#: inc/class-settings.php:716
+#: inc/class-settings.php:727
 msgid "Obfuscate the Original Login URL (wp-login.php)"
 msgstr ""
 
-#: inc/class-settings.php:717
+#: inc/class-settings.php:728
 msgid ""
 "If this option is enabled, we will display a 404 error when a user tries to "
 "access the original wp-login.php link. This is useful to prevent "
 "brute-force attacks."
 msgstr ""
 
-#: inc/class-settings.php:726
+#: inc/class-settings.php:737
 msgid "Use Sub-site logo on Login Page"
 msgstr ""
 
-#: inc/class-settings.php:727
+#: inc/class-settings.php:738
 msgid ""
 "Toggle this option to replace the WordPress logo on the sub-site login page "
 "with the logo set for that sub-site. If unchecked, the network logo will be "
 "used instead."
 msgstr ""
 
-#: inc/class-settings.php:736
+#: inc/class-settings.php:747
 msgid "Force Synchronous Site Publication "
 msgstr ""
 
-#: inc/class-settings.php:737
+#: inc/class-settings.php:748
 msgid ""
 "By default, when a new pending site needs to be converted into a real "
 "network site, the publishing process happens via Job Queue, asynchronously. "
@@ -8503,54 +8505,54 @@ msgid ""
 "of the site templates being copied."
 msgstr ""
 
-#: inc/class-settings.php:743 inc/class-settings.php:1192
-#: inc/class-settings.php:1193
+#: inc/class-settings.php:754 inc/class-settings.php:1203
+#: inc/class-settings.php:1204
 msgid "Other Options"
 msgstr ""
 
-#: inc/class-settings.php:744
+#: inc/class-settings.php:755
 msgid "Other registration-related options."
 msgstr ""
 
-#: inc/class-settings.php:749
+#: inc/class-settings.php:760
 msgid "Default Role"
 msgstr ""
 
-#: inc/class-settings.php:750
+#: inc/class-settings.php:761
 msgid "Set the role to be applied to the user during the signup process."
 msgstr ""
 
-#: inc/class-settings.php:757
+#: inc/class-settings.php:768
 msgid "Add Users to the Main Site as well?"
 msgstr ""
 
-#: inc/class-settings.php:758
+#: inc/class-settings.php:769
 msgid ""
 "Enabling this option will also add the user to the main site of your "
 "network."
 msgstr ""
 
-#: inc/class-settings.php:764
+#: inc/class-settings.php:775
 msgid "Add to Main Site with Role..."
 msgstr ""
 
-#: inc/class-settings.php:765
+#: inc/class-settings.php:776
 msgid ""
 "Select the role WP Ultimo should use when adding the user to the main site "
 "of your network. Be careful."
 msgstr ""
 
-#: inc/class-settings.php:788
+#: inc/class-settings.php:799
 msgid "Block Frontend Access"
 msgstr ""
 
-#: inc/class-settings.php:789
+#: inc/class-settings.php:800
 msgid ""
 "Block the frontend access of network sites after a membership is no longer "
 "active."
 msgstr ""
 
-#: inc/class-settings.php:790
+#: inc/class-settings.php:801
 msgid ""
 "By default, if a user does not pay and the account goes inactive, only the "
 "admin panel will be blocked, but the user's site will still be accessible "
@@ -8558,109 +8560,109 @@ msgid ""
 "those cases."
 msgstr ""
 
-#: inc/class-settings.php:796
+#: inc/class-settings.php:807
 msgid "Frontend Block Grace Period"
 msgstr ""
 
-#: inc/class-settings.php:797
+#: inc/class-settings.php:808
 msgid ""
 "Select the number of days WP Ultimo should wait after the membership goes "
 "inactive before blocking the frontend access. Leave 0 to block immediately "
 "after the membership becomes inactive."
 msgstr ""
 
-#: inc/class-settings.php:807
+#: inc/class-settings.php:818
 msgid "Frontend Block Page"
 msgstr ""
 
-#: inc/class-settings.php:808
+#: inc/class-settings.php:819
 msgid "Select a page to redirect user if access is blocked"
 msgstr ""
 
-#: inc/class-settings.php:809
+#: inc/class-settings.php:820
 msgid "Only published pages on the main site are available for selection."
 msgstr ""
 
-#: inc/class-settings.php:825
+#: inc/class-settings.php:836
 msgid "Enable Multiple Memberships per Customer"
 msgstr ""
 
-#: inc/class-settings.php:826
+#: inc/class-settings.php:837
 msgid ""
 "Enabling this option will allow your users to create more than one "
 "membership."
 msgstr ""
 
-#: inc/class-settings.php:832
+#: inc/class-settings.php:843
 msgid "Enable Multiple Sites per Membership"
 msgstr ""
 
-#: inc/class-settings.php:833
+#: inc/class-settings.php:844
 msgid ""
 "Enabling this option will allow your customers to create more than one "
 "site. You can limit how many sites your users can create in a per plan "
 "basis."
 msgstr ""
 
-#: inc/class-settings.php:839
+#: inc/class-settings.php:850
 msgid "Block Sites on Downgrade"
 msgstr ""
 
-#: inc/class-settings.php:840
+#: inc/class-settings.php:851
 msgid ""
 "Choose how WP Ultimo should handle client sites above their plan quota on "
 "downgrade."
 msgstr ""
 
-#: inc/class-settings.php:844
+#: inc/class-settings.php:855
 msgid "Keep sites as is (do nothing)"
 msgstr ""
 
-#: inc/class-settings.php:845
+#: inc/class-settings.php:856
 msgid "Block only frontend access"
 msgstr ""
 
-#: inc/class-settings.php:846
+#: inc/class-settings.php:857
 msgid "Block only backend access"
 msgstr ""
 
-#: inc/class-settings.php:847
+#: inc/class-settings.php:858
 msgid "Block both frontend and backend access"
 msgstr ""
 
-#: inc/class-settings.php:855
+#: inc/class-settings.php:866
 msgid "Move Posts on Downgrade"
 msgstr ""
 
-#: inc/class-settings.php:856
+#: inc/class-settings.php:867
 msgid ""
 "Select how you want to handle the posts above the quota on downgrade. This "
 "will apply to all post types with quotas set."
 msgstr ""
 
-#: inc/class-settings.php:860
+#: inc/class-settings.php:871
 msgid "Keep posts as is (do nothing)"
 msgstr ""
 
-#: inc/class-settings.php:861
+#: inc/class-settings.php:872
 msgid "Move posts above the new quota to the Trash"
 msgstr ""
 
-#: inc/class-settings.php:862
+#: inc/class-settings.php:873
 msgid "Mark posts above the new quota as Drafts"
 msgstr ""
 
-#: inc/class-settings.php:868
+#: inc/class-settings.php:879
 msgid "Emulated Post Types"
 msgstr ""
 
-#: inc/class-settings.php:869
+#: inc/class-settings.php:880
 msgid ""
 "Emulates the registering of a custom post type to be able to create limits "
 "for it without having to activate plugins on the main site."
 msgstr ""
 
-#: inc/class-settings.php:874
+#: inc/class-settings.php:885
 msgid ""
 "By default, WP Ultimo only allows super admins to limit post types that are "
 "registered on the main site. This makes sense from a technical stand-point "
@@ -8670,49 +8672,49 @@ msgid ""
 "main site and allow you to create limits for them on your products."
 msgstr ""
 
-#: inc/class-settings.php:881
+#: inc/class-settings.php:892
 msgid "Add the first post type using the button below."
 msgstr ""
 
-#: inc/class-settings.php:909
+#: inc/class-settings.php:920
 msgid "Post Type Slug"
 msgstr ""
 
-#: inc/class-settings.php:910
+#: inc/class-settings.php:921
 msgid "e.g. product"
 msgstr ""
 
-#: inc/class-settings.php:919
+#: inc/class-settings.php:930
 msgid "Post Type Label"
 msgstr ""
 
-#: inc/class-settings.php:920
+#: inc/class-settings.php:931
 msgid "e.g. Products"
 msgstr ""
 
-#: inc/class-settings.php:932
+#: inc/class-settings.php:943
 msgid "+ Add Post Type"
 msgstr ""
 
-#: inc/class-settings.php:963
+#: inc/class-settings.php:974
 msgid "Configure certain aspects of how network Sites behave."
 msgstr ""
 
-#: inc/class-settings.php:968
+#: inc/class-settings.php:979
 msgid "Enable Visits Limitation & Counting"
 msgstr ""
 
-#: inc/class-settings.php:969
+#: inc/class-settings.php:980
 msgid ""
 "Enabling this option will add visits limitation settings to the plans and "
 "add the functionality necessary to count site visits on the front-end."
 msgstr ""
 
-#: inc/class-settings.php:975
+#: inc/class-settings.php:986
 msgid "Enable Screenshot Generator"
 msgstr ""
 
-#: inc/class-settings.php:976
+#: inc/class-settings.php:987
 msgid ""
 "With this option is enabled, WP Ultimo will take a screenshot for every "
 "newly created site on your network and set the resulting image as that "
@@ -8720,56 +8722,56 @@ msgid ""
 "and it is not supported for local sites."
 msgstr ""
 
-#: inc/class-settings.php:982
+#: inc/class-settings.php:993
 msgid "WordPress Features"
 msgstr ""
 
-#: inc/class-settings.php:983
+#: inc/class-settings.php:994
 msgid "Override default WordPress settings for network Sites."
 msgstr ""
 
-#: inc/class-settings.php:988
+#: inc/class-settings.php:999
 msgid "Enable Plugins Menu"
 msgstr ""
 
-#: inc/class-settings.php:989
+#: inc/class-settings.php:1000
 msgid ""
 "Do you want to let users on the network to have access to the Plugins page, "
 "activating plugins for their sites? If this option is disabled, the "
 "customer will not be able to manage the site plugins."
 msgstr ""
 
-#: inc/class-settings.php:990
+#: inc/class-settings.php:1001
 msgid "You can select which plugins the user will be able to use for each plan."
 msgstr ""
 
-#: inc/class-settings.php:996
+#: inc/class-settings.php:1007
 msgid "Add New Users"
 msgstr ""
 
-#: inc/class-settings.php:997
+#: inc/class-settings.php:1008
 msgid ""
 "Allow site administrators to add new users to their site via the \"Users → "
 "Add New\" page."
 msgstr ""
 
-#: inc/class-settings.php:998
+#: inc/class-settings.php:1009
 msgid "You can limit the number of users allowed for each plan."
 msgstr ""
 
-#: inc/class-settings.php:1004
+#: inc/class-settings.php:1015
 msgid "Site Template Options"
 msgstr ""
 
-#: inc/class-settings.php:1005
+#: inc/class-settings.php:1016
 msgid "Configure certain aspects of how Site Templates behave."
 msgstr ""
 
-#: inc/class-settings.php:1010
+#: inc/class-settings.php:1021
 msgid "Allow Template Switching"
 msgstr ""
 
-#: inc/class-settings.php:1011
+#: inc/class-settings.php:1022
 msgid ""
 "Enabling this option will add an option on your client's dashboard to "
 "switch their site template to another one available on the catalog of "
@@ -8777,101 +8779,101 @@ msgid ""
 "new template is copied over."
 msgstr ""
 
-#: inc/class-settings.php:1017
+#: inc/class-settings.php:1028
 msgid "Allow Users to use their own Sites as Templates"
 msgstr ""
 
-#: inc/class-settings.php:1018
+#: inc/class-settings.php:1029
 msgid ""
 "Enabling this option will add the user own sites to the template screen, "
 "allowing them to create a new site based on the content and customizations "
 "they made previously."
 msgstr ""
 
-#: inc/class-settings.php:1027
+#: inc/class-settings.php:1038
 msgid "Copy Media on Template Duplication?"
 msgstr ""
 
-#: inc/class-settings.php:1028
+#: inc/class-settings.php:1039
 msgid ""
 "Checking this option will copy the media uploaded on the template site to "
 "the newly created site. This can be overridden on each of the plans."
 msgstr ""
 
-#: inc/class-settings.php:1034
+#: inc/class-settings.php:1045
 msgid "Prevent Search Engines from indexing Site Templates"
 msgstr ""
 
-#: inc/class-settings.php:1035
+#: inc/class-settings.php:1046
 msgid ""
 "Checking this option will discourage search engines from indexing all the "
 "Site Templates on your network."
 msgstr ""
 
-#: inc/class-settings.php:1054
+#: inc/class-settings.php:1065
 msgid "Payment Settings"
 msgstr ""
 
-#: inc/class-settings.php:1061
+#: inc/class-settings.php:1072
 msgid "Force Auto-Renew"
 msgstr ""
 
-#: inc/class-settings.php:1062
+#: inc/class-settings.php:1073
 msgid ""
 "Enable this option if you want to make sure memberships are created with "
 "auto-renew activated whenever the selected gateway supports it. Disabling "
 "this option will show an auto-renew option during checkout."
 msgstr ""
 
-#: inc/class-settings.php:1069
+#: inc/class-settings.php:1080
 msgid "Allow Trials without Payment Method"
 msgstr ""
 
-#: inc/class-settings.php:1070
+#: inc/class-settings.php:1081
 msgid ""
 "By default, WP Ultimo asks customers to add a payment method on sign-up "
 "even if a trial period is present. Enable this option to only ask for a "
 "payment method when the trial period is over."
 msgstr ""
 
-#: inc/class-settings.php:1077
+#: inc/class-settings.php:1088
 msgid "Send Invoice on Payment Confirmation"
 msgstr ""
 
-#: inc/class-settings.php:1078
+#: inc/class-settings.php:1089
 msgid ""
 "Enabling this option will attach a PDF invoice (marked paid) with the "
 "payment confirmation email. This option does not apply to the Manual "
 "Gateway, which sends invoices regardless of this option."
 msgstr ""
 
-#: inc/class-settings.php:1079
+#: inc/class-settings.php:1090
 msgid ""
 "The invoice files will be saved on the wp-content/uploads/wu-invoices "
 "folder."
 msgstr ""
 
-#: inc/class-settings.php:1085
+#: inc/class-settings.php:1096
 msgid "Invoice Numbering Scheme"
 msgstr ""
 
-#: inc/class-settings.php:1086
+#: inc/class-settings.php:1097
 msgid "What should WP Ultimo use as the invoice number?"
 msgstr ""
 
-#: inc/class-settings.php:1091
+#: inc/class-settings.php:1102
 msgid "Payment Reference Code"
 msgstr ""
 
-#: inc/class-settings.php:1092
+#: inc/class-settings.php:1103
 msgid "Sequential Number"
 msgstr ""
 
-#: inc/class-settings.php:1097
+#: inc/class-settings.php:1108
 msgid "Next Invoice Number"
 msgstr ""
 
-#: inc/class-settings.php:1098
+#: inc/class-settings.php:1109
 msgid ""
 "This number will be used as the invoice number for the next invoice "
 "generated on the system. It is incremented by one every time a new invoice "
@@ -8879,63 +8881,63 @@ msgid ""
 "number to a specific value."
 msgstr ""
 
-#: inc/class-settings.php:1108
+#: inc/class-settings.php:1119
 msgid "Invoice Number Prefix"
 msgstr ""
 
-#: inc/class-settings.php:1109
+#: inc/class-settings.php:1120
 msgid "INV00"
 msgstr ""
 
-#: inc/class-settings.php:1110
+#: inc/class-settings.php:1121
 msgid ""
 "Use %%YEAR%%, %%MONTH%%, and %%DAY%% to create a dynamic placeholder. E.g. "
 "%%YEAR%%-%%MONTH%%-INV will become %s."
 msgstr ""
 
-#: inc/class-settings.php:1120 inc/ui/class-jumper.php:228
+#: inc/class-settings.php:1131 inc/ui/class-jumper.php:228
 msgid "Payment Gateways"
 msgstr ""
 
-#: inc/class-settings.php:1121
+#: inc/class-settings.php:1132
 msgid "Activate and configure the installed payment gateways in this section."
 msgstr ""
 
-#: inc/class-settings.php:1133 inc/class-settings.php:1134
+#: inc/class-settings.php:1144 inc/class-settings.php:1145
 #: inc/list-tables/class-broadcast-list-table.php:512
 #: inc/list-tables/class-email-list-table.php:39 inc/ui/class-jumper.php:230
 msgid "Emails"
 msgstr ""
 
-#: inc/class-settings.php:1146 inc/class-settings.php:1147
+#: inc/class-settings.php:1157 inc/class-settings.php:1158
 msgid "Domain Mapping"
 msgstr ""
 
-#: inc/class-settings.php:1159 inc/class-settings.php:1160
+#: inc/class-settings.php:1170 inc/class-settings.php:1171
 msgid "Single Sign-On"
 msgstr ""
 
-#: inc/class-settings.php:1178
+#: inc/class-settings.php:1189
 msgid "Hosting or Panel Providers"
 msgstr ""
 
-#: inc/class-settings.php:1179
+#: inc/class-settings.php:1190
 msgid "Configure and manage the integration with your Hosting or Panel Provider."
 msgstr ""
 
-#: inc/class-settings.php:1199
+#: inc/class-settings.php:1210
 msgid "Miscellaneous"
 msgstr ""
 
-#: inc/class-settings.php:1200
+#: inc/class-settings.php:1211
 msgid "Other options that do not fit anywhere else."
 msgstr ""
 
-#: inc/class-settings.php:1207
+#: inc/class-settings.php:1218
 msgid "Hide UI Tours"
 msgstr ""
 
-#: inc/class-settings.php:1208
+#: inc/class-settings.php:1219
 msgid ""
 "The UI tours showed by WP Ultimo should permanently hide themselves after "
 "being seen but if they persist for whatever reason, toggle this option to "
@@ -8943,11 +8945,11 @@ msgid ""
 "up again."
 msgstr ""
 
-#: inc/class-settings.php:1216
+#: inc/class-settings.php:1227
 msgid "Disable \"Hover to Zoom\""
 msgstr ""
 
-#: inc/class-settings.php:1217
+#: inc/class-settings.php:1228
 msgid ""
 "By default, WP Ultimo adds a \"hover to zoom\" feature, allowing network "
 "admins to see larger version of site screenshots and other images across "
@@ -8955,21 +8957,21 @@ msgid ""
 "here. Preview tags like the above are not affected."
 msgstr ""
 
-#: inc/class-settings.php:1223
+#: inc/class-settings.php:1234
 msgid "Error Reporting"
 msgstr ""
 
-#: inc/class-settings.php:1224
+#: inc/class-settings.php:1235
 msgid ""
 "Help us make WP Ultimo better by automatically reporting fatal errors and "
 "warnings so we can fix them as soon as possible."
 msgstr ""
 
-#: inc/class-settings.php:1229
+#: inc/class-settings.php:1240
 msgid "Send Error Data to WP Ultimo Developers"
 msgstr ""
 
-#: inc/class-settings.php:1230
+#: inc/class-settings.php:1241
 msgid ""
 "With this option enabled, every time your installation runs into an error "
 "related to WP Ultimo, that error data will be sent to us. No sensitive data "
@@ -8977,19 +8979,19 @@ msgid ""
 "subdomain network, etc)."
 msgstr ""
 
-#: inc/class-settings.php:1236
+#: inc/class-settings.php:1247
 msgid "Uninstall Options"
 msgstr ""
 
-#: inc/class-settings.php:1237
+#: inc/class-settings.php:1248
 msgid "Change the plugin behavior on uninstall."
 msgstr ""
 
-#: inc/class-settings.php:1242
+#: inc/class-settings.php:1253
 msgid "Remove Data on Uninstall"
 msgstr ""
 
-#: inc/class-settings.php:1243
+#: inc/class-settings.php:1254
 msgid "Remove all saved data for WP Ultimo when the plugin is uninstalled."
 msgstr ""
 
@@ -9062,8 +9064,8 @@ msgid ""
 msgstr ""
 
 #: inc/class-unsupported.php:343
-#: inc/compat/class-multiple-accounts-compat.php:215
-#: inc/compat/class-multiple-accounts-compat.php:258
+#: inc/compat/class-multiple-accounts-compat.php:217
+#: inc/compat/class-multiple-accounts-compat.php:278
 msgid "Multiple Accounts"
 msgstr ""
 
@@ -9211,26 +9213,26 @@ msgstr ""
 #: inc/compat/class-legacy-shortcodes.php:362
 #: inc/list-tables/class-product-list-table.php:325
 #: inc/models/class-checkout-form.php:488
-#: inc/models/class-checkout-form.php:1234
+#: inc/models/class-checkout-form.php:1299
 msgid "Plans"
 msgstr ""
 
-#: inc/compat/class-multiple-accounts-compat.php:216
+#: inc/compat/class-multiple-accounts-compat.php:218
 msgid "Options related to the Multiple Accounts feature."
 msgstr ""
 
-#: inc/compat/class-multiple-accounts-compat.php:221
+#: inc/compat/class-multiple-accounts-compat.php:223
 msgid "Enable Multiple Accounts"
 msgstr ""
 
-#: inc/compat/class-multiple-accounts-compat.php:222
+#: inc/compat/class-multiple-accounts-compat.php:224
 msgid ""
 "Allow users to have accounts in different sites with the same email "
 "address. This is useful when running stores with WooCommerce and other "
 "plugins, for example."
 msgstr ""
 
-#: inc/compat/class-multiple-accounts-compat.php:222
+#: inc/compat/class-multiple-accounts-compat.php:224
 #: views/base/products/grid-item.php:68
 #: views/wizards/setup/installation_steps.php:55
 #: views/wizards/setup/requirements_table.php:38
@@ -9238,16 +9240,16 @@ msgstr ""
 msgid "Read More"
 msgstr ""
 
-#: inc/compat/class-multiple-accounts-compat.php:289
+#: inc/compat/class-multiple-accounts-compat.php:309
 #. translators: the %d is the account count for that email address.
 msgid "<strong>%d</strong> accounts using this email."
 msgstr ""
 
-#: inc/compat/class-multiple-accounts-compat.php:291
+#: inc/compat/class-multiple-accounts-compat.php:311
 msgid "See all"
 msgstr ""
 
-#: inc/compat/class-multiple-accounts-compat.php:428
+#: inc/compat/class-multiple-accounts-compat.php:448
 msgid "Sorry, that email address is already used!"
 msgstr ""
 
@@ -230495,119 +230497,129 @@ msgstr ""
 msgid "Use WP Ultimo default"
 msgstr ""
 
-#: inc/gateways/class-base-stripe-gateway.php:164
-#: inc/gateways/class-stripe-checkout-gateway.php:58
-#: inc/gateways/class-stripe-gateway.php:80
+#: inc/gateways/class-base-stripe-gateway.php:168
+#: inc/gateways/class-stripe-checkout-gateway.php:60
+#: inc/gateways/class-stripe-gateway.php:82
 msgid "Credit Card"
 msgstr ""
 
-#: inc/gateways/class-base-stripe-gateway.php:516
+#: inc/gateways/class-base-stripe-gateway.php:339
+#: inc/gateways/class-base-stripe-gateway.php:366
+msgid "Invalid API Key provided"
+msgstr ""
+
+#: inc/gateways/class-base-stripe-gateway.php:719
 msgid "Invalid payment method"
 msgstr ""
 
-#: inc/gateways/class-base-stripe-gateway.php:656
+#: inc/gateways/class-base-stripe-gateway.php:867
 msgid "Account credit and other discounts"
 msgstr ""
 
-#: inc/gateways/class-base-stripe-gateway.php:1097
-#: inc/gateways/class-paypal-gateway.php:547
+#: inc/gateways/class-base-stripe-gateway.php:1372
+#: inc/gateways/class-paypal-gateway.php:538
 msgid "Gateway payment ID not found. Cannot process refund automatically."
 msgstr ""
 
-#: inc/gateways/class-base-stripe-gateway.php:1117
+#: inc/gateways/class-base-stripe-gateway.php:1397
 msgid "Gateway payment ID not valid."
 msgstr ""
 
-#: inc/gateways/class-base-stripe-gateway.php:1256
+#: inc/gateways/class-base-stripe-gateway.php:1540
 msgid "An unknown error has occurred."
 msgstr ""
 
-#: inc/gateways/class-base-stripe-gateway.php:1287
+#: inc/gateways/class-base-stripe-gateway.php:1571
 #. translators: 1 is the error code and 2 the message.
 msgid "An error has occurred (code: %1$s; message: %2$s)."
 msgstr ""
 
-#: inc/gateways/class-base-stripe-gateway.php:1335
+#: inc/gateways/class-base-stripe-gateway.php:1619
 msgid "Event ID not found."
 msgstr ""
 
-#: inc/gateways/class-base-stripe-gateway.php:1364
+#: inc/gateways/class-base-stripe-gateway.php:1651
 msgid "Exiting Stripe webhook - no customer attached to event."
 msgstr ""
 
-#: inc/gateways/class-base-stripe-gateway.php:1441
+#: inc/gateways/class-base-stripe-gateway.php:1728
 #. translators: %s is the customer ID.
 msgid "Exiting Stripe webhook - membership not found. Customer ID: %s."
 msgstr ""
 
-#: inc/gateways/class-base-stripe-gateway.php:1628
+#: inc/gateways/class-base-stripe-gateway.php:1738
+#. translators: %s is the customer ID.
+msgid "Exiting Stripe webhook - This call must be handled by %s webhook"
+msgstr ""
+
+#: inc/gateways/class-base-stripe-gateway.php:1937
 msgid "Duplicate payment."
 msgstr ""
 
-#: inc/gateways/class-base-stripe-gateway.php:1649
+#: inc/gateways/class-base-stripe-gateway.php:1958
 msgid "Payment not found on refund webhook call."
 msgstr ""
 
-#: inc/gateways/class-base-stripe-gateway.php:1657
+#: inc/gateways/class-base-stripe-gateway.php:1966
 msgid "Payment is not refundable."
 msgstr ""
 
-#: inc/gateways/class-base-stripe-gateway.php:1718
+#: inc/gateways/class-base-stripe-gateway.php:2027
 msgid "Membership cancelled via Stripe webhook."
 msgstr ""
 
-#: inc/gateways/class-base-stripe-gateway.php:1762
+#: inc/gateways/class-base-stripe-gateway.php:2071
 #. translators: 1 is the card brand (e.g. VISA), and 2 is the last 4 digits.
 msgid "%1$s ending in %2$s"
 msgstr ""
 
-#: inc/gateways/class-base-stripe-gateway.php:1797
+#: inc/gateways/class-base-stripe-gateway.php:2106
 msgid "Name on Card"
 msgstr ""
 
-#: inc/gateways/class-base-stripe-gateway.php:1943
+#: inc/gateways/class-base-stripe-gateway.php:2252
 msgid "Missing plan name or price."
 msgstr ""
 
-#: inc/gateways/class-base-stripe-gateway.php:1969
+#: inc/gateways/class-base-stripe-gateway.php:2279
 msgid "Empty plan ID."
 msgstr ""
 
-#: inc/gateways/class-manual-gateway.php:89
+#: inc/gateways/class-manual-gateway.php:90
 #: inc/list-tables/class-payment-list-table.php:232
 #: inc/managers/class-gateway-manager.php:404
 msgid "Manual"
 msgstr ""
 
-#: inc/gateways/class-manual-gateway.php:90
+#: inc/gateways/class-manual-gateway.php:91
 msgid ""
 "Use the settings section below to configure the manual payment method. This "
 "method allows your customers to manually pay for their memberships, but "
 "those payments require manual confirmation on your part."
 msgstr ""
 
-#: inc/gateways/class-manual-gateway.php:99
+#: inc/gateways/class-manual-gateway.php:100
 msgid "Payment Instructions"
 msgstr ""
 
-#: inc/gateways/class-manual-gateway.php:100
+#: inc/gateways/class-manual-gateway.php:101
 msgid ""
 "This instructions will be shown to the customer on the thank you page, as "
 "well as be sent via email."
 msgstr ""
 
-#: inc/gateways/class-manual-gateway.php:103
+#: inc/gateways/class-manual-gateway.php:104
 msgid "Payment instructions here."
 msgstr ""
 
-#: inc/gateways/class-manual-gateway.php:321
+#: inc/gateways/class-manual-gateway.php:331
 msgid ""
 "After you finish signing up, we will send you an email with instructions to "
 "finalize the payment. Your account will be pending until the payment is "
 "finalized and confirmed."
 msgstr ""
 
-#: inc/gateways/class-manual-gateway.php:357
+#: inc/gateways/class-manual-gateway.php:367
 msgid "Instructions for Payment"
 msgstr ""
 
@@ -230695,227 +230707,227 @@ msgstr ""
 msgid "Make sure you are placing the LIVE signature, not the test one."
 msgstr ""
 
-#: inc/gateways/class-paypal-gateway.php:487
-#: inc/gateways/class-paypal-gateway.php:1254
-#: inc/gateways/class-paypal-gateway.php:1418
+#: inc/gateways/class-paypal-gateway.php:478
+#: inc/gateways/class-paypal-gateway.php:1245
+#: inc/gateways/class-paypal-gateway.php:1409
 msgid "Something has gone wrong, please try again"
 msgstr ""
 
-#: inc/gateways/class-paypal-gateway.php:634
+#: inc/gateways/class-paypal-gateway.php:625
 msgid "You will be redirected to PayPal to complete the purchase."
 msgstr ""
 
-#: inc/gateways/class-paypal-gateway.php:672
+#: inc/gateways/class-paypal-gateway.php:663
 msgid "PayPal token no longer valid."
 msgstr ""
 
-#: inc/gateways/class-paypal-gateway.php:690
+#: inc/gateways/class-paypal-gateway.php:681
 msgid "Pending payment does not exist."
 msgstr ""
 
-#: inc/gateways/class-paypal-gateway.php:706
+#: inc/gateways/class-paypal-gateway.php:697
 msgid "Original cart does not exist."
 msgstr ""
 
-#: inc/gateways/class-paypal-gateway.php:722
+#: inc/gateways/class-paypal-gateway.php:713
 msgid "Missing membership or customer data."
 msgstr ""
 
-#: inc/gateways/class-paypal-gateway.php:794
+#: inc/gateways/class-paypal-gateway.php:785
 msgid "Exiting PayPal Express IPN - membership ID not found."
 msgstr ""
 
-#: inc/gateways/class-paypal-gateway.php:919
+#: inc/gateways/class-paypal-gateway.php:910
 msgid "Transaction ID %s failed in PayPal."
 msgstr ""
 
-#: inc/gateways/class-paypal-gateway.php:926
+#: inc/gateways/class-paypal-gateway.php:917
 msgid "unknown"
 msgstr ""
 
-#: inc/gateways/class-paypal-gateway.php:928
+#: inc/gateways/class-paypal-gateway.php:919
 msgid "Transaction ID %1$s is pending in PayPal for reason: %2$s"
 msgstr ""
 
-#: inc/gateways/class-paypal-gateway.php:971
+#: inc/gateways/class-paypal-gateway.php:962
 msgid "Initial payment failed in PayPal Express."
 msgstr ""
 
-#: inc/gateways/class-paypal-gateway.php:973
+#: inc/gateways/class-paypal-gateway.php:964
 msgid "Initial payment failed."
 msgstr ""
 
-#: inc/gateways/class-paypal-gateway.php:989
+#: inc/gateways/class-paypal-gateway.php:980
 msgid "Membership cancelled via PayPal Express IPN."
 msgstr ""
 
-#: inc/gateways/class-paypal-gateway.php:1254
-#: inc/gateways/class-paypal-gateway.php:1418
+#: inc/gateways/class-paypal-gateway.php:1245
+#: inc/gateways/class-paypal-gateway.php:1409
 #: inc/managers/class-gateway-manager.php:290
 #: inc/managers/class-gateway-manager.php:317
 #: inc/managers/class-gateway-manager.php:325 views/ui/jumper.php:23
 msgid "Error"
 msgstr ""
 
-#: inc/gateways/class-paypal-gateway.php:1438
+#: inc/gateways/class-paypal-gateway.php:1429
 msgid "Invalid response code from PayPal"
 msgstr ""
 
-#: inc/gateways/class-paypal-gateway.php:1441
+#: inc/gateways/class-paypal-gateway.php:1432
 #. translators: %s is the paypal error message.
 msgid "An unexpected PayPal error occurred. Error message: %s."
 msgstr ""
 
-#: inc/gateways/class-stripe-checkout-gateway.php:45
+#: inc/gateways/class-stripe-checkout-gateway.php:47
 #: inc/managers/class-gateway-manager.php:394
 msgid "Stripe Checkout"
 msgstr ""
 
-#: inc/gateways/class-stripe-checkout-gateway.php:46
+#: inc/gateways/class-stripe-checkout-gateway.php:48
 msgid ""
 "Use the settings section below to configure Stripe Checkout as a payment "
 "method."
 msgstr ""
 
-#: inc/gateways/class-stripe-checkout-gateway.php:55
-#: inc/gateways/class-stripe-gateway.php:77
+#: inc/gateways/class-stripe-checkout-gateway.php:57
+#: inc/gateways/class-stripe-gateway.php:79
 msgid "Stripe Public Name"
 msgstr ""
 
-#: inc/gateways/class-stripe-checkout-gateway.php:56
-#: inc/gateways/class-stripe-gateway.php:78
+#: inc/gateways/class-stripe-checkout-gateway.php:58
+#: inc/gateways/class-stripe-gateway.php:80
 msgid ""
 "The name to display on the payment method selection field. By default, "
 "\"Credit Card\" is used."
 msgstr ""
 
-#: inc/gateways/class-stripe-checkout-gateway.php:65
+#: inc/gateways/class-stripe-checkout-gateway.php:67
 msgid "Stripe Checkout Sandbox Mode"
 msgstr ""
 
-#: inc/gateways/class-stripe-checkout-gateway.php:66
-#: inc/gateways/class-stripe-gateway.php:88
+#: inc/gateways/class-stripe-checkout-gateway.php:68
+#: inc/gateways/class-stripe-gateway.php:90
 msgid ""
 "Toggle this to put Stripe on sandbox mode. This is useful for testing and "
 "making sure Stripe is correctly setup to handle your payments."
 msgstr ""
 
-#: inc/gateways/class-stripe-checkout-gateway.php:78
-#: inc/gateways/class-stripe-gateway.php:100
+#: inc/gateways/class-stripe-checkout-gateway.php:82
+#: inc/gateways/class-stripe-gateway.php:104
 msgid "Stripe Test Publishable Key"
 msgstr ""
 
-#: inc/gateways/class-stripe-checkout-gateway.php:80
-#: inc/gateways/class-stripe-checkout-gateway.php:94
-#: inc/gateways/class-stripe-gateway.php:102
-#: inc/gateways/class-stripe-gateway.php:116
+#: inc/gateways/class-stripe-checkout-gateway.php:84
+#: inc/gateways/class-stripe-checkout-gateway.php:100
+#: inc/gateways/class-stripe-gateway.php:106
+#: inc/gateways/class-stripe-gateway.php:122
 msgid "Make sure you are placing the TEST keys, not the live ones."
 msgstr ""
 
-#: inc/gateways/class-stripe-checkout-gateway.php:81
-#: inc/gateways/class-stripe-gateway.php:103
+#: inc/gateways/class-stripe-checkout-gateway.php:85
+#: inc/gateways/class-stripe-gateway.php:107
 msgid "pk_test_***********"
 msgstr ""
 
-#: inc/gateways/class-stripe-checkout-gateway.php:92
-#: inc/gateways/class-stripe-gateway.php:114
+#: inc/gateways/class-stripe-checkout-gateway.php:98
+#: inc/gateways/class-stripe-gateway.php:120
 msgid "Stripe Test Secret Key"
 msgstr ""
 
-#: inc/gateways/class-stripe-checkout-gateway.php:95
-#: inc/gateways/class-stripe-gateway.php:117
+#: inc/gateways/class-stripe-checkout-gateway.php:101
+#: inc/gateways/class-stripe-gateway.php:123
 msgid "sk_test_***********"
 msgstr ""
 
-#: inc/gateways/class-stripe-checkout-gateway.php:106
-#: inc/gateways/class-stripe-gateway.php:128
+#: inc/gateways/class-stripe-checkout-gateway.php:114
+#: inc/gateways/class-stripe-gateway.php:136
 msgid "Stripe Live Publishable Key"
 msgstr ""
 
-#: inc/gateways/class-stripe-checkout-gateway.php:108
-#: inc/gateways/class-stripe-checkout-gateway.php:122
-#: inc/gateways/class-stripe-gateway.php:130
-#: inc/gateways/class-stripe-gateway.php:144
+#: inc/gateways/class-stripe-checkout-gateway.php:116
+#: inc/gateways/class-stripe-checkout-gateway.php:132
+#: inc/gateways/class-stripe-gateway.php:138
+#: inc/gateways/class-stripe-gateway.php:154
 msgid "Make sure you are placing the LIVE keys, not the test ones."
 msgstr ""
 
-#: inc/gateways/class-stripe-checkout-gateway.php:109
-#: inc/gateways/class-stripe-gateway.php:131
+#: inc/gateways/class-stripe-checkout-gateway.php:117
+#: inc/gateways/class-stripe-gateway.php:139
 msgid "pk_live_***********"
 msgstr ""
 
-#: inc/gateways/class-stripe-checkout-gateway.php:120
-#: inc/gateways/class-stripe-gateway.php:142
+#: inc/gateways/class-stripe-checkout-gateway.php:130
+#: inc/gateways/class-stripe-gateway.php:152
 msgid "Stripe Live Secret Key"
-msgstr ""
-
-#: inc/gateways/class-stripe-checkout-gateway.php:123
-#: inc/gateways/class-stripe-gateway.php:145
-msgid "sk_live_***********"
 msgstr ""
 
 #: inc/gateways/class-stripe-checkout-gateway.php:133
 #: inc/gateways/class-stripe-gateway.php:155
+msgid "sk_live_***********"
+msgstr ""
+
+#: inc/gateways/class-stripe-checkout-gateway.php:143
+#: inc/gateways/class-stripe-gateway.php:165
 msgid ""
 "Whenever you change your Stripe settings, WP Ultimo will automatically "
 "check the webhook URLs on your Stripe account to make sure we get notified "
 "about changes in subscriptions and payments."
 msgstr ""
 
-#: inc/gateways/class-stripe-checkout-gateway.php:136
-#: inc/gateways/class-stripe-gateway.php:158
+#: inc/gateways/class-stripe-checkout-gateway.php:146
+#: inc/gateways/class-stripe-gateway.php:168
 msgid "Webhook Listener URL"
 msgstr ""
 
-#: inc/gateways/class-stripe-checkout-gateway.php:138
-#: inc/gateways/class-stripe-gateway.php:160
+#: inc/gateways/class-stripe-checkout-gateway.php:148
+#: inc/gateways/class-stripe-gateway.php:170
 msgid "This is the URL Stripe should send webhook calls to."
 msgstr ""
 
-#: inc/gateways/class-stripe-checkout-gateway.php:342
+#: inc/gateways/class-stripe-checkout-gateway.php:373
 msgid "You will be redirected to a checkout to complete the purchase."
 msgstr ""
 
-#: inc/gateways/class-stripe-checkout-gateway.php:367
-#: inc/gateways/class-stripe-gateway.php:757
+#: inc/gateways/class-stripe-checkout-gateway.php:398
+#: inc/gateways/class-stripe-gateway.php:794
 msgid "Saved Cards"
 msgstr ""
 
-#: inc/gateways/class-stripe-gateway.php:67
+#: inc/gateways/class-stripe-gateway.php:69
 #: inc/list-tables/class-payment-list-table.php:234
 #: inc/managers/class-gateway-manager.php:389
 msgid "Stripe"
 msgstr ""
 
-#: inc/gateways/class-stripe-gateway.php:68
+#: inc/gateways/class-stripe-gateway.php:70
 msgid "Use the settings section below to configure Stripe as a payment method."
 msgstr ""
 
-#: inc/gateways/class-stripe-gateway.php:87
+#: inc/gateways/class-stripe-gateway.php:89
 msgid "Stripe Sandbox Mode"
 msgstr ""
 
-#: inc/gateways/class-stripe-gateway.php:213
+#: inc/gateways/class-stripe-gateway.php:223
 #. translators: %s is the error message.
 msgid "Error creating Stripe customer: %s"
 msgstr ""
 
-#: inc/gateways/class-stripe-gateway.php:472
+#: inc/gateways/class-stripe-gateway.php:504
 msgid ""
 "Missing Stripe payment intent, please try again or contact support if the "
 "issue persists."
 msgstr ""
 
-#: inc/gateways/class-stripe-gateway.php:505
+#: inc/gateways/class-stripe-gateway.php:542
 #. translators: first is the customer id, then the customer email.
 msgid "Customer ID: %1$d - User Email: %2$s"
 msgstr ""
 
-#: inc/gateways/class-stripe-gateway.php:682
+#: inc/gateways/class-stripe-gateway.php:719
 msgid "Add new card"
 msgstr ""
 
-#: inc/gateways/class-stripe-gateway.php:687
+#: inc/gateways/class-stripe-gateway.php:724
 msgid "Saved Payment Methods"
 msgstr ""
 
@@ -233366,13 +233378,14 @@ msgstr ""
 msgid "You can only use numeric fields to generate hashes."
 msgstr ""
 
-#: inc/models/class-base-model.php:801
+#: inc/models/class-base-model.php:808
 msgid "This method expects an array as argument."
 msgstr ""
 
 #: inc/models/class-checkout-form.php:548
 #: inc/models/class-checkout-form.php:698
-#: inc/models/class-checkout-form.php:1275
+#: inc/models/class-checkout-form.php:1204
+#: inc/models/class-checkout-form.php:1340
 msgid "Your Order"
 msgstr ""
 
@@ -233411,12 +233424,16 @@ msgstr ""
 msgid "Pay & Create Account"
 msgstr ""
 
-#: inc/models/class-checkout-form.php:1289
+#: inc/models/class-checkout-form.php:1218
+msgid "Finish Payment"
+msgstr ""
+
+#: inc/models/class-checkout-form.php:1354
 msgid "Complete Checkout"
 msgstr ""
 
-#: inc/models/class-checkout-form.php:1410
-#: inc/models/class-checkout-form.php:1418
+#: inc/models/class-checkout-form.php:1475
+#: inc/models/class-checkout-form.php:1483
 msgid "Create Site"
 msgstr ""
 
@@ -233844,7 +233861,7 @@ msgid "Billing Information"
 msgstr ""
 
 #: inc/ui/class-billing-info-element.php:120
-#: inc/ui/class-checkout-element.php:92
+#: inc/ui/class-checkout-element.php:93
 #: inc/ui/class-current-membership-element.php:125
 #: inc/ui/class-invoices-element.php:90 inc/ui/class-limits-element.php:90
 #: inc/ui/class-payment-methods-element.php:90
@@ -233861,19 +233878,63 @@ msgstr ""
 msgid "Enter your billing address here. This info will be used on your invoices."
 msgstr ""
 
-#: inc/ui/class-checkout-element.php:125
+#: inc/ui/class-checkout-element.php:126
 msgid "The checkout form slug."
 msgstr ""
 
-#: inc/ui/class-checkout-element.php:289
+#: inc/ui/class-checkout-element.php:303
+#. Translators: Placeholder receives the customer display name
+msgid "Hi %s. You have a pending payment for your membership!"
+msgstr ""
+
+#: inc/ui/class-checkout-element.php:310
+#. Translators: The link to registration url with payment hash
+msgid "Click <a href=\"%s\">here</a> to pay."
+msgstr ""
+
+#: inc/ui/class-checkout-element.php:339
+msgid "You already have a membership!"
+msgstr ""
+
+#: inc/ui/class-checkout-element.php:344
+msgid "Go to my account"
+msgstr ""
+
+#: inc/ui/class-checkout-element.php:364
+msgid "You are not allowed to change this membership!"
+msgstr ""
+
+#: inc/ui/class-checkout-element.php:408
+#. Translators: Placeholder receives the limit name
+msgid "You reached your membership %s limit!"
+msgstr ""
+
+#: inc/ui/class-checkout-element.php:413
+msgid "Buy a new membership"
+msgstr ""
+
+#: inc/ui/class-checkout-element.php:439
+msgid "Upgrade your account"
+msgstr ""
+
+#: inc/ui/class-checkout-element.php:467
+msgid "You need to be logged in to complete a payment"
+msgstr ""
+
+#: inc/ui/class-checkout-element.php:470
+#. Translators: The link to login url with redirect_to url
+msgid "Click <a href=\"%s\">here</a> sign in."
+msgstr ""
+
+#: inc/ui/class-checkout-element.php:487
 msgid "Checkout form %s not found."
 msgstr ""
 
-#: inc/ui/class-checkout-element.php:295
+#: inc/ui/class-checkout-element.php:493
 msgid "Registration is not available at this time."
 msgstr ""
 
-#: inc/ui/class-checkout-element.php:305
+#: inc/ui/class-checkout-element.php:503
 msgid "Registration is closed for your location."
 msgstr ""
 
@@ -234366,19 +234427,19 @@ msgstr ""
 msgid "This template is not available"
 msgstr ""
 
-#: inc/ui/class-template-switching-element.php:64
+#: inc/ui/class-template-switching-element.php:73
 msgid "Template Switching"
 msgstr ""
 
-#: inc/ui/class-template-switching-element.php:76
+#: inc/ui/class-template-switching-element.php:85
 msgid "Adds the template switching form to this page."
 msgstr ""
 
-#: inc/ui/class-template-switching-element.php:135
+#: inc/ui/class-template-switching-element.php:144
 msgid "Template Selector Layout"
 msgstr ""
 
-#: inc/ui/class-template-switching-element.php:152
+#: inc/ui/class-template-switching-element.php:161
 msgid ""
 "Want to add customized template selection templates?<br><a "
 "target=\"_blank\" class=\"wu-no-underline\" "
@@ -234386,26 +234447,26 @@ msgid ""
 "using-field-templates\">See how you can do that here</a>."
 msgstr ""
 
-#: inc/ui/class-template-switching-element.php:270
+#: inc/ui/class-template-switching-element.php:279
 msgid "You need to provide a valid template to duplicate."
 msgstr ""
 
-#: inc/ui/class-template-switching-element.php:342
+#: inc/ui/class-template-switching-element.php:351
 msgid "&larr; Back to Template Selection"
 msgstr ""
 
-#: inc/ui/class-template-switching-element.php:363
+#: inc/ui/class-template-switching-element.php:372
 msgid "Confirm template switch?"
 msgstr ""
 
-#: inc/ui/class-template-switching-element.php:364
+#: inc/ui/class-template-switching-element.php:373
 msgid ""
 "Switching your current template completely overwrites the content of your "
 "site with the contents of the newly chosen template. All customizations "
 "will be lost. This action cannot be undone."
 msgstr ""
 
-#: inc/ui/class-template-switching-element.php:379
+#: inc/ui/class-template-switching-element.php:388
 msgid "Process Switch"
 msgstr ""
 
@@ -235158,7 +235219,6 @@ msgstr ""
 #: views/dashboard-widgets/billing-info.php:32
 #: views/dashboard-widgets/billing-info.php:52
 #: views/dashboard-widgets/billing-info.php:111
-#: views/dashboard-widgets/current-membership.php:30
 #: views/dashboard-widgets/login-form.php:47
 msgid "Update Billing Address"
 msgstr ""
@@ -235180,6 +235240,10 @@ msgstr ""
 
 #: views/dashboard-widgets/current-membership-product-details.php:51
 msgid "Product Characteristics:"
+msgstr ""
+
+#: views/dashboard-widgets/current-membership.php:30
+msgid "Update your membership"
 msgstr ""
 
 #: views/dashboard-widgets/current-membership.php:35

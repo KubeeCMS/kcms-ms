@@ -1,7 +1,7 @@
 === WP Ultimo ===
 Contributors: aanduque, freemius
 Requires at least: 5.3
-Tested up to: 6.0
+Tested up to: 6.0.1
 Requires PHP: 7.1.4
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -21,6 +21,32 @@ The Complete Network Solution.
 3. Follow the step by step Wizard to set the plugin up
 
 == Changelog ==
+
+Version 2.0.18 - Released on 2022-08-05
+
+* Added: Current currency in use on Stripe and StripeCheckout product gateway;
+* Added: wu_pre_save_settings filter to allow data change before save settings;
+* Added: Stripe and Stripe Checkout api keys verification on save settings;
+* Added: Show messages to customer on forms according sistem and account limitations;
+* Added: Current membership selected on Current class;
+* Improvement: Set trial status according membership data on save process;
+* Improvement: Delete object cache key of a model after save process;
+* Improvement: Non recurring coupon value on stripe checkout;
+* Improvement: New session system on forms;
+* Improvement: Stripe and Stripe Checkout calls, ensuring correct API keys in use;
+* Improvement: Create new payment with Stripe and Stripe Checkout only on "charge.succeeded" webhook event;
+* Improvement: Check if membership uses Stripe or Stripe Checkout gateway on webhook calls to prevent duplicated processes which can cause subscription cancelation on gateway;
+* Improvement: Public API load order to by present on setup wizard;
+* Improvement: get_broadcast_targets method return on class Broadcast;
+* Improvement: Multiple account with woocomerce billing_address value;
+* Fix: Subtotal value on cart items;;
+* Fix: Stripe card input styles;
+* Fix: Check the available template sites for selected products;
+* Fix: Correct build the cart with trial period on checkout process;
+* Fix: Template switch form;
+* Fix: Stripe and Stripe Checkout error code on WP_Error;
+* Fix: Stripe and Stripe Checkout webhook listener url shown in payment settings;
+* Fix: Stripe and Stripe Checkout production mode setting value on save;
 
 Version 2.0.17 - Released on 2022-07-04
 

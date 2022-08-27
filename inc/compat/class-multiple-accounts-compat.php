@@ -105,6 +105,8 @@ class Multiple_Accounts_Compat {
 			// It's a fix for the WooCommerce Email
 			add_filter('woocommerce_checkout_update_order_meta', array($this, 'fix_billing_email_in_wc_order'), 10, 2);
 
+			add_action( 'woocommerce_before_customer_object_save', array($this, 'fix_billing_email_in_wc_customer'), -10);
+
 		} // end if;
 
 	} // end init;
@@ -244,6 +246,24 @@ class Multiple_Accounts_Compat {
 		} // end if;
 
 	} // end fix_billing_email_in_wc_order;
+
+	/**
+	 * Fixes the email on the WooCommerce Customer.
+	 *
+	 * @since 2.0.18
+	 *
+	 * @param \WC_Customer $customer The WooCommerce customer.
+	 * @return void
+	 */
+	public function fix_billing_email_in_wc_customer($customer) {
+
+		if ($customer->get_billing_email() === $this->fake_email) {
+
+			$customer->set_billing_email($this->original_email);
+
+		} // end if;
+
+	} // end fix_billing_email_in_wc_customer;
 
 	/**
 	 * Adds the Multiple accounts column to the users table.

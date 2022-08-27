@@ -21,5 +21,5 @@ use phpseclib3\File\ASN1;
  */
 abstract class RevokedCertificate
 {
-    const MAP = ['type' => ASN1::TYPE_SEQUENCE, 'children' => ['userCertificate' => \phpseclib3\File\ASN1\Maps\CertificateSerialNumber::MAP, 'revocationDate' => \phpseclib3\File\ASN1\Maps\Time::MAP, 'crlEntryExtensions' => ['optional' => \true] + \phpseclib3\File\ASN1\Maps\Extensions::MAP]];
+    public const MAP = ['type' => ASN1::TYPE_SEQUENCE, 'children' => ['userCertificate' => \phpseclib3\File\ASN1\Maps\CertificateSerialNumber::MAP, 'revocationDate' => \phpseclib3\File\ASN1\Maps\Time::MAP, 'crlEntryExtensions' => ['optional' => \true] + \phpseclib3\File\ASN1\Maps\Extensions::MAP]];
 }

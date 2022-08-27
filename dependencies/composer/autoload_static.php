@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit5eff2df59b0cb3ea25035e8d33a18b81
+class ComposerStaticInit31fb1a3b7229a98761d26d56d516bbb8
 {
     public static $files = array (
         'ad155f8f1cf0d418fe49e248db8c661b' => __DIR__ . '/..' . '/react/promise/src/functions_include.php',
@@ -85,7 +85,6 @@ class ComposerStaticInit5eff2df59b0cb3ea25035e8d33a18b81
             'WP_Ultimo\\Dependencies\\Delight\\Cookie\\' => 38,
             'WP_Ultimo\\Dependencies\\DeepCopy\\' => 32,
             'WP_Ultimo\\Dependencies\\Carbon\\' => 30,
-            'WP_Ultimo\\Dependencies\\Aura\\Session\\' => 36,
             'WP_Ultimo\\Dependencies\\Arrch\\' => 29,
             'WP_Ultimo\\Dependencies\\Analog\\' => 30,
             'WP_Ultimo\\Dependencies\\Amp\\WindowsRegistry\\' => 43,
@@ -274,10 +273,6 @@ class ComposerStaticInit5eff2df59b0cb3ea25035e8d33a18b81
         'WP_Ultimo\\Dependencies\\Carbon\\' => 
         array (
             0 => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon',
-        ),
-        'WP_Ultimo\\Dependencies\\Aura\\Session\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/aura/session/src',
         ),
         'WP_Ultimo\\Dependencies\\Arrch\\' => 
         array (
@@ -1487,17 +1482,6 @@ class ComposerStaticInit5eff2df59b0cb3ea25035e8d33a18b81
         'WP_Ultimo\\Dependencies\\Analog\\Logger' => __DIR__ . '/..' . '/analog/analog/lib/Analog/Logger.php',
         'WP_Ultimo\\Dependencies\\Arrch\\Arrch' => __DIR__ . '/..' . '/rpnzl/arrch/src/Arrch/Arrch.php',
         'WP_Ultimo\\Dependencies\\Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
-        'WP_Ultimo\\Dependencies\\Aura\\Session\\CsrfToken' => __DIR__ . '/..' . '/aura/session/src/CsrfToken.php',
-        'WP_Ultimo\\Dependencies\\Aura\\Session\\CsrfTokenFactory' => __DIR__ . '/..' . '/aura/session/src/CsrfTokenFactory.php',
-        'WP_Ultimo\\Dependencies\\Aura\\Session\\Exception' => __DIR__ . '/..' . '/aura/session/src/Exception.php',
-        'WP_Ultimo\\Dependencies\\Aura\\Session\\Phpfunc' => __DIR__ . '/..' . '/aura/session/src/Phpfunc.php',
-        'WP_Ultimo\\Dependencies\\Aura\\Session\\Randval' => __DIR__ . '/..' . '/aura/session/src/Randval.php',
-        'WP_Ultimo\\Dependencies\\Aura\\Session\\RandvalInterface' => __DIR__ . '/..' . '/aura/session/src/RandvalInterface.php',
-        'WP_Ultimo\\Dependencies\\Aura\\Session\\Segment' => __DIR__ . '/..' . '/aura/session/src/Segment.php',
-        'WP_Ultimo\\Dependencies\\Aura\\Session\\SegmentFactory' => __DIR__ . '/..' . '/aura/session/src/SegmentFactory.php',
-        'WP_Ultimo\\Dependencies\\Aura\\Session\\SegmentInterface' => __DIR__ . '/..' . '/aura/session/src/SegmentInterface.php',
-        'WP_Ultimo\\Dependencies\\Aura\\Session\\Session' => __DIR__ . '/..' . '/aura/session/src/Session.php',
-        'WP_Ultimo\\Dependencies\\Aura\\Session\\SessionFactory' => __DIR__ . '/..' . '/aura/session/src/SessionFactory.php',
         'WP_Ultimo\\Dependencies\\BerlinDB\\Database\\Base' => __DIR__ . '/..' . '/berlindb/core/base.php',
         'WP_Ultimo\\Dependencies\\BerlinDB\\Database\\Column' => __DIR__ . '/..' . '/berlindb/core/column.php',
         'WP_Ultimo\\Dependencies\\BerlinDB\\Database\\Queries\\Compare' => __DIR__ . '/..' . '/berlindb/core/compare.php',
@@ -1897,6 +1881,7 @@ class ComposerStaticInit5eff2df59b0cb3ea25035e8d33a18b81
         'WP_Ultimo\\Dependencies\\ScssPhp\\ScssPhp\\Ast\\Css\\CssStylesheet' => __DIR__ . '/..' . '/scssphp/scssphp/src/Ast/Css/CssStylesheet.php',
         'WP_Ultimo\\Dependencies\\ScssPhp\\ScssPhp\\Ast\\Css\\CssSupportsRule' => __DIR__ . '/..' . '/scssphp/scssphp/src/Ast/Css/CssSupportsRule.php',
         'WP_Ultimo\\Dependencies\\ScssPhp\\ScssPhp\\Ast\\Css\\CssValue' => __DIR__ . '/..' . '/scssphp/scssphp/src/Ast/Css/CssValue.php',
+        'WP_Ultimo\\Dependencies\\ScssPhp\\ScssPhp\\Ast\\Css\\IsInvisibleVisitor' => __DIR__ . '/..' . '/scssphp/scssphp/src/Ast/Css/IsInvisibleVisitor.php',
         'WP_Ultimo\\Dependencies\\ScssPhp\\ScssPhp\\Ast\\Css\\ModifiableCssAtRule' => __DIR__ . '/..' . '/scssphp/scssphp/src/Ast/Css/ModifiableCssAtRule.php',
         'WP_Ultimo\\Dependencies\\ScssPhp\\ScssPhp\\Ast\\Css\\ModifiableCssComment' => __DIR__ . '/..' . '/scssphp/scssphp/src/Ast/Css/ModifiableCssComment.php',
         'WP_Ultimo\\Dependencies\\ScssPhp\\ScssPhp\\Ast\\Css\\ModifiableCssDeclaration' => __DIR__ . '/..' . '/scssphp/scssphp/src/Ast/Css/ModifiableCssDeclaration.php',
@@ -1909,6 +1894,7 @@ class ComposerStaticInit5eff2df59b0cb3ea25035e8d33a18b81
         'WP_Ultimo\\Dependencies\\ScssPhp\\ScssPhp\\Ast\\Css\\ModifiableCssStylesheet' => __DIR__ . '/..' . '/scssphp/scssphp/src/Ast/Css/ModifiableCssStylesheet.php',
         'WP_Ultimo\\Dependencies\\ScssPhp\\ScssPhp\\Ast\\Css\\ModifiableCssSupportsRule' => __DIR__ . '/..' . '/scssphp/scssphp/src/Ast/Css/ModifiableCssSupportsRule.php',
         'WP_Ultimo\\Dependencies\\ScssPhp\\ScssPhp\\Ast\\Css\\ModifiableCssValue' => __DIR__ . '/..' . '/scssphp/scssphp/src/Ast/Css/ModifiableCssValue.php',
+        'WP_Ultimo\\Dependencies\\ScssPhp\\ScssPhp\\Ast\\FakeAstNode' => __DIR__ . '/..' . '/scssphp/scssphp/src/Ast/FakeAstNode.php',
         'WP_Ultimo\\Dependencies\\ScssPhp\\ScssPhp\\Ast\\Sass\\Argument' => __DIR__ . '/..' . '/scssphp/scssphp/src/Ast/Sass/Argument.php',
         'WP_Ultimo\\Dependencies\\ScssPhp\\ScssPhp\\Ast\\Sass\\ArgumentDeclaration' => __DIR__ . '/..' . '/scssphp/scssphp/src/Ast/Sass/ArgumentDeclaration.php',
         'WP_Ultimo\\Dependencies\\ScssPhp\\ScssPhp\\Ast\\Sass\\ArgumentInvocation' => __DIR__ . '/..' . '/scssphp/scssphp/src/Ast/Sass/ArgumentInvocation.php',
@@ -1987,8 +1973,12 @@ class ComposerStaticInit5eff2df59b0cb3ea25035e8d33a18b81
         'WP_Ultimo\\Dependencies\\ScssPhp\\ScssPhp\\Ast\\Selector\\ClassSelector' => __DIR__ . '/..' . '/scssphp/scssphp/src/Ast/Selector/ClassSelector.php',
         'WP_Ultimo\\Dependencies\\ScssPhp\\ScssPhp\\Ast\\Selector\\Combinator' => __DIR__ . '/..' . '/scssphp/scssphp/src/Ast/Selector/Combinator.php',
         'WP_Ultimo\\Dependencies\\ScssPhp\\ScssPhp\\Ast\\Selector\\ComplexSelector' => __DIR__ . '/..' . '/scssphp/scssphp/src/Ast/Selector/ComplexSelector.php',
+        'WP_Ultimo\\Dependencies\\ScssPhp\\ScssPhp\\Ast\\Selector\\ComplexSelectorComponent' => __DIR__ . '/..' . '/scssphp/scssphp/src/Ast/Selector/ComplexSelectorComponent.php',
         'WP_Ultimo\\Dependencies\\ScssPhp\\ScssPhp\\Ast\\Selector\\CompoundSelector' => __DIR__ . '/..' . '/scssphp/scssphp/src/Ast/Selector/CompoundSelector.php',
         'WP_Ultimo\\Dependencies\\ScssPhp\\ScssPhp\\Ast\\Selector\\IDSelector' => __DIR__ . '/..' . '/scssphp/scssphp/src/Ast/Selector/IDSelector.php',
+        'WP_Ultimo\\Dependencies\\ScssPhp\\ScssPhp\\Ast\\Selector\\IsBogusVisitor' => __DIR__ . '/..' . '/scssphp/scssphp/src/Ast/Selector/IsBogusVisitor.php',
+        'WP_Ultimo\\Dependencies\\ScssPhp\\ScssPhp\\Ast\\Selector\\IsInvisibleVisitor' => __DIR__ . '/..' . '/scssphp/scssphp/src/Ast/Selector/IsInvisibleVisitor.php',
+        'WP_Ultimo\\Dependencies\\ScssPhp\\ScssPhp\\Ast\\Selector\\IsUselessVisitor' => __DIR__ . '/..' . '/scssphp/scssphp/src/Ast/Selector/IsUselessVisitor.php',
         'WP_Ultimo\\Dependencies\\ScssPhp\\ScssPhp\\Ast\\Selector\\ParentSelector' => __DIR__ . '/..' . '/scssphp/scssphp/src/Ast/Selector/ParentSelector.php',
         'WP_Ultimo\\Dependencies\\ScssPhp\\ScssPhp\\Ast\\Selector\\PlaceholderSelector' => __DIR__ . '/..' . '/scssphp/scssphp/src/Ast/Selector/PlaceholderSelector.php',
         'WP_Ultimo\\Dependencies\\ScssPhp\\ScssPhp\\Ast\\Selector\\PseudoSelector' => __DIR__ . '/..' . '/scssphp/scssphp/src/Ast/Selector/PseudoSelector.php',
@@ -2096,7 +2086,9 @@ class ComposerStaticInit5eff2df59b0cb3ea25035e8d33a18b81
         'WP_Ultimo\\Dependencies\\ScssPhp\\ScssPhp\\Value\\UnitlessSassNumber' => __DIR__ . '/..' . '/scssphp/scssphp/src/Value/UnitlessSassNumber.php',
         'WP_Ultimo\\Dependencies\\ScssPhp\\ScssPhp\\Value\\Value' => __DIR__ . '/..' . '/scssphp/scssphp/src/Value/Value.php',
         'WP_Ultimo\\Dependencies\\ScssPhp\\ScssPhp\\Version' => __DIR__ . '/..' . '/scssphp/scssphp/src/Version.php',
+        'WP_Ultimo\\Dependencies\\ScssPhp\\ScssPhp\\Visitor\\AnySelectorVisitor' => __DIR__ . '/..' . '/scssphp/scssphp/src/Visitor/AnySelectorVisitor.php',
         'WP_Ultimo\\Dependencies\\ScssPhp\\ScssPhp\\Visitor\\CssVisitor' => __DIR__ . '/..' . '/scssphp/scssphp/src/Visitor/CssVisitor.php',
+        'WP_Ultimo\\Dependencies\\ScssPhp\\ScssPhp\\Visitor\\EveryCssVisitor' => __DIR__ . '/..' . '/scssphp/scssphp/src/Visitor/EveryCssVisitor.php',
         'WP_Ultimo\\Dependencies\\ScssPhp\\ScssPhp\\Visitor\\ExpressionVisitor' => __DIR__ . '/..' . '/scssphp/scssphp/src/Visitor/ExpressionVisitor.php',
         'WP_Ultimo\\Dependencies\\ScssPhp\\ScssPhp\\Visitor\\ModifiableCssVisitor' => __DIR__ . '/..' . '/scssphp/scssphp/src/Visitor/ModifiableCssVisitor.php',
         'WP_Ultimo\\Dependencies\\ScssPhp\\ScssPhp\\Visitor\\SelectorVisitor' => __DIR__ . '/..' . '/scssphp/scssphp/src/Visitor/SelectorVisitor.php',
@@ -2140,8 +2132,6 @@ class ComposerStaticInit5eff2df59b0cb3ea25035e8d33a18b81
         'WP_Ultimo\\Dependencies\\Stripe\\BaseStripeClientInterface' => __DIR__ . '/..' . '/stripe/stripe-php/lib/BaseStripeClientInterface.php',
         'WP_Ultimo\\Dependencies\\Stripe\\BillingPortal\\Configuration' => __DIR__ . '/..' . '/stripe/stripe-php/lib/BillingPortal/Configuration.php',
         'WP_Ultimo\\Dependencies\\Stripe\\BillingPortal\\Session' => __DIR__ . '/..' . '/stripe/stripe-php/lib/BillingPortal/Session.php',
-        'WP_Ultimo\\Dependencies\\Stripe\\BitcoinReceiver' => __DIR__ . '/..' . '/stripe/stripe-php/lib/BitcoinReceiver.php',
-        'WP_Ultimo\\Dependencies\\Stripe\\BitcoinTransaction' => __DIR__ . '/..' . '/stripe/stripe-php/lib/BitcoinTransaction.php',
         'WP_Ultimo\\Dependencies\\Stripe\\Capability' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Capability.php',
         'WP_Ultimo\\Dependencies\\Stripe\\Card' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Card.php',
         'WP_Ultimo\\Dependencies\\Stripe\\CashBalance' => __DIR__ . '/..' . '/stripe/stripe-php/lib/CashBalance.php',
@@ -2210,7 +2200,6 @@ class ComposerStaticInit5eff2df59b0cb3ea25035e8d33a18b81
         'WP_Ultimo\\Dependencies\\Stripe\\OAuth' => __DIR__ . '/..' . '/stripe/stripe-php/lib/OAuth.php',
         'WP_Ultimo\\Dependencies\\Stripe\\OAuthErrorObject' => __DIR__ . '/..' . '/stripe/stripe-php/lib/OAuthErrorObject.php',
         'WP_Ultimo\\Dependencies\\Stripe\\Order' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Order.php',
-        'WP_Ultimo\\Dependencies\\Stripe\\OrderItem' => __DIR__ . '/..' . '/stripe/stripe-php/lib/OrderItem.php',
         'WP_Ultimo\\Dependencies\\Stripe\\PaymentIntent' => __DIR__ . '/..' . '/stripe/stripe-php/lib/PaymentIntent.php',
         'WP_Ultimo\\Dependencies\\Stripe\\PaymentLink' => __DIR__ . '/..' . '/stripe/stripe-php/lib/PaymentLink.php',
         'WP_Ultimo\\Dependencies\\Stripe\\PaymentMethod' => __DIR__ . '/..' . '/stripe/stripe-php/lib/PaymentMethod.php',
@@ -2224,7 +2213,6 @@ class ComposerStaticInit5eff2df59b0cb3ea25035e8d33a18b81
         'WP_Ultimo\\Dependencies\\Stripe\\Radar\\EarlyFraudWarning' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Radar/EarlyFraudWarning.php',
         'WP_Ultimo\\Dependencies\\Stripe\\Radar\\ValueList' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Radar/ValueList.php',
         'WP_Ultimo\\Dependencies\\Stripe\\Radar\\ValueListItem' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Radar/ValueListItem.php',
-        'WP_Ultimo\\Dependencies\\Stripe\\Recipient' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Recipient.php',
         'WP_Ultimo\\Dependencies\\Stripe\\RecipientTransfer' => __DIR__ . '/..' . '/stripe/stripe-php/lib/RecipientTransfer.php',
         'WP_Ultimo\\Dependencies\\Stripe\\Refund' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Refund.php',
         'WP_Ultimo\\Dependencies\\Stripe\\Reporting\\ReportRun' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Reporting/ReportRun.php',
@@ -2364,7 +2352,6 @@ class ComposerStaticInit5eff2df59b0cb3ea25035e8d33a18b81
         'WP_Ultimo\\Dependencies\\Stripe\\Terminal\\Location' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Terminal/Location.php',
         'WP_Ultimo\\Dependencies\\Stripe\\Terminal\\Reader' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Terminal/Reader.php',
         'WP_Ultimo\\Dependencies\\Stripe\\TestHelpers\\TestClock' => __DIR__ . '/..' . '/stripe/stripe-php/lib/TestHelpers/TestClock.php',
-        'WP_Ultimo\\Dependencies\\Stripe\\ThreeDSecure' => __DIR__ . '/..' . '/stripe/stripe-php/lib/ThreeDSecure.php',
         'WP_Ultimo\\Dependencies\\Stripe\\Token' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Token.php',
         'WP_Ultimo\\Dependencies\\Stripe\\Topup' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Topup.php',
         'WP_Ultimo\\Dependencies\\Stripe\\Transfer' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Transfer.php',
@@ -2984,9 +2971,9 @@ class ComposerStaticInit5eff2df59b0cb3ea25035e8d33a18b81
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit5eff2df59b0cb3ea25035e8d33a18b81::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit5eff2df59b0cb3ea25035e8d33a18b81::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit5eff2df59b0cb3ea25035e8d33a18b81::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit31fb1a3b7229a98761d26d56d516bbb8::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit31fb1a3b7229a98761d26d56d516bbb8::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit31fb1a3b7229a98761d26d56d516bbb8::$classMap;
 
         }, null, ClassLoader::class);
     }

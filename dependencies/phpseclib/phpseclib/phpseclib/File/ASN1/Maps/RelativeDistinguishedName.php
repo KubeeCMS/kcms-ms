@@ -27,5 +27,5 @@ use phpseclib3\File\ASN1;
  */
 abstract class RelativeDistinguishedName
 {
-    const MAP = ['type' => ASN1::TYPE_SET, 'min' => 1, 'max' => -1, 'children' => \phpseclib3\File\ASN1\Maps\AttributeTypeAndValue::MAP];
+    public const MAP = ['type' => ASN1::TYPE_SET, 'min' => 1, 'max' => -1, 'children' => \phpseclib3\File\ASN1\Maps\AttributeTypeAndValue::MAP];
 }

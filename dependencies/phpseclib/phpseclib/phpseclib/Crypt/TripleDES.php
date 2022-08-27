@@ -3,7 +3,9 @@
 /**
  * Pure-PHP implementation of Triple DES.
  *
- * Uses mcrypt, if available, and an internal implementation, otherwise.  Operates in the EDE3 mode (encrypt-decrypt-encrypt).
+ * Uses OpenSSL, if available/possible, and an internal implementation, otherwise.
+ *
+ * Operates in the EDE3 mode (encrypt-decrypt-encrypt).
  *
  * PHP version 5
  *
@@ -34,6 +36,7 @@
 declare (strict_types=1);
 namespace phpseclib3\Crypt;
 
+use phpseclib3\Exception\BadModeException;
 /**
  * Pure-PHP implementation of Triple DES.
  *
@@ -46,13 +49,13 @@ class TripleDES extends \phpseclib3\Crypt\DES
      *
      * Inner chaining is used by SSH-1 and is generally considered to be less secure then outer chaining (self::MODE_CBC3).
      */
-    const MODE_3CBC = -2;
+    public const MODE_3CBC = -2;
     /**
      * Encrypt / decrypt using outer chaining
      *
      * Outer chaining is used by SSH-2 and when the mode is set to \phpseclib3\Crypt\Common\BlockCipher::MODE_CBC.
      */
-    const MODE_CBC3 = self::MODE_CBC;
+    public const MODE_CBC3 = self::MODE_CBC;
     /**
      * Key Length (in bytes)
      *
@@ -60,21 +63,6 @@ class TripleDES extends \phpseclib3\Crypt\DES
      * @var int
      */
     protected $key_length = 24;
-    /**
-     * The mcrypt specific name of the cipher
-     *
-     * @see \phpseclib3\Crypt\DES::cipher_name_mcrypt
-     * @see \phpseclib3\Crypt\Common\SymmetricKey::cipher_name_mcrypt
-     * @var string
-     */
-    protected $cipher_name_mcrypt = 'tripledes';
-    /**
-     * Optimizing value while CFB-encrypting
-     *
-     * @see \phpseclib3\Crypt\Common\SymmetricKey::cfb_init_len
-     * @var int
-     */
-    protected $cfb_init_len = 750;
     /**
      * max possible size of $key
      *
@@ -99,8 +87,6 @@ class TripleDES extends \phpseclib3\Crypt\DES
     private $des;
     /**
      * Default Constructor.
-     *
-     * Determines whether or not the mcrypt or OpenSSL extensions should be used.
      *
      * $mode could be:
      *
@@ -143,7 +129,7 @@ class TripleDES extends \phpseclib3\Crypt\DES
             default:
                 parent::__construct($mode);
                 if ($this->mode == self::MODE_STREAM) {
-                    throw new \phpseclib3\Crypt\BadModeException('Block ciphers cannot be ran in stream mode');
+                    throw new BadModeException('Block ciphers cannot be ran in stream mode');
                 }
         }
     }

@@ -8,5 +8,5 @@ namespace phpseclib3\Net\SSH2;
  */
 abstract class TerminalMode
 {
-    const TTY_OP_END = 0;
+    public const TTY_OP_END = 0;
 }

@@ -200,13 +200,25 @@ abstract class Base_Signup_Field {
 	 */
 	public function get_value() {
 
-		if (wu_get_isset($this->attributes, 'from_request') && wu_get_isset($this->attributes, 'id')) {
+		$value = wu_get_isset($this->attributes, 'default_value', '');
 
-			return wu_request($this->attributes['id'], '');
+		$session = wu_get_session('signup');
+
+		$value_session = wu_get_isset($session->get('signup'), $this->attributes['id']);
+
+		if ($value_session) {
+
+			$value = $value_session;
 
 		} // end if;
 
-		return wu_get_isset($this->attributes, 'default_value', '');
+		if (wu_get_isset($this->attributes, 'from_request') && wu_get_isset($this->attributes, 'id')) {
+
+			$value = wu_request($this->attributes['id'], '');
+
+		} // end if;
+
+		return $value;
 
 	} // end get_value;
 

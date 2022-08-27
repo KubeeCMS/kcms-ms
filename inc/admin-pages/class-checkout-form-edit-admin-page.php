@@ -67,14 +67,6 @@ class Checkout_Form_Edit_Admin_Page extends Edit_Admin_Page {
 	protected $badge_count = 0;
 
 	/**
-	 * The settings retrieved from session cookie. This is used to read the values after we sent the headers.
-	 *
-	 * @since 2.0.16
-	 * @var string
-	 */
-	protected $session_settings = array();
-
-	/**
 	 * Holds the admin panels where this page should be displayed, as well as which capability to require.
 	 *
 	 * To add a page to the regular admin (wp-admin/), use: 'admin_menu' => 'capability_here'
@@ -103,29 +95,6 @@ class Checkout_Form_Edit_Admin_Page extends Edit_Admin_Page {
 		add_action('wp_ajax_wu_save_editor_session', array($this, 'save_editor_session'));
 
 		add_action('load-admin_page_wp-ultimo-edit-checkout-form', array($this, 'add_width_control_script'));
-
-		$current_form = wu_request('form');
-
-		$editor_forms = array(
-			'add_new_form_step',
-			'add_new_form_field',
-		);
-
-		if (in_array($current_form, $editor_forms, true) && wu_request('checkout_form')) {
-
-			$checkout_form = wu_get_checkout_form_by_slug(wu_request('checkout_form'));
-
-			if ($checkout_form) {
-
-				$key = sprintf('checkout_form_%d', $checkout_form->get_id());
-
-				$session = wu_get_session($key);
-
-				$this->session_settings = $session->get('settings');
-
-			} // end if;
-
-		} // end if;
 
 	} // end init;
 
@@ -300,6 +269,8 @@ class Checkout_Form_Edit_Admin_Page extends Edit_Admin_Page {
 
 			$session->set('settings', $settings);
 
+			$session->commit();
+
 			wp_send_json_success();
 
 		} // end if;
@@ -317,6 +288,18 @@ class Checkout_Form_Edit_Admin_Page extends Edit_Admin_Page {
 	public function page_loaded() {
 
 		parent::page_loaded();
+
+		$object = $this->get_object();
+
+		if (!is_wp_error($object->validate())) {
+
+			$key = sprintf('checkout_form_%d', $object->get_id());
+
+			$session = wu_get_session($key);
+
+			$session->destroy();
+
+		} // end if;
 
 		$screen = get_current_screen();
 
@@ -627,21 +610,23 @@ class Checkout_Form_Edit_Admin_Page extends Edit_Admin_Page {
 
 		$field = $checkout_form->get_field($step_name, $field_name);
 
-		if (!$field) {
+		$field['saved'] = true;
 
-			$field = array();
+		if (!$field) {
 
 			$field['saved'] = false;
 
-		} else {
-
-			$field['saved'] = true;
-
 		} // end if;
 
-		if (!empty($this->session_settings)) {
+		$key = sprintf('checkout_form_%d', $checkout_form->get_id());
 
-			$checkout_form->set_settings($this->session_settings);
+		$session = wu_get_session($key);
+
+		$settings = $session->get('settings');
+
+		if (!empty($settings)) {
+
+			$checkout_form->set_settings($settings);
 
 			$new_field = $checkout_form->get_field($step_name, $field_name);
 
@@ -670,21 +655,21 @@ class Checkout_Form_Edit_Admin_Page extends Edit_Admin_Page {
 
 		$step = $checkout_form->get_step($step_name);
 
-		if (!$step) {
+		$step['saved'] = true;
 
-			$step = array();
+		if (!$step) {
 
 			$step['saved'] = false;
 
-		} else {
-
-			$step['saved'] = true;
-
 		} // end if;
 
-		if (!empty($this->session_settings)) {
+		$key = sprintf('checkout_form_%d', $checkout_form->get_id());
 
-			$checkout_form->set_settings($this->session_settings);
+		$session = wu_get_session($key);
+
+		if ($session->get('settings')) {
+
+			$checkout_form->set_settings($session->get('settings'));
 
 			$step = $checkout_form->get_step($step_name);
 

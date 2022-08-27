@@ -191,7 +191,7 @@ class PublicKey extends RSA implements Common\PublicKey
         if ($emLen < $this->hLen + $sLen + 2) {
             return \false;
         }
-        if ($em[\strlen($em) - 1] != \chr(0xbc)) {
+        if ($em[-1] != \chr(0xbc)) {
             return \false;
         }
         $maskedDB = \substr($em, 0, -$this->hLen - 1);

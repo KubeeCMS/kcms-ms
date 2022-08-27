@@ -15,6 +15,7 @@ use WP_Ultimo\Dependencies\ScssPhp\ScssPhp\Ast\Sass\Expression;
 use WP_Ultimo\Dependencies\ScssPhp\ScssPhp\Ast\Sass\SassDeclaration;
 use WP_Ultimo\Dependencies\ScssPhp\ScssPhp\Ast\Sass\Statement;
 use WP_Ultimo\Dependencies\ScssPhp\ScssPhp\SourceSpan\FileSpan;
+use WP_Ultimo\Dependencies\ScssPhp\ScssPhp\Util;
 use WP_Ultimo\Dependencies\ScssPhp\ScssPhp\Util\SpanUtil;
 use WP_Ultimo\Dependencies\ScssPhp\ScssPhp\Visitor\StatementVisitor;
 /**
@@ -84,6 +85,17 @@ final class VariableDeclaration implements Statement, SassDeclaration
     public function getName() : string
     {
         return $this->name;
+    }
+    /**
+     * The variable name as written in the document, without underscores
+     * converted to hyphens and including the leading `$`.
+     *
+     * This isn't particularly efficient, and should only be used for error
+     * messages.
+     */
+    public function getOriginalName() : string
+    {
+        return Util::declarationName($this->span);
     }
     public function getComment() : ?SilentComment
     {

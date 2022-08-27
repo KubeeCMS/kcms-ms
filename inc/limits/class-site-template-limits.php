@@ -10,6 +10,8 @@
 
 namespace WP_Ultimo\Limits;
 
+use WP_Ultimo\Checkout\Checkout;
+
 // Exit if accessed directly
 defined('ABSPATH') || exit;
 
@@ -148,14 +150,63 @@ class Site_Template_Limits {
 
 		} // end foreach;
 
-		if ($limits->site_templates->get_mode() === 'assign_template' || $limits->site_templates->get_mode() === 'choose_available_templates') {
+		if ($limits->site_templates->get_mode() === 'assign_template') {
 
 			$extra['template_id'] = $limits->site_templates->get_pre_selected_site_template();
+
+		} elseif ($limits->site_templates->get_mode() === 'choose_available_templates') {
+
+			$template_id = Checkout::get_instance()->request_or_session('template_id');
+
+			$extra['template_id'] = $this->is_template_available($products, $template_id) ? $template_id : false;
 
 		} // end if;
 
 		return $extra;
 
 	} // end maybe_force_template_selection_on_cart;
+
+	/**
+	 * Check if site template is available in current limits
+	 *
+	 * @param array $products    the list of products to check for limit.
+	 * @param int   $template_id the site template id.
+	 * @return boolean
+	 */
+	protected function is_template_available($products, $template_id) {
+
+		$template_id = (int) $template_id;
+
+		if (!empty($products)) {
+
+			$limits = new \WP_Ultimo\Objects\Limitations();
+
+			list($plan, $additional_products) = wu_segregate_products($products);
+
+			$products = array_merge(array($plan), $additional_products);
+
+			foreach ($products as $product) {
+
+				$limits = $limits->merge($product->get_limitations());
+
+			} // end foreach;
+
+			if ($limits->site_templates->get_mode() === 'assign_template') {
+
+				return $limits->site_templates->get_pre_selected_site_template() === $template_id;
+
+			} else {
+
+				$available_templates = $limits->site_templates->get_available_site_templates();
+
+				return in_array($template_id, $available_templates, true);
+
+			} // end if;
+
+		} // end if;
+
+		return true;
+
+	} // end is_template_available;
 
 } // end class Site_Template_Limits;

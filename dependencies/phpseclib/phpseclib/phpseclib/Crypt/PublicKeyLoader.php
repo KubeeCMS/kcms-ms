@@ -29,9 +29,8 @@ abstract class PublicKeyLoader
      * Loads a public or private key
      *
      * @param string|array $key
-     * @param string $password optional
      */
-    public static function load($key, $password = \false) : AsymmetricKey
+    public static function load($key, ?string $password = null) : AsymmetricKey
     {
         try {
             return \phpseclib3\Crypt\EC::load($key, $password);
@@ -60,9 +59,8 @@ abstract class PublicKeyLoader
      * Loads a private key
      *
      * @param string|array $key
-     * @param string $password optional
      */
-    public static function loadPrivateKey($key, $password = \false) : PrivateKey
+    public static function loadPrivateKey($key, ?string $password = null) : PrivateKey
     {
         $key = self::load($key, $password);
         if (!$key instanceof PrivateKey) {

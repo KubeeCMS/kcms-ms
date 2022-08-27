@@ -62,7 +62,7 @@ $categories = isset($categories) ? $categories : array();
 
   </ul>
 
-  <div id="wu-site-template-container-grid" class="wu-grid wu-grid-cols-1 sm:wu-grid-cols-2 md:wu-grid-cols-<?php echo $cols; ?> wu-gap-4">
+  <div id="wu-site-template-container-grid" class="wu-grid wu-grid-cols-1 sm:wu-grid-cols-2 md:wu-grid-cols-<?php echo isset($cols) ? $cols : '3'; ?> wu-gap-4">
 
     <?php foreach ($sites as $site_template) : ?>
 

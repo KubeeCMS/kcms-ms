@@ -3,6 +3,7 @@
 namespace WP_Ultimo\Dependencies\Amp\Process\Internal\Posix;
 
 use WP_Ultimo\Dependencies\Amp\Deferred;
+use WP_Ultimo\Dependencies\Amp\Loop;
 use WP_Ultimo\Dependencies\Amp\Process\Internal\ProcessHandle;
 /** @internal */
 final class Handle extends ProcessHandle
@@ -25,4 +26,23 @@ final class Handle extends ProcessHandle
     public $extraDataPipeStartWatcher;
     /** @var int */
     public $originalParentPid;
+    /** @var int */
+    public $shellPid;
+    public function wait()
+    {
+        if ($this->shellPid === 0) {
+            return;
+        }
+        $pid = $this->shellPid;
+        $this->shellPid = 0;
+        Loop::unreference(Loop::repeat(100, static function (string $watcherId) use($pid) {
+            if (!\extension_loaded('pcntl') || \pcntl_waitpid($pid, $status, \WNOHANG) !== 0) {
+                Loop::cancel($watcherId);
+            }
+        }));
+    }
+    public function __destruct()
+    {
+        $this->wait();
+    }
 }

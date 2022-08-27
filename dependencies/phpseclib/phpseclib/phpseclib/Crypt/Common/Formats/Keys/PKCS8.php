@@ -264,14 +264,13 @@ abstract class PKCS8 extends \phpseclib3\Crypt\Common\Formats\Keys\PKCS
      * Break a public or private key down into its constituent components
      *
      * @param string|array $key
-     * @param string|false $password
      */
-    protected static function load($key, $password = '') : array
+    protected static function load($key, ?string $password = null) : array
     {
         $decoded = self::preParse($key);
         $meta = [];
         $decrypted = ASN1::asn1map($decoded[0], Maps\EncryptedPrivateKeyInfo::MAP);
-        if ($password !== \false && \strlen($password) && \is_array($decrypted)) {
+        if ($password !== null && \strlen($password) && \is_array($decrypted)) {
             $algorithm = $decrypted['encryptionAlgorithm']['algorithm'];
             switch ($algorithm) {
                 // PBES1
@@ -495,7 +494,10 @@ abstract class PKCS8 extends \phpseclib3\Crypt\Common\Formats\Keys\PKCS
     protected static function wrapPublicKey(string $key, $params, string $oid = null) : string
     {
         self::initialize_static_variables();
-        $key = ['publicKeyAlgorithm' => ['algorithm' => \is_string(static::OID_NAME) ? static::OID_NAME : $oid, 'parameters' => $params], 'publicKey' => "\0" . $key];
+        $key = ['publicKeyAlgorithm' => ['algorithm' => \is_string(static::OID_NAME) ? static::OID_NAME : $oid], 'publicKey' => "\0" . $key];
+        if ($oid != 'id-Ed25519' && $oid != 'id-Ed448') {
+            $key['publicKeyAlgorithm']['parameters'] = $params;
+        }
         $key = ASN1::encodeDER($key, Maps\PublicKeyInfo::MAP);
         return "-----BEGIN PUBLIC KEY-----\r\n" . \chunk_split(Base64::encode($key), 64) . "-----END PUBLIC KEY-----";
     }

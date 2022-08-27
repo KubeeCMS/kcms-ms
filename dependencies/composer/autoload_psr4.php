@@ -40,7 +40,6 @@ return array(
     'WP_Ultimo\\Dependencies\\Delight\\Cookie\\' => array($vendorDir . '/delight-im/cookie/src'),
     'WP_Ultimo\\Dependencies\\DeepCopy\\' => array($vendorDir . '/myclabs/deep-copy/src/DeepCopy'),
     'WP_Ultimo\\Dependencies\\Carbon\\' => array($vendorDir . '/nesbot/carbon/src/Carbon'),
-    'WP_Ultimo\\Dependencies\\Aura\\Session\\' => array($vendorDir . '/aura/session/src'),
     'WP_Ultimo\\Dependencies\\Arrch\\' => array($vendorDir . '/rpnzl/arrch/src/Arrch'),
     'WP_Ultimo\\Dependencies\\Analog\\' => array($vendorDir . '/analog/analog/lib/Analog'),
     'WP_Ultimo\\Dependencies\\Amp\\WindowsRegistry\\' => array($vendorDir . '/amphp/windows-registry/lib'),

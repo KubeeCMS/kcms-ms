@@ -21,5 +21,5 @@ use phpseclib3\File\ASN1;
  */
 abstract class UniqueIdentifier
 {
-    const MAP = ['type' => ASN1::TYPE_BIT_STRING];
+    public const MAP = ['type' => ASN1::TYPE_BIT_STRING];
 }

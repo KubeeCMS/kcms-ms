@@ -37,7 +37,7 @@ final class WP_Ultimo {
 	 *
 	 * @var string
 	 */
-	public $version = '2.0.17';
+	public $version = '2.0.18';
 
 	/**
 	 * Holds an instance of the helper functions layer.
@@ -113,6 +113,11 @@ final class WP_Ultimo {
 		$this->setup_textdomain();
 
 		/*
+		 * Loads files containing public functions.
+		 */
+		$this->load_public_apis();
+
+		/*
 		 * Setup Wizard
 		 */
 		new WP_Ultimo\Admin_Pages\Setup_Wizard_Admin_Page();
@@ -165,11 +170,6 @@ final class WP_Ultimo {
 		 * Loads tables
 		 */
 		$this->setup_tables();
-
-		/*
-		 * Loads files containing public functions.
-		 */
-		$this->load_public_apis();
 
 		/*
 		 * Loads extra components

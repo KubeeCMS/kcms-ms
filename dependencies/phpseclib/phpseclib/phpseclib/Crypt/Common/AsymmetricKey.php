@@ -71,20 +71,6 @@ abstract class AsymmetricKey
      */
     private static $invisiblePlugins = [];
     /**
-     * Supported signature formats (lower case)
-     *
-     * @see self::initialize_static_variables()
-     * @var array
-     */
-    private static $signatureFormats = [];
-    /**
-     * Supported signature formats (original case)
-     *
-     * @see self::initialize_static_variables()
-     * @var array
-     */
-    private static $signatureFileFormats = [];
-    /**
      * Available Engines
      *
      * @var boolean[]
@@ -96,8 +82,6 @@ abstract class AsymmetricKey
      * @var null|string
      */
     private $comment;
-    /**
-     */
     public abstract function toString(string $type, array $options = []) : string;
     /**
      * The constructor
@@ -126,9 +110,8 @@ abstract class AsymmetricKey
      * Load the key
      *
      * @param string|array $key
-     * @param string $password optional
      */
-    public static function load($key, $password = \false) : \phpseclib3\Crypt\Common\AsymmetricKey
+    public static function load($key, ?string $password = null) : \phpseclib3\Crypt\Common\AsymmetricKey
     {
         self::initialize_static_variables();
         $components = \false;
@@ -198,10 +181,9 @@ abstract class AsymmetricKey
     /**
      * Load the key, assuming a specific format
      *
-     * @param string $password optional
      * @return static
      */
-    public static function loadFormat(string $type, string $key, $password = \false) : \phpseclib3\Crypt\Common\AsymmetricKey
+    public static function loadFormat(string $type, string $key, ?string $password = null) : \phpseclib3\Crypt\Common\AsymmetricKey
     {
         self::initialize_static_variables();
         $components = \false;
@@ -220,10 +202,8 @@ abstract class AsymmetricKey
     }
     /**
      * Loads a private key
-     *
-     * @param string $password optional
      */
-    public static function loadPrivateKeyFormat(string $type, string $key, $password = \false) : \phpseclib3\Crypt\Common\PrivateKey
+    public static function loadPrivateKeyFormat(string $type, string $key, ?string $password = null) : \phpseclib3\Crypt\Common\PrivateKey
     {
         $key = self::loadFormat($type, $key, $password);
         if (!$key instanceof \phpseclib3\Crypt\Common\PrivateKey) {

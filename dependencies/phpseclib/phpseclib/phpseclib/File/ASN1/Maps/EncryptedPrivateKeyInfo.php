@@ -21,5 +21,5 @@ use phpseclib3\File\ASN1;
  */
 abstract class EncryptedPrivateKeyInfo
 {
-    const MAP = ['type' => ASN1::TYPE_SEQUENCE, 'children' => ['encryptionAlgorithm' => \phpseclib3\File\ASN1\Maps\AlgorithmIdentifier::MAP, 'encryptedData' => \phpseclib3\File\ASN1\Maps\EncryptedData::MAP]];
+    public const MAP = ['type' => ASN1::TYPE_SEQUENCE, 'children' => ['encryptionAlgorithm' => \phpseclib3\File\ASN1\Maps\AlgorithmIdentifier::MAP, 'encryptedData' => \phpseclib3\File\ASN1\Maps\EncryptedData::MAP]];
 }

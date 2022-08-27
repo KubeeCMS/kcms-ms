@@ -330,9 +330,17 @@ class Broadcast_Manager extends Base_Manager {
 
 		if (isset($targets[$type])) {
 
-			return $targets[$type];
+			if (is_string($targets[$type])) {
+
+				return explode(',', $targets[$type]);
+
+			} // end if;
+
+			return (array) $targets[$type];
 
 		} // end if;
+
+		return array();
 
 	} // end get_broadcast_targets;
 
@@ -346,9 +354,9 @@ class Broadcast_Manager extends Base_Manager {
 	 */
 	public function get_all_notice_customer_targets($object_id) {
 
-		$customers_targets = explode(',', $this->get_broadcast_targets($object_id, 'customers'));
+		$customers_targets = $this->get_broadcast_targets($object_id, 'customers');
 
-		$products = explode(',', $this->get_broadcast_targets($object_id, 'products'));
+		$products = $this->get_broadcast_targets($object_id, 'products');
 
 		$product_customers = array();
 

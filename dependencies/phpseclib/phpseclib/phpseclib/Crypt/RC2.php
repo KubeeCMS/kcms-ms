@@ -3,7 +3,7 @@
 /**
  * Pure-PHP implementation of RC2.
  *
- * Uses mcrypt, if available, and an internal implementation, otherwise.
+ * Uses OpenSSL, if available/possible, and an internal implementation, otherwise
  *
  * PHP version 5
  *
@@ -66,13 +66,6 @@ class RC2 extends BlockCipher
      */
     private $orig_key;
     /**
-     * Don't truncate / null pad key
-     *
-     * @see \phpseclib3\Crypt\Common\SymmetricKey::clearBuffers()
-     * @var bool
-     */
-    private $skip_key_adjustment = \true;
-    /**
      * Key Length (in bytes)
      *
      * @see \phpseclib3\Crypt\RC2::setKeyLength()
@@ -80,20 +73,6 @@ class RC2 extends BlockCipher
      */
     protected $key_length = 16;
     // = 128 bits
-    /**
-     * The mcrypt specific name of the cipher
-     *
-     * @see \phpseclib3\Crypt\Common\SymmetricKey::cipher_name_mcrypt
-     * @var string
-     */
-    protected $cipher_name_mcrypt = 'rc2';
-    /**
-     * Optimizing value while CFB-encrypting
-     *
-     * @see \phpseclib3\Crypt\Common\SymmetricKey::cfb_init_len
-     * @var int
-     */
-    protected $cfb_init_len = 500;
     /**
      * The key length in bits.
      *

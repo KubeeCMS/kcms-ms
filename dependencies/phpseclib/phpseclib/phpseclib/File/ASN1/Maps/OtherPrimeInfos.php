@@ -22,5 +22,5 @@ use phpseclib3\File\ASN1;
 abstract class OtherPrimeInfos
 {
     // version must be multi if otherPrimeInfos present
-    const MAP = ['type' => ASN1::TYPE_SEQUENCE, 'min' => 1, 'max' => -1, 'children' => \phpseclib3\File\ASN1\Maps\OtherPrimeInfo::MAP];
+    public const MAP = ['type' => ASN1::TYPE_SEQUENCE, 'min' => 1, 'max' => -1, 'children' => \phpseclib3\File\ASN1\Maps\OtherPrimeInfo::MAP];
 }

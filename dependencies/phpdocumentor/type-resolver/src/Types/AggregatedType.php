@@ -31,9 +31,8 @@ abstract class AggregatedType implements Type, IteratorAggregate
      * @psalm-allow-private-mutation
      * @var array<int, Type>
      */
-    private $types = [];
-    /** @var string */
-    private $token;
+    private array $types = [];
+    private string $token;
     /**
      * @param array<Type> $types
      */

@@ -41,19 +41,6 @@ class TransferService extends \WP_Ultimo\Dependencies\Stripe\Service\AbstractSer
         return $this->requestCollection('get', $this->buildPath('/v1/transfers/%s/reversals', $parentId), $params, $opts);
     }
     /**
-     * @param string $id
-     * @param null|array $params
-     * @param null|array|\Stripe\Util\RequestOptions $opts
-     *
-     * @throws \Stripe\Exception\ApiErrorException if the request fails
-     *
-     * @return \Stripe\Transfer
-     */
-    public function cancel($id, $params = null, $opts = null)
-    {
-        return $this->request('post', $this->buildPath('/v1/transfers/%s/cancel', $id), $params, $opts);
-    }
-    /**
      * To send funds from your Stripe account to a connected account, you create a new
      * transfer object. Your <a href="#balance">Stripe balance</a> must be able to
      * cover the transfer amount, or you’ll receive an “Insufficient Funds” error.

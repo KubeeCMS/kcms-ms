@@ -35,50 +35,50 @@ abstract class ASN1
 {
     // Tag Classes
     // http://www.itu.int/ITU-T/studygroups/com17/languages/X.690-0207.pdf#page=12
-    const CLASS_UNIVERSAL = 0;
-    const CLASS_APPLICATION = 1;
-    const CLASS_CONTEXT_SPECIFIC = 2;
-    const CLASS_PRIVATE = 3;
+    public const CLASS_UNIVERSAL = 0;
+    public const CLASS_APPLICATION = 1;
+    public const CLASS_CONTEXT_SPECIFIC = 2;
+    public const CLASS_PRIVATE = 3;
     // Tag Classes
     // http://www.obj-sys.com/asn1tutorial/node124.html
-    const TYPE_BOOLEAN = 1;
-    const TYPE_INTEGER = 2;
-    const TYPE_BIT_STRING = 3;
-    const TYPE_OCTET_STRING = 4;
-    const TYPE_NULL = 5;
-    const TYPE_OBJECT_IDENTIFIER = 6;
+    public const TYPE_BOOLEAN = 1;
+    public const TYPE_INTEGER = 2;
+    public const TYPE_BIT_STRING = 3;
+    public const TYPE_OCTET_STRING = 4;
+    public const TYPE_NULL = 5;
+    public const TYPE_OBJECT_IDENTIFIER = 6;
     //const TYPE_OBJECT_DESCRIPTOR = 7;
     //const TYPE_INSTANCE_OF       = 8; // EXTERNAL
-    const TYPE_REAL = 9;
-    const TYPE_ENUMERATED = 10;
+    public const TYPE_REAL = 9;
+    public const TYPE_ENUMERATED = 10;
     //const TYPE_EMBEDDED          = 11;
-    const TYPE_UTF8_STRING = 12;
+    public const TYPE_UTF8_STRING = 12;
     //const TYPE_RELATIVE_OID      = 13;
-    const TYPE_SEQUENCE = 16;
+    public const TYPE_SEQUENCE = 16;
     // SEQUENCE OF
-    const TYPE_SET = 17;
+    public const TYPE_SET = 17;
     // SET OF
     // More Tag Classes
     // http://www.obj-sys.com/asn1tutorial/node10.html
-    const TYPE_NUMERIC_STRING = 18;
-    const TYPE_PRINTABLE_STRING = 19;
-    const TYPE_TELETEX_STRING = 20;
+    public const TYPE_NUMERIC_STRING = 18;
+    public const TYPE_PRINTABLE_STRING = 19;
+    public const TYPE_TELETEX_STRING = 20;
     // T61String
-    const TYPE_VIDEOTEX_STRING = 21;
-    const TYPE_IA5_STRING = 22;
-    const TYPE_UTC_TIME = 23;
-    const TYPE_GENERALIZED_TIME = 24;
-    const TYPE_GRAPHIC_STRING = 25;
-    const TYPE_VISIBLE_STRING = 26;
+    public const TYPE_VIDEOTEX_STRING = 21;
+    public const TYPE_IA5_STRING = 22;
+    public const TYPE_UTC_TIME = 23;
+    public const TYPE_GENERALIZED_TIME = 24;
+    public const TYPE_GRAPHIC_STRING = 25;
+    public const TYPE_VISIBLE_STRING = 26;
     // ISO646String
-    const TYPE_GENERAL_STRING = 27;
-    const TYPE_UNIVERSAL_STRING = 28;
+    public const TYPE_GENERAL_STRING = 27;
+    public const TYPE_UNIVERSAL_STRING = 28;
     //const TYPE_CHARACTER_STRING = 29;
-    const TYPE_BMP_STRING = 30;
+    public const TYPE_BMP_STRING = 30;
     // Tag Aliases
     // These tags are kinda place holders for other tags.
-    const TYPE_CHOICE = -1;
-    const TYPE_ANY = -2;
+    public const TYPE_CHOICE = -1;
+    public const TYPE_ANY = -2;
     /**
      * ASN.1 object identifiers
      *
@@ -135,7 +135,7 @@ abstract class ASN1
      *
      * @var array
      */
-    const ANY_MAP = [
+    public const ANY_MAP = [
         self::TYPE_BOOLEAN => \true,
         self::TYPE_INTEGER => \true,
         self::TYPE_BIT_STRING => 'bitString',
@@ -167,7 +167,7 @@ abstract class ASN1
      *
      * @var array
      */
-    const STRING_TYPE_SIZE = [self::TYPE_UTF8_STRING => 0, self::TYPE_BMP_STRING => 2, self::TYPE_UNIVERSAL_STRING => 4, self::TYPE_PRINTABLE_STRING => 1, self::TYPE_TELETEX_STRING => 1, self::TYPE_IA5_STRING => 1, self::TYPE_VISIBLE_STRING => 1];
+    public const STRING_TYPE_SIZE = [self::TYPE_UTF8_STRING => 0, self::TYPE_BMP_STRING => 2, self::TYPE_UNIVERSAL_STRING => 4, self::TYPE_PRINTABLE_STRING => 1, self::TYPE_TELETEX_STRING => 1, self::TYPE_IA5_STRING => 1, self::TYPE_VISIBLE_STRING => 1];
     /**
      * Parse BER-encoding
      *
@@ -1120,7 +1120,7 @@ abstract class ASN1
                     $temp = (\chr(0x80) | $submask->toBytes()) . $temp;
                     $part = $part->bitwise_rightShift(7);
                 }
-                $temp[\strlen($temp) - 1] = $temp[\strlen($temp) - 1] & \chr(0x7f);
+                $temp[-1] = $temp[-1] & \chr(0x7f);
             }
             $value .= $temp;
         }
@@ -1155,7 +1155,7 @@ abstract class ASN1
         } elseif (\strpos($content, '.') !== \false) {
             $format .= '.u';
         }
-        if ($content[\strlen($content) - 1] == 'Z') {
+        if ($content[-1] == 'Z') {
             $content = \substr($content, 0, -1) . '+0000';
         }
         if (\strpos($content, '-') !== \false || \strpos($content, '+') !== \false) {

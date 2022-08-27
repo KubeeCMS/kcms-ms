@@ -7,7 +7,7 @@
 
 $current_site = wu_get_current_site();
 
-$add_new_url = $current_site->get_membership() &&  $current_site->get_membership()->has_remaining_sites() ? admin_url('admin.php?page=add-new-site') : wu_get_registration_url();
+$add_new_url = wu_get_setting('enable_multiple_sites') ? admin_url('admin.php?page=add-new-site') : wu_get_registration_url();
 
 ?>
 <div class="wu-styling <?php echo esc_attr($className); ?>">

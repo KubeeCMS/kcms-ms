@@ -68,13 +68,13 @@ final class SassCalculation extends Value
      * {@see SassNumber} rather than a {@see SassCalculation}. It throws an exception if it
      * can determine that the calculation will definitely produce invalid CSS.
      *
-     * @param list<object> $argument
+     * @param object $argument
      *
      * @return Value
      *
      * @throws SassScriptException
      */
-    public static function calc($argument) : Value
+    public static function calc(object $argument) : Value
     {
         $argument = self::simplify($argument);
         if ($argument instanceof SassNumber) {
@@ -356,7 +356,7 @@ final class SassCalculation extends Value
         return \true;
     }
     /**
-     * @param list<mixed> $args
+     * @param list<object> $args
      *
      * @return list<object>
      *
@@ -367,13 +367,9 @@ final class SassCalculation extends Value
         return \array_map([self::class, 'simplify'], $args);
     }
     /**
-     * @param mixed $arg
-     *
-     * @return object
-     *
      * @throws SassScriptException
      */
-    private static function simplify($arg) : object
+    private static function simplify(object $arg) : object
     {
         if ($arg instanceof SassNumber || $arg instanceof CalculationInterpolation || $arg instanceof CalculationOperation) {
             return $arg;
@@ -390,7 +386,7 @@ final class SassCalculation extends Value
         if ($arg instanceof Value) {
             throw new SassScriptException("Value {$arg} can't be used in a calculation.");
         }
-        throw new \InvalidArgumentException(\sprintf('Unexpected calculation argument %s.', \is_object($arg) ? \get_class($arg) : \gettype($arg)));
+        throw new \InvalidArgumentException(\sprintf('Unexpected calculation argument %s.', \get_class($arg)));
     }
     /**
      * Verifies that all the numbers in $args aren't known to be incompatible

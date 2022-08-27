@@ -21,5 +21,5 @@ use phpseclib3\File\ASN1;
  */
 abstract class CertificationRequest
 {
-    const MAP = ['type' => ASN1::TYPE_SEQUENCE, 'children' => ['certificationRequestInfo' => \phpseclib3\File\ASN1\Maps\CertificationRequestInfo::MAP, 'signatureAlgorithm' => \phpseclib3\File\ASN1\Maps\AlgorithmIdentifier::MAP, 'signature' => ['type' => ASN1::TYPE_BIT_STRING]]];
+    public const MAP = ['type' => ASN1::TYPE_SEQUENCE, 'children' => ['certificationRequestInfo' => \phpseclib3\File\ASN1\Maps\CertificationRequestInfo::MAP, 'signatureAlgorithm' => \phpseclib3\File\ASN1\Maps\AlgorithmIdentifier::MAP, 'signature' => ['type' => ASN1::TYPE_BIT_STRING]]];
 }

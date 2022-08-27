@@ -1171,6 +1171,71 @@ class Checkout_Form extends Base_Model {
 	} // end set_template;
 
 	/**
+	 * Custom fields to allow customer to finish a payment intent.
+	 *
+	 * @since 2.0.18
+	 * @return array
+	 */
+	public static function finish_checkout_form_fields() {
+
+		$payment = wu_get_payment_by_hash(wu_request('payment'));
+
+		if (!$payment && wu_request('payment_id')) {
+
+			$payment = wu_get_payment(wu_request('payment_id'));
+
+		} // end if;
+
+		if (!$payment && current_user_can('manage_options')) {
+
+			$payment = wu_mock_payment();
+
+		} // end if;
+
+		if (!$payment) {
+
+			return array();
+
+		} // end if;
+
+		$fields = array(
+			array (
+				'step'                   => 'checkout',
+				'name'                   => __('Your Order', 'wp-ultimo'),
+				'type'                   => 'order_summary',
+				'id'                     => 'order_summary',
+				'order_summary_template' => 'clean',
+				'table_columns'          => 'simple',
+			),
+			array (
+				'step' => 'checkout',
+				'name' => __('Payment Method', 'wp-ultimo'),
+				'type' => 'payment',
+				'id'   => 'payment',
+			),
+			array (
+				'step'  => 'checkout',
+				'name'  => __('Finish Payment', 'wp-ultimo'),
+				'type'  => 'submit_button',
+				'id'    => 'checkout',
+				'order' => 0,
+			),
+		);
+
+		$steps = array (
+			array (
+				'id'     => 'checkout',
+				'name'   => __('Checkout', 'wp-ultimo'),
+				'desc'   => '',
+				'fields' => $fields,
+			),
+		);
+
+		return apply_filters('wu_checkout_form_finish_checkout_form_fields', $steps);
+
+	} // end finish_checkout_form_fields;
+
+	/**
 	 * Custom fields for back-end upgrade/downgrades and such.
 	 *
 	 * @since 2.0.0

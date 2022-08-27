@@ -56,6 +56,9 @@ class SearchResult extends StripeObject implements \Countable, \IteratorAggregat
     {
         $this->filters = $filters;
     }
+    /**
+     * @return mixed
+     */
     #[\ReturnTypeWillChange]
     public function offsetGet($k)
     {

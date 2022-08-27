@@ -63,6 +63,8 @@ class Stripe_Gateway extends Base_Stripe_Gateway {
 	 */
 	public function settings() {
 
+		$error_message_wrap = '<span class="wu-p-2 wu-bg-red-100 wu-text-red-600 wu-rounded wu-mt-3 wu-mb-0 wu-block wu-text-xs">%s</span>';
+
 		wu_register_settings_field('payment-gateways', 'stripe_header', array(
 			'title'           => __('Stripe', 'wp-ultimo'),
 			'desc'            => __('Use the settings section below to configure Stripe as a payment method.', 'wp-ultimo'),
@@ -96,9 +98,11 @@ class Stripe_Gateway extends Base_Stripe_Gateway {
 			),
 		));
 
+		$pk_test_status = wu_get_setting('stripe_test_pk_key_status', '');
+
 		wu_register_settings_field('payment-gateways', 'stripe_test_pk_key', array(
 			'title'       => __('Stripe Test Publishable Key', 'wp-ultimo'),
-			'desc'        => '',
+			'desc'        => !empty($pk_test_status) ? sprintf($error_message_wrap, $pk_test_status) : '',
 			'tooltip'     => __('Make sure you are placing the TEST keys, not the live ones.', 'wp-ultimo'),
 			'placeholder' => __('pk_test_***********', 'wp-ultimo'),
 			'type'        => 'text',
@@ -110,9 +114,11 @@ class Stripe_Gateway extends Base_Stripe_Gateway {
 			),
 		));
 
+		$sk_test_status = wu_get_setting('stripe_test_sk_key_status', '');
+
 		wu_register_settings_field('payment-gateways', 'stripe_test_sk_key', array(
 			'title'       => __('Stripe Test Secret Key', 'wp-ultimo'),
-			'desc'        => '',
+			'desc'        => !empty($sk_test_status) ? sprintf($error_message_wrap, $sk_test_status) : '',
 			'tooltip'     => __('Make sure you are placing the TEST keys, not the live ones.', 'wp-ultimo'),
 			'placeholder' => __('sk_test_***********', 'wp-ultimo'),
 			'type'        => 'text',
@@ -124,9 +130,11 @@ class Stripe_Gateway extends Base_Stripe_Gateway {
 			),
 		));
 
+		$pk_status = wu_get_setting('stripe_live_pk_key_status', '');
+
 		wu_register_settings_field('payment-gateways', 'stripe_live_pk_key', array(
 			'title'       => __('Stripe Live Publishable Key', 'wp-ultimo'),
-			'desc'        => '',
+			'desc'        => !empty($pk_status) ? sprintf($error_message_wrap, $pk_status) : '',
 			'tooltip'     => __('Make sure you are placing the LIVE keys, not the test ones.', 'wp-ultimo'),
 			'placeholder' => __('pk_live_***********', 'wp-ultimo'),
 			'type'        => 'text',
@@ -138,9 +146,11 @@ class Stripe_Gateway extends Base_Stripe_Gateway {
 			),
 		));
 
+		$sk_status = wu_get_setting('stripe_live_sk_key_status', '');
+
 		wu_register_settings_field('payment-gateways', 'stripe_live_sk_key', array(
 			'title'       => __('Stripe Live Secret Key', 'wp-ultimo'),
-			'desc'        => '',
+			'desc'        => !empty($sk_status) ? sprintf($error_message_wrap, $sk_status) : '',
 			'tooltip'     => __('Make sure you are placing the LIVE keys, not the test ones.', 'wp-ultimo'),
 			'placeholder' => __('sk_live_***********', 'wp-ultimo'),
 			'type'        => 'text',
@@ -243,6 +253,11 @@ class Stripe_Gateway extends Base_Stripe_Gateway {
 		 */
 		$payment_intent_id = $this->payment->get_meta('stripe_payment_intent_id');
 		$existing_intent   = false;
+
+		/**
+		 * Ensure the correct api keys are set
+		 */
+		$this->setup_api_keys();
 
 		/*
 		 * Tries to retrieve an intent on Stripe.
@@ -371,13 +386,30 @@ class Stripe_Gateway extends Base_Stripe_Gateway {
 
 			} // end if;
 
-		} catch (\WP_Ultimo\Dependencies\Stripe\Stripe\Error\Base $e) {
+		} catch (Stripe\Stripe\Error\Base $e) {
 
 			return $this->get_stripe_error($e);
 
 		} catch (\Exception $e) {
 
-			return new \WP_Error($e->getCode(), $e->getMessage());
+			$error_code = $e->getCode();
+
+			// WP Error did not handle empty error code
+			if (empty($error_code)) {
+
+				if (method_exists($e, 'getHttpStatus')) {
+
+					$error_code = $e->getHttpStatus();
+
+				} else {
+
+					$error_code = 500;
+
+				} // end if;
+
+			} // end if;
+
+			return new \WP_Error($error_code, $e->getMessage());
 
 		} // end try;
 
@@ -472,6 +504,11 @@ class Stripe_Gateway extends Base_Stripe_Gateway {
 			throw new \Exception(__('Missing Stripe payment intent, please try again or contact support if the issue persists.', 'wp-ultimo'), 'missing_stripe_payment_intent');
 
 		} // end if;
+
+		/**
+		 * Ensure the correct api keys are set
+		 */
+		$this->setup_api_keys();
 
 		/*
 		 * To make our lives easier, let's
@@ -840,6 +877,11 @@ class Stripe_Gateway extends Base_Stripe_Gateway {
 			));
 
 			$stripe_customer_id = current(array_column($stripe_customer_id, 'gateway_customer_id'));
+
+			/**
+			 * Ensure the correct api keys are set
+			 */
+			$this->setup_api_keys();
 
 			$payment_methods = Stripe\PaymentMethod::all(array(
 				'customer' => $stripe_customer_id,

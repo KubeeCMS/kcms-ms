@@ -19,6 +19,13 @@ use WP_Ultimo\Dependencies\ScssPhp\ScssPhp\SourceSpan\FileSpan;
 final class SpanUtil
 {
     /**
+     * Returns this span with all whitespace trimmed from both sides.
+     */
+    public static function trim(FileSpan $span) : FileSpan
+    {
+        return self::trimRight(self::trimLeft($span));
+    }
+    /**
      * Returns this span with all leading whitespace trimmed.
      */
     public static function trimLeft(FileSpan $span) : FileSpan
@@ -30,6 +37,18 @@ final class SpanUtil
             $start++;
         }
         return $span->subspan($start);
+    }
+    /**
+     * Returns this span with all trailing whitespace trimmed.
+     */
+    public static function trimRight(FileSpan $span) : FileSpan
+    {
+        $text = $span->getText();
+        $end = \strlen($text) - 1;
+        while ($end >= 0 && Character::isWhitespace($text[$end])) {
+            $end--;
+        }
+        return $span->subspan(0, $end + 1);
     }
     /**
      * Returns the span of the identifier at the start of this span.
@@ -73,6 +92,16 @@ final class SpanUtil
         $scanner->expectChar('@');
         self::scanIdentifier($scanner);
         return self::trimLeft($span->subspan($scanner->getPosition()));
+    }
+    /**
+     * Whether $span contains the $target FileSpan.
+     *
+     * Validates the FileSpans to be in the same file and for the $target to be
+     * within $span FileSpan inclusive range [start,end].
+     */
+    public static function contains(FileSpan $span, FileSpan $target) : bool
+    {
+        return $span->getFile() === $target->getFile() && $span->getStart()->getOffset() <= $target->getStart()->getOffset() && $span->getEnd()->getOffset() >= $target->getEnd()->getOffset();
     }
     /**
      * Consumes an identifier from $scanner.
